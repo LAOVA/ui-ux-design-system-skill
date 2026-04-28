@@ -2,6 +2,11 @@
 
 Use these structures when the user wants a deliverable instead of a conversational recommendation.
 
+Default generation rule:
+- When the user asks to generate a design system and does not specify an output format, generate both `design-spec.html` and `DESIGN.md`.
+- Pair those artifacts with a short summary of the chosen direction and where the files were written.
+- Render both artifacts from the same normalized design-system data so sections stay aligned.
+
 ## Design System Spec
 
 Include these sections in order:
@@ -41,6 +46,28 @@ Use semantic naming such as:
 - `muted`
 - `border`
 - `destructive`
+
+## `design-spec.html`
+
+Treat this as a human-browsable artifact generated from the same design-system data as `DESIGN.md`.
+
+Include:
+
+1. Project summary
+2. Reference direction
+3. Color palette swatches
+4. Typography preview
+5. Token summary for spacing, radius, and shadow
+6. Pattern and layout guidance
+7. Component guidance for buttons, cards, and inputs
+8. Accessibility and responsive rules
+9. Anti-patterns
+
+Prefer:
+- semantic token labels
+- copy-ready rules
+- limited but clear component previews
+- a single self-contained HTML file unless the user explicitly wants separate assets
 
 ## Page Override
 

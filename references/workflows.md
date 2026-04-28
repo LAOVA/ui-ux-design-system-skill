@@ -46,7 +46,22 @@ Process:
    - accessibility and responsive constraints
    - anti-patterns
 
-## 3. Page Override
+Default output rule:
+- If the user asks to generate or create a design system and does not specify a format, generate both `design-spec.html` and `DESIGN.md` and provide a short written summary.
+- If the user explicitly asks for `DESIGN.md`, Markdown, JSON, or another format, honor that instead.
+
+## 3. Design-Spec HTML
+
+Use when the user wants a browsable design spec, lightweight style guide page, or HTML artifact that previews the system visually.
+
+Process:
+1. Generate or load the design-system data first.
+2. Normalize it into a consistent structure for export.
+3. Render the HTML from a template instead of freehand markup.
+4. Include the sections required by [html-spec-contract.md](html-spec-contract.md).
+5. Save the artifact to a user-visible path when the user asks for a file output.
+
+## 4. Page Override
 
 Use when the product already has a global system and the user needs a specific page defined.
 
@@ -62,7 +77,7 @@ Process:
    - component emphasis
    - page-specific risks
 
-## 4. UI Review
+## 5. UI Review
 
 Use when the user wants critique, polish, or design fixes.
 
@@ -83,5 +98,9 @@ Process:
 
 - Start with `reference-match` if the user is unclear on taste.
 - Start with `design-system` if the user is clear on product intent but needs a buildable system.
+- Start with `design-spec-html` if the user explicitly wants a visual spec artifact or HTML deliverable.
 - Start with `page-override` if the system exists and the page is the only moving part.
 - Start with `ui-review` if the artifact already exists.
+
+Default artifact heuristic:
+- `design-system` should usually end by generating both `design-spec.html` and `DESIGN.md` unless the user asked for a different deliverable.

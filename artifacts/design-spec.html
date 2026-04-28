@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI SaaS Dashboard Design Spec - Linear + Vercel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist.min.css">
+    <style>
+        :root {
+            --color-primary: #FFFFFF;
+            --color-secondary: #8A8F98;
+            --color-accent: #5E6AD2;
+            --color-background: #000000;
+            --color-surface: #0A0A0A;
+            --color-muted: #161616;
+            --color-border: #1F1F1F;
+            --color-success: #10B981;
+            --color-destructive: #FF453A;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-foreground);
+            font-family: 'Geist Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .mono {
+            font-family: 'Geist Mono', monospace;
+        }
+
+        .glass {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--color-border);
+        }
+
+        .hairline {
+            border: 1px solid var(--color-border);
+        }
+
+        .accent-glow {
+            box-shadow: 0 0 20px rgba(94, 106, 210, 0.2);
+        }
+
+        .section-title {
+            color: var(--color-secondary);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="p-8 md:p-16 max-w-6xl mx-auto text-[#EDEDEF]">
+    <header class="mb-16">
+        <h1 class="text-4xl font-bold mb-4 tracking-tight">AI SaaS Dashboard Design Spec</h1>
+        <p class="text-lg text-[#8A8F98] max-w-2xl">A professional, high-precision design system blending Linear's cinematic dark atmosphere with Vercel's technical minimalism.</p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+        <!-- Colors -->
+        <section>
+            <h2 class="section-title">Color Palette</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-lg bg-black border border-[#1F1F1F]"></div>
+                    <div>
+                        <p class="text-sm font-medium">Background</p>
+                        <p class="text-xs mono text-[#8A8F98]">#000000</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-lg bg-[#0A0A0A] border border-[#1F1F1F]"></div>
+                    <div>
+                        <p class="text-sm font-medium">Surface</p>
+                        <p class="text-xs mono text-[#8A8F98]">#0A0A0A</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-lg bg-[#5E6AD2]"></div>
+                    <div>
+                        <p class="text-sm font-medium">Accent (Linear)</p>
+                        <p class="text-xs mono text-[#8A8F98]">#5E6AD2</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-lg bg-white"></div>
+                    <div>
+                        <p class="text-sm font-medium">Primary Text</p>
+                        <p class="text-xs mono text-[#8A8F98]">#FFFFFF</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typography -->
+        <section>
+            <h2 class="section-title">Typography</h2>
+            <div class="space-y-6">
+                <div>
+                    <p class="text-xs text-[#8A8F98] mb-1">UI Sans (Geist Sans)</p>
+                    <p class="text-2xl font-semibold tracking-tight">The quick brown fox jumps over the lazy dog.</p>
+                </div>
+                <div>
+                    <p class="text-xs text-[#8A8F98] mb-1">Data Mono (Geist Mono)</p>
+                    <p class="text-xl mono">const ai_model = "gpt-4-turbo";</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Components -->
+        <section class="md:col-span-2">
+            <h2 class="section-title">Core Components</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card -->
+                <div class="glass p-6 rounded-xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-8 h-8 rounded bg-[#5E6AD2]/20 flex items-center justify-center">
+                            <div class="w-4 h-4 rounded-full bg-[#5E6AD2]"></div>
+                        </div>
+                        <span class="text-xs mono text-[#10B981]">Active</span>
+                    </div>
+                    <h3 class="text-lg font-medium mb-1">AI Agent Status</h3>
+                    <p class="text-sm text-[#8A8F98]">Processing user requests in real-time with 98.2% accuracy.</p>
+                </div>
+
+                <!-- Button -->
+                <div class="space-y-4">
+                    <button class="w-full bg-white text-black py-2.5 rounded-lg font-medium hover:bg-[#EDEDEF] transition-colors">
+                        Primary Action
+                    </button>
+                    <button class="w-full bg-[#5E6AD2] text-white py-2.5 rounded-lg font-medium accent-glow hover:bg-[#4E5AC2] transition-colors">
+                        Linear Accent
+                    </button>
+                    <button class="w-full border border-[#1F1F1F] text-[#8A8F98] py-2.5 rounded-lg font-medium hover:text-white hover:bg-[#0A0A0A] transition-colors">
+                        Secondary Ghost
+                    </button>
+                </div>
+
+                <!-- Input -->
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs text-[#8A8F98] mb-1.5 uppercase tracking-wider">Prompt Input</label>
+                        <input type="text" placeholder="Describe your AI task..." class="w-full bg-[#161616] border border-[#1F1F1F] rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-[#5E6AD2] focus:ring-1 focus:ring-[#5E6AD2]/50 transition-all">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rules -->
+        <section class="md:col-span-2">
+            <h2 class="section-title">Design Rules</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    <h3 class="text-sm font-semibold text-[#10B981]">Do</h3>
+                    <ul class="text-sm text-[#8A8F98] space-y-2 list-disc pl-4">
+                        <li>Use 1px borders for all surface separations.</li>
+                        <li>Maintain pure black (#000000) for base backgrounds.</li>
+                        <li>Prioritize Geist Mono for any numerical or system data.</li>
+                        <li>Apply subtle backdrop-blur on all overlay components.</li>
+                    </ul>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-sm font-semibold text-[#FF453A]">Don't</h3>
+                    <ul class="text-sm text-[#8A8F98] space-y-2 list-disc pl-4">
+                        <li>Avoid large drop shadows; use borders or elevation shifts.</li>
+                        <li>Do not use saturated background colors.</li>
+                        <li>Avoid rounded corners larger than 12px for technical UI.</li>
+                        <li>Don't mix more than 3 distinct font weights.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="mt-32 pt-8 border-t border-[#1F1F1F] text-center">
+        <p class="text-xs mono text-[#8A8F98]">DESIGN SPEC ARTIFACT v1.0.0 | GENERATED FOR AI SAAS DASHBOARD</p>
+    </footer>
+</body>
+</html>

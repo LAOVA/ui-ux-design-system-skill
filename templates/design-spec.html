@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{project_name}} Design Spec</title>
+  <style>
+{{styles}}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="eyebrow">Design Spec</div>
+      <h1>{{project_name}}</h1>
+      <p class="lede">{{summary}}</p>
+      <div class="hero-grid">
+        <div class="stat-card">
+          <span class="label">Category</span>
+          <strong>{{category}}</strong>
+        </div>
+        <div class="stat-card">
+          <span class="label">Style</span>
+          <strong>{{style_name}}</strong>
+        </div>
+        <div class="stat-card">
+          <span class="label">Pattern</span>
+          <strong>{{pattern_name}}</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Pattern Summary</h2>
+      <div class="detail-grid">
+        <article class="panel">
+          <h3>Section Order</h3>
+          <p>{{pattern_sections}}</p>
+        </article>
+        <article class="panel">
+          <h3>CTA Placement</h3>
+          <p>{{cta_placement}}</p>
+        </article>
+        <article class="panel">
+          <h3>Key Effects</h3>
+          <p>{{key_effects}}</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Color Palette</h2>
+      <div class="swatch-grid">
+{{color_swatches}}
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Typography</h2>
+      <div class="detail-grid">
+        <article class="panel">
+          <h3>Heading Font</h3>
+          <p class="font-heading">{{heading_font}}</p>
+          <p class="sample-title">Build with clarity and momentum</p>
+        </article>
+        <article class="panel">
+          <h3>Body Font</h3>
+          <p class="font-body">{{body_font}}</p>
+          <p class="sample-body">Use body copy that is readable, measured, and calm enough to support product comprehension.</p>
+        </article>
+        <article class="panel">
+          <h3>Mood</h3>
+          <p>{{typography_mood}}</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Tokens</h2>
+      <div class="token-grid">
+        <article class="panel">
+          <h3>Spacing</h3>
+          <ul>
+            <li><code>space-1</code>: 4px</li>
+            <li><code>space-2</code>: 8px</li>
+            <li><code>space-3</code>: 16px</li>
+            <li><code>space-4</code>: 24px</li>
+            <li><code>space-5</code>: 40px</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>Radius</h3>
+          <ul>
+            <li><code>radius-sm</code>: 8px</li>
+            <li><code>radius-md</code>: 12px</li>
+            <li><code>radius-lg</code>: 16px</li>
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>Elevation</h3>
+          <ul>
+            <li><code>shadow-card</code>: 0 10px 30px rgba(15, 23, 42, 0.10)</li>
+            <li><code>shadow-popover</code>: 0 18px 48px rgba(15, 23, 42, 0.18)</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Component Guidance</h2>
+      <div class="component-grid">
+        <article class="panel">
+          <h3>Buttons</h3>
+          <div class="button-row">
+            <button class="btn btn-primary">Primary Action</button>
+            <button class="btn btn-secondary">Secondary Action</button>
+          </div>
+          <p>{{button_guidance}}</p>
+        </article>
+        <article class="panel">
+          <h3>Card</h3>
+          <div class="card-preview">
+            <span class="card-tag">Insight</span>
+            <strong>Use low-noise surfaces</strong>
+            <p>Keep supporting surfaces subtle so hierarchy comes from structure, not decoration.</p>
+          </div>
+          <p>{{card_guidance}}</p>
+        </article>
+        <article class="panel">
+          <h3>Input</h3>
+          <label class="input-label">Email</label>
+          <input class="input-preview" placeholder="team@example.com">
+          <p>{{input_guidance}}</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Rules</h2>
+      <div class="detail-grid">
+        <article class="panel">
+          <h3>Accessibility</h3>
+          <ul>
+{{accessibility_rules}}
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>Responsive</h3>
+          <ul>
+{{responsive_rules}}
+          </ul>
+        </article>
+        <article class="panel">
+          <h3>Avoid</h3>
+          <ul>
+{{anti_patterns}}
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

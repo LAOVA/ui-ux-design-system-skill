@@ -22,12 +22,15 @@ The combined skill should answer both:
    Produce a global UI system from product type, tone, and platform needs.
 
 3. `DESIGN.md` generation
-   Emit a reusable document another coding agent can follow.
+   Emit a reusable document another coding agent can follow, from the same normalized data as HTML.
 
-4. Page override generation
+4. HTML spec generation
+   Emit a browsable `design-spec.html` artifact from the same design-system data.
+
+5. Page override generation
    Define page-level deviations from the global system.
 
-5. UI review
+6. UI review
    Review existing UI against the chosen direction and platform rules.
 
 ## Recommended Skill Layout
@@ -41,11 +44,13 @@ uiux-design-system/
 |  |- source-map.md
 |  |- workflows.md
 |  |- output-contracts.md
+|  |- html-spec-contract.md
 |  |- implementation-architecture.md
 |- scripts/                    # add later when implementation begins
-|  |- search.py
+|  |- search.py                # unified entry point, defaulting to design-spec.html
 |  |- reference_search.py
 |  |- design_system.py
+|  |- build_design_spec.py
 |  |- page_override.py
 |  |- review.py
 |  |- build_design_md.py
@@ -112,5 +117,5 @@ Responsibility:
 2. Reuse `ui-ux-pro-max-skill` search logic before rewriting anything
 3. Add reference parsing for `awesome-design-md`
 4. Add a small reasoning layer that merges both result sets
-5. Add formatter outputs
+5. Add formatter outputs, including `DESIGN.md` and `design-spec.html`
 6. Add review mode last
