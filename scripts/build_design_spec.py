@@ -7,6 +7,7 @@ design-system generator.
 from __future__ import annotations
 
 import argparse
+from datetime import datetime
 import html
 import sys
 from pathlib import Path
@@ -19,7 +20,12 @@ TEMPLATE_PATH = ROOT_DIR / "templates" / "design-spec.html"
 if str(UPSTREAM_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(UPSTREAM_SCRIPTS))
 
-from design_system import DesignSystemGenerator  # type: ignore  # noqa: E402
+from reasoning import generate_design_system  # type: ignore  # noqa: E402
+
+
+def default_output_path(filename: str = "design-spec.html") -> Path:
+    stamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    return ROOT_DIR / "artifacts" / stamp / filename
 
 
 DEFAULT_STYLES = """
@@ -44,6 +50,13 @@ DEFAULT_STYLES = """
       --interactive-on-primary: {{on_primary}};
       --interactive-primary-shadow: color-mix(in srgb, {{primary}} 22%, transparent);
       --interactive-secondary-fg: {{primary}};
+      --toggle-shell-bg: color-mix(in srgb, {{panel_bg_soft}} 90%, white 10%);
+      --toggle-shell-border: color-mix(in srgb, {{border}} 82%, white 18%);
+      --toggle-button-fg: {{panel_muted}};
+      --toggle-active-bg: color-mix(in srgb, {{panel_bg}} 92%, white 8%);
+      --toggle-active-fg: {{panel_fg}};
+      --toggle-active-border: {{border}};
+      --toggle-active-shadow: 0 6px 18px rgba(15, 23, 42, 0.10);
     }
     body[data-page-theme="dark"] {
       color-scheme: dark;
@@ -66,6 +79,13 @@ DEFAULT_STYLES = """
       --interactive-on-primary: #04110C;
       --interactive-primary-shadow: color-mix(in srgb, {{accent}} 32%, transparent);
       --interactive-secondary-fg: #D7FBE7;
+      --toggle-shell-bg: color-mix(in srgb, #1A2740 88%, #020617 12%);
+      --toggle-shell-border: #243244;
+      --toggle-button-fg: #94A3B8;
+      --toggle-active-bg: color-mix(in srgb, #131C2E 82%, white 18%);
+      --toggle-active-fg: #F8FAFC;
+      --toggle-active-border: #31415A;
+      --toggle-active-shadow: 0 8px 22px rgba(2, 6, 23, 0.34);
     }
     body[data-page-theme="light"] {
       color-scheme: light;
@@ -82,6 +102,13 @@ DEFAULT_STYLES = """
       --preview-border: #CBD5E1;
       --preview-fg: #0F172A;
       --preview-muted: #475569;
+      --toggle-shell-bg: color-mix(in srgb, #F1F5F9 82%, white 18%);
+      --toggle-shell-border: #D7DEE8;
+      --toggle-button-fg: #6B7280;
+      --toggle-active-bg: #FFFFFF;
+      --toggle-active-fg: #1F2937;
+      --toggle-active-border: #D7DEE8;
+      --toggle-active-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
     }
     * { box-sizing: border-box; }
     body {
@@ -111,13 +138,14 @@ DEFAULT_STYLES = """
       backdrop-filter: blur(14px);
     }
     .page-theme-switch {
-      background: color-mix(in srgb, var(--panel-bg-soft) 88%, white 12%);
-      border-color: color-mix(in srgb, var(--surface-border) 72%, white 28%);
+      background: var(--toggle-shell-bg);
+      border-color: var(--toggle-shell-border);
     }
     .page-theme-button {
       background: transparent;
-      color: var(--panel-muted);
-      transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+      color: var(--toggle-button-fg);
+      border: 1px solid transparent;
+      transition: background 160ms ease, color 160ms ease, transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
     }
     .page-theme-button:hover,
     .theme-button-primary:hover,
@@ -125,8 +153,10 @@ DEFAULT_STYLES = """
       transform: translateY(-1px);
     }
     .page-theme-button.active {
-      background: var(--interactive-primary);
-      color: var(--interactive-on-primary);
+      background: var(--toggle-active-bg);
+      color: var(--toggle-active-fg);
+      border-color: var(--toggle-active-border);
+      box-shadow: var(--toggle-active-shadow);
     }
     .theme-panel {
       background: var(--panel-bg);
@@ -338,6 +368,11 @@ def _normalize(design_system: dict) -> dict:
     pattern = design_system.get("pattern", {})
     typography = design_system.get("typography", {})
 
+    def color_value(key: str, fallback: str) -> str:
+        value = colors.get(key)
+        text = str(value or "").strip()
+        return text or fallback
+
     return {
         "project_name": design_system.get("project_name", "Untitled Project"),
         "category": design_system.get("category", "General"),
@@ -359,19 +394,21 @@ def _normalize(design_system: dict) -> dict:
         ),
         "card_guidance": "Use soft boundaries, moderate radius, and structure-led hierarchy over decorative noise.",
         "input_guidance": "Inputs should remain highly legible, with clear labels and visible focus treatment.",
-        "background": colors.get("background", "#F8FAFC"),
-        "foreground": colors.get("foreground", "#0F172A"),
-        "card": colors.get("card", "#FFFFFF"),
-        "border": colors.get("border", "#E2E8F0"),
-        "primary": colors.get("primary", "#2563EB"),
-        "secondary": colors.get("secondary", "#3B82F6"),
-        "accent": colors.get("accent", "#F97316"),
-        "muted": colors.get("muted", "#E2E8F0"),
-        "muted_foreground": colors.get("muted_foreground", colors.get("foreground", "#475569")),
-        "on_primary": colors.get("on_primary", "#FFFFFF") or "#FFFFFF",
+        "background": color_value("background", "#F8FAFC"),
+        "foreground": color_value("foreground", "#0F172A"),
+        "card": color_value("card", "#FFFFFF"),
+        "border": color_value("border", "#E2E8F0"),
+        "primary": color_value("primary", "#2563EB"),
+        "secondary": color_value("secondary", "#3B82F6"),
+        "accent": color_value("accent", "#F97316"),
+        "muted": color_value("muted", "#E2E8F0"),
+        "muted_foreground": color_value("muted_foreground", color_value("foreground", "#475569")),
+        "on_primary": color_value("on_primary", "#FFFFFF"),
         "heading_font_css": _font_css(typography.get("heading", "Inter"), "ui-sans-serif, system-ui, sans-serif"),
         "body_font_css": _font_css(typography.get("body", "Inter"), "ui-sans-serif, system-ui, sans-serif"),
         "anti_patterns_raw": design_system.get("anti_patterns", ""),
+        "reference_summary": design_system.get("reference_summary", ""),
+        "reference_direction": design_system.get("reference_direction", ""),
     }
 
 
@@ -543,14 +580,17 @@ def render_html(design_system: dict) -> str:
         **{k: _safe(v) for k, v in normalized.items() if k != "anti_patterns_raw"},
         "styles": styles.rstrip(),
         "hero_tags": _chip_group(
-            [normalized["category"], normalized["style_name"], normalized["heading_font"], normalized["body_font"]],
+            [normalized["category"], normalized["style_name"], normalized["reference_summary"], normalized["heading_font"], normalized["body_font"]],
             ["System", "UI", "Design"],
         ),
         "style_keyword_chips": _chip_group(
             [part.strip() for part in str(design_system.get("style", {}).get("keywords", "")).split(",") if part.strip()],
             ["clear hierarchy", "semantic color", "low-noise surfaces"],
         ),
-        "style_best_for": _safe(design_system.get("style", {}).get("best_for", "Digital products that need clarity and direction.")),
+        "style_best_for": _safe(
+            design_system.get("reference_direction")
+            or design_system.get("style", {}).get("best_for", "Digital products that need clarity and direction.")
+        ),
         "style_performance": _safe(design_system.get("style", {}).get("performance", "Balanced for production delivery.")),
         "style_accessibility": _safe(design_system.get("style", {}).get("accessibility", "Respect motion and contrast constraints.")),
         "pattern_flow": _pattern_flow(normalized["pattern_steps"]),
@@ -579,13 +619,12 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Build a design-spec HTML artifact.")
     parser.add_argument("query", help='Brief such as "AI SaaS dashboard"')
     parser.add_argument("--project-name", "-p", default=None, help="Project name shown in the output")
-    parser.add_argument("--output", "-o", default="design-spec.html", help="Output HTML path")
+    parser.add_argument("--output", "-o", default=None, help="Output HTML path")
     args = parser.parse_args()
 
-    generator = DesignSystemGenerator()
-    design_system = generator.generate(args.query, args.project_name)
+    design_system = generate_design_system(args.query, args.project_name)
 
-    output_path = Path(args.output)
+    output_path = default_output_path() if not args.output else Path(args.output)
     if not output_path.is_absolute():
         output_path = Path.cwd() / output_path
     output_path.parent.mkdir(parents=True, exist_ok=True)

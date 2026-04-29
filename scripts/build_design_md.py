@@ -7,6 +7,7 @@ the HTML exporter.
 from __future__ import annotations
 
 import argparse
+from datetime import datetime
 import sys
 from pathlib import Path
 
@@ -20,7 +21,12 @@ if str(UPSTREAM_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(UPSTREAM_SCRIPTS))
 
 from build_design_spec import normalize_design_system  # type: ignore  # noqa: E402
-from design_system import DesignSystemGenerator  # type: ignore  # noqa: E402
+from reasoning import generate_design_system  # type: ignore  # noqa: E402
+
+
+def default_output_path(filename: str = "DESIGN.md") -> Path:
+    stamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    return ROOT_DIR / "artifacts" / stamp / filename
 
 
 COLOR_ROWS = [
@@ -51,6 +57,10 @@ def render_markdown(design_system: dict) -> str:
     lines.append(f"- **Style Direction:** {normalized['style_name']}")
     lines.append(f"- **Summary:** {normalized['summary']}")
     lines.append(f"- **Key Effects:** {normalized['key_effects']}")
+    if design_system.get("reference_summary"):
+        lines.append(f"- **Reference Styles:** {design_system.get('reference_summary')}")
+    if design_system.get("reference_direction"):
+        lines.append(f"- **Reference Direction:** {design_system.get('reference_direction')}")
     lines.append("")
     lines.append("## Color Palette and Semantic Roles")
     lines.append("")
@@ -131,13 +141,12 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Build a DESIGN.md artifact.")
     parser.add_argument("query", help='Brief such as "AI SaaS dashboard"')
     parser.add_argument("--project-name", "-p", default=None, help="Project name shown in the output")
-    parser.add_argument("--output", "-o", default="DESIGN.md", help="Output Markdown path")
+    parser.add_argument("--output", "-o", default=None, help="Output Markdown path")
     args = parser.parse_args()
 
-    generator = DesignSystemGenerator()
-    design_system = generator.generate(args.query, args.project_name)
+    design_system = generate_design_system(args.query, args.project_name)
 
-    output_path = Path(args.output)
+    output_path = default_output_path() if not args.output else Path(args.output)
     if not output_path.is_absolute():
         output_path = Path.cwd() / output_path
     output_path.parent.mkdir(parents=True, exist_ok=True)

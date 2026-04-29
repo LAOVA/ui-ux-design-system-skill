@@ -80,7 +80,14 @@ If the search output is noisy or insufficient, read the relevant CSV-backed doma
 - Prefer semantic tokens over raw hex values when describing systems.
 - Always surface accessibility, responsiveness, and interaction constraints for implementation-facing outputs.
 - For HTML outputs, prefer deterministic template rendering over ad hoc generated markup.
+- `templates/design-spec.html` is the canonical design-system HTML template. Treat it as a required output contract, not a loose inspiration source.
+- Do not replace `design-spec.html` with a bespoke application mockup, landing page, dashboard, editor, or prototype layout just because that feels more visually direct.
+- When generating `design-spec.html`, preserve the template's document role: it is a design-system specification page, not an app screen preview.
+- It is acceptable to fill the template with a brand's design language and to update token values, copy, swatches, component notes, and preview styling, but not to change the artifact into a different page type.
+- If the user explicitly wants an application interface mockup or product prototype, create that as a separate artifact such as `app-preview.html`. Do not use it as a substitute for `design-spec.html`.
+- If script execution is unavailable, manually mirror the existing template structure as closely as possible instead of inventing a new layout from scratch.
 - `design-spec.html` should load Tailwind from `https://cdn.tailwindcss.com` and use Tailwind utilities for layout and presentation wherever practical, keeping custom CSS limited to theme variables and a small preview layer.
+- Default artifact output must go under `./artifacts/<timestamp>/`. Do not write default deliverables to the project root.
 - If the user asks to generate a design system and does not specify a target format, produce both `design-spec.html` and `DESIGN.md` by default and summarize the result briefly.
 - Keep `design-spec.html` and `DESIGN.md` aligned by rendering them from the same normalized design-system data.
 - If multiple directions are plausible, narrow to one recommended direction and one fallback rather than listing many equal options.

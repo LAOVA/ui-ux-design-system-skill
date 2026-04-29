@@ -49,6 +49,7 @@ Process:
 Default output rule:
 - If the user asks to generate or create a design system and does not specify a format, generate both `design-spec.html` and `DESIGN.md` and provide a short written summary.
 - If the user explicitly asks for `DESIGN.md`, Markdown, JSON, or another format, honor that instead.
+- Unless the user explicitly overrides the path, store generated artifacts under `./artifacts/<timestamp>/`.
 
 ## 3. Design-Spec HTML
 
@@ -57,10 +58,16 @@ Use when the user wants a browsable design spec, lightweight style guide page, o
 Process:
 1. Generate or load the design-system data first.
 2. Normalize it into a consistent structure for export.
-3. Render the HTML from a template instead of freehand markup.
+3. Read `templates/design-spec.html` and treat it as the required structural contract.
+4. Render the HTML from that template instead of freehand markup.
    Default to Tailwind CDN plus utility classes for layout and spacing, with only a small custom CSS theme layer.
-4. Include the sections required by [html-spec-contract.md](html-spec-contract.md).
-5. Save the artifact to a user-visible path when the user asks for a file output.
+5. Include the sections required by [html-spec-contract.md](html-spec-contract.md).
+6. Save the artifact to a user-visible path when the user asks for a file output.
+
+Important distinction:
+- `design-spec.html` is a spec page.
+- A dashboard, editor, landing page, CMS, or app screen preview is a separate artifact type.
+- If the user asks for both, generate `design-spec.html` from the template and create the app preview separately.
 
 ## 4. Page Override
 
@@ -102,6 +109,10 @@ Process:
 - Start with `design-spec-html` if the user explicitly wants a visual spec artifact or HTML deliverable.
 - Start with `page-override` if the system exists and the page is the only moving part.
 - Start with `ui-review` if the artifact already exists.
+
+Template adherence heuristic:
+- If the requested file name or output type is `design-spec.html`, never swap in a custom application layout in its place.
+- If you need to show a more concrete UI concept, add a second artifact rather than mutating the spec artifact into something else.
 
 Default artifact heuristic:
 - `design-system` should usually end by generating both `design-spec.html` and `DESIGN.md` unless the user asked for a different deliverable.

@@ -9,6 +9,7 @@ Default behavior:
 from __future__ import annotations
 
 import argparse
+from datetime import datetime
 import json
 import sys
 from pathlib import Path
@@ -16,8 +17,6 @@ from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 UPSTREAM_SCRIPTS = ROOT_DIR / "ui-ux-pro-max-skill" / "scripts"
-DEFAULT_HTML_OUTPUT = ROOT_DIR / "artifacts" / "design-spec.html"
-DEFAULT_MD_OUTPUT = ROOT_DIR / "artifacts" / "DESIGN.md"
 
 if str(ROOT_DIR / "scripts") not in sys.path:
     sys.path.insert(0, str(ROOT_DIR / "scripts"))
@@ -26,7 +25,12 @@ if str(UPSTREAM_SCRIPTS) not in sys.path:
 
 from build_design_md import render_markdown  # type: ignore  # noqa: E402
 from build_design_spec import render_html  # type: ignore  # noqa: E402
-from design_system import DesignSystemGenerator  # type: ignore  # noqa: E402
+from reasoning import generate_design_system  # type: ignore  # noqa: E402
+
+
+def _default_run_dir() -> Path:
+    stamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    return ROOT_DIR / "artifacts" / stamp
 
 
 def _resolve_output_path(output: str | None, default_path: Path) -> Path:
@@ -64,12 +68,12 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    generator = DesignSystemGenerator()
-    design_system = generator.generate(args.query, args.project_name)
+    design_system = generate_design_system(args.query, args.project_name)
+    run_dir = _default_run_dir()
 
     if args.format == "all":
-        html_path = _resolve_output_path(args.output, DEFAULT_HTML_OUTPUT)
-        md_path = DEFAULT_MD_OUTPUT
+        html_path = _resolve_output_path(args.output, run_dir / "design-spec.html")
+        md_path = run_dir / "DESIGN.md"
         _write_text(html_path, render_html(design_system))
         _write_text(md_path, render_markdown(design_system))
         print(f"Generated design-spec HTML: {html_path}")
@@ -77,7 +81,7 @@ def main() -> int:
         return 0
 
     if args.format == "html":
-        output_path = _resolve_output_path(args.output, DEFAULT_HTML_OUTPUT)
+        output_path = _resolve_output_path(args.output, run_dir / "design-spec.html")
         _write_text(output_path, render_html(design_system))
         print(f"Generated design-spec HTML: {output_path}")
         return 0
@@ -87,24 +91,23 @@ def main() -> int:
         if args.output:
             output_path = _resolve_output_path(
                 args.output,
-                Path.cwd() / "artifacts" / "design-system.json",
+                run_dir / "design-system.json",
             )
             _write_text(output_path, content)
             print(f"Generated design-system JSON: {output_path}")
             return 0
-        print(content)
+        output_path = run_dir / "design-system.json"
+        _write_text(output_path, content)
+        print(f"Generated design-system JSON: {output_path}")
         return 0
 
     markdown = render_markdown(design_system)
-    if args.output:
-        output_path = _resolve_output_path(
-            args.output,
-            Path.cwd() / "artifacts" / "DESIGN.md",
-        )
-        _write_text(output_path, markdown)
-        print(f"Generated design-system Markdown: {output_path}")
-        return 0
-    print(markdown)
+    output_path = _resolve_output_path(
+        args.output,
+        run_dir / "DESIGN.md",
+    )
+    _write_text(output_path, markdown)
+    print(f"Generated design-system Markdown: {output_path}")
     return 0
 
 

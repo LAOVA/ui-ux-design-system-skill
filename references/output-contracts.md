@@ -6,6 +6,7 @@ Default generation rule:
 - When the user asks to generate a design system and does not specify an output format, generate both `design-spec.html` and `DESIGN.md`.
 - Pair those artifacts with a short summary of the chosen direction and where the files were written.
 - Render both artifacts from the same normalized design-system data so sections stay aligned.
+- Write default artifacts under `./artifacts/<timestamp>/` rather than the repository root.
 
 ## Design System Spec
 
@@ -51,6 +52,10 @@ Use semantic naming such as:
 
 Treat this as a human-browsable artifact generated from the same design-system data as `DESIGN.md`.
 
+Treat the artifact type as fixed:
+- It is a design-system specification page.
+- It is not a substitute for a product mockup or application prototype.
+
 Include:
 
 1. Project summary
@@ -70,6 +75,11 @@ Prefer:
 - a single self-contained HTML file unless the user explicitly wants separate assets
 - Tailwind CDN plus utility-first markup for most structure and spacing
 - only a thin custom CSS layer for theme variables and preview-specific behavior
+
+Do not:
+- replace the template with a custom landing page, dashboard, editor, CMS, or mobile screen
+- remove core spec sections in favor of a more “realistic” app layout
+- reinterpret “HTML output” to mean “freeform UI mockup” when the requested artifact is `design-spec.html`
 
 ## Page Override
 

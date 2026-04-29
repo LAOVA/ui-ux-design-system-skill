@@ -1,4 +1,4 @@
 interface:
   display_name: "UIUX Design System"
   short_description: "Turn product briefs into usable UI systems"
-  default_prompt: "Use $uiux-design-system to turn this product brief into a design system and generate matching design-spec.html and DESIGN.md artifacts by default."
+  default_prompt: "Use $uiux-design-system to turn this product brief into a design system and generate matching design-spec.html and DESIGN.md artifacts by default. Keep design-spec.html aligned to the provided template structure instead of replacing it with a custom app mockup."
