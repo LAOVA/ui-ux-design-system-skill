@@ -65,7 +65,7 @@ def _write_manifest(run_dir: Path, bundle: dict, files: dict[str, Path]) -> None
         "structured_query": bundle.get("structured_query"),
         "source_pipeline": bundle.get("final_design_system", {}).get("source_pipeline", {}),
         "workflow_stage": "bundle-generated",
-        "next_step": "Use render_artifacts.py on this run directory so DESIGN.md and design-spec.html are rendered from generation-bundle.json in the same final_output_dir.",
+        "next_step": "Use render_artifacts.py on this run directory so DESIGN.md, design-spec.html, and app-preview.html are rendered from generation-bundle.json in the same final_output_dir.",
         "outputs": {name: str(path) for name, path in files.items()},
     }
     _write_text(
@@ -125,6 +125,7 @@ def main() -> int:
         finalize_run(run_dir)
         print(f"Rendered DESIGN.md: {run_dir / 'DESIGN.md'}")
         print(f"Rendered design-spec.html: {run_dir / 'design-spec.html'}")
+        print(f"Rendered app-preview.html: {run_dir / 'app-preview.html'}")
         print(f"Finalized manifest: {run_dir / 'manifest.json'}")
     return 0
 

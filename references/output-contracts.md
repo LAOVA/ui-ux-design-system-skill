@@ -3,12 +3,12 @@
 Use these structures when the user wants a deliverable instead of a conversational recommendation.
 
 Default generation rule:
-- When the user asks to generate a design system and does not specify an output format, first generate the intermediate bundle, then author both `design-spec.html` and `DESIGN.md`.
+- When the user asks to generate a design system and does not specify an output format, first generate the intermediate bundle, then author `design-spec.html`, `DESIGN.md`, and `app-preview.html`.
 - Pair those artifacts with a short summary of the chosen direction and where the files were written.
-- Render both artifacts from the same synthesized normalized design-system data so sections stay aligned.
+- Render all artifacts from the same synthesized normalized design-system data so sections stay aligned.
 - Write default artifacts under `./artifacts/<timestamp>/` rather than the repository root.
 - Write `manifest.json` in that same run directory to record the official inputs and outputs.
-- The final `DESIGN.md` and `design-spec.html` must be written into that same run directory, not a sibling folder such as `demo/` and not a second timestamped folder.
+- The final `DESIGN.md`, `design-spec.html`, and `app-preview.html` must be written into that same run directory, not a sibling folder such as `demo/` and not a second timestamped folder.
 - Final delivery is only complete after `scripts/finalize_manifest.py` updates `manifest.json.workflow_stage` to `final-artifacts-authored`.
 
 ## Design System Spec
@@ -86,6 +86,23 @@ Do not:
 - reinterpret “HTML output” to mean “freeform UI mockup” when the requested artifact is `design-spec.html`
 
 ## Page Override
+
+## `app-preview.html`
+
+Treat this as the concrete UI mockup companion to `design-spec.html`.
+
+Include:
+
+1. A clear product-facing hero
+2. A lightweight but realistic application shell
+3. Sections or cards that reflect the synthesized pattern
+4. Typography and color usage consistent with the same design-system data
+5. Responsive layout that works on desktop and mobile
+
+Prefer:
+- one self-contained HTML file
+- Tailwind CDN plus a thin custom theme layer
+- realistic but scoped mockups instead of sprawling multi-screen prototypes
 
 Keep it short. Include only what differs from the global system:
 

@@ -55,21 +55,25 @@ def finalize_run(run_dir: Path) -> Path:
 
     design_md_path = final_output_dir / "DESIGN.md"
     design_spec_path = final_output_dir / "design-spec.html"
+    app_preview_path = final_output_dir / "app-preview.html"
 
     _require_file(design_md_path, "DESIGN.md")
     _require_file(design_spec_path, "design-spec.html")
+    _require_file(app_preview_path, "app-preview.html")
     _verify_same_dir(design_md_path, final_output_dir, "DESIGN.md")
     _verify_same_dir(design_spec_path, final_output_dir, "design-spec.html")
+    _verify_same_dir(app_preview_path, final_output_dir, "app-preview.html")
     _verify_html_signature(design_spec_path)
 
     outputs = manifest.get("outputs", {})
     outputs["generation-bundle.json"] = outputs.get("generation-bundle.json", str(run_dir / "generation-bundle.json"))
     outputs["DESIGN.md"] = str(design_md_path)
     outputs["design-spec.html"] = str(design_spec_path)
+    outputs["app-preview.html"] = str(app_preview_path)
 
     manifest["outputs"] = outputs
     manifest["workflow_stage"] = "final-artifacts-authored"
-    manifest["next_step"] = "Run completed. Final DESIGN.md and design-spec.html were authored in final_output_dir."
+    manifest["next_step"] = "Run completed. Final DESIGN.md, design-spec.html, and app-preview.html were authored in final_output_dir."
 
     _write_json(manifest_path, manifest)
     return manifest_path
