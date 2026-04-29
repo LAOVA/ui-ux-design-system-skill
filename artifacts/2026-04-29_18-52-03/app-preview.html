@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ferrari AI CMS App Preview</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --bg: #0A0A0A;
+      --fg: #FFFFFF;
+      --primary: #da291c;
+      --accent-yellow: #FFD700;
+      --border: #2A2A2A;
+      --muted: #888888;
+      --carbon: rgba(255, 255, 255, 0.03);
+      --font-heading: 'Inter', system-ui, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-heading);
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(45deg, var(--carbon) 25%, transparent 25%),
+        linear-gradient(-45deg, var(--carbon) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--carbon) 75%),
+        linear-gradient(-45deg, transparent 75%, var(--carbon) 75%);
+      background-size: 4px 4px;
+      color: var(--fg);
+      overflow-x: hidden;
+    }
+
+    .cms-container {
+      display: grid;
+      grid-template-columns: 80px 280px 1fr;
+      height: 100vh;
+    }
+
+    /* Side Rail */
+    .side-rail {
+      background: #000;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+      gap: 30px;
+    }
+
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px var(--primary);
+    }
+
+    .rail-item {
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .rail-item:hover,
+    .rail-item.active {
+      color: var(--primary);
+    }
+
+    /* Navigation Sidebar */
+    .sidebar {
+      background: rgba(15, 15, 15, 0.8);
+      backdrop-filter: blur(20px);
+      border-right: 1px solid var(--border);
+      padding: 30px 20px;
+    }
+
+    .sidebar-header {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .nav-group {
+      margin-bottom: 30px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 8px;
+      color: var(--fg);
+      text-decoration: none;
+      font-size: 14px;
+      margin-bottom: 4px;
+      transition: 0.2s;
+    }
+
+    .nav-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-item.active {
+      background: var(--primary);
+      font-weight: 600;
+    }
+
+    /* Main Content */
+    .main-content {
+      padding: 40px;
+      overflow-y: auto;
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .ai-badge {
+      background: var(--accent-yellow);
+      color: #000;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    /* Dashboard Grid */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 2px;
+      height: 100%;
+      background: var(--primary);
+      opacity: 0.5;
+    }
+
+    .telemetry-value {
+      font-size: 32px;
+      font-weight: 700;
+      margin: 10px 0;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .telemetry-unit {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-yellow);
+      display: inline-block;
+      margin-right: 8px;
+      box-shadow: 0 0 8px var(--accent-yellow);
+    }
+
+    /* AI Editor */
+    .ai-editor {
+      grid-column: span 2;
+      background: linear-gradient(135deg, rgba(218, 41, 28, 0.05) 0%, transparent 100%);
+    }
+
+    .prompt-input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      color: var(--fg);
+      font-family: inherit;
+      resize: none;
+      margin-top: 15px;
+    }
+
+    .btn-race {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-race:hover {
+      transform: skewX(-10deg);
+      box-shadow: -10px 0 20px rgba(218, 41, 28, 0.4);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cms-container">
+    <div class="side-rail">
+      <div class="logo-mark">SF</div>
+      <div class="rail-item active">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+        </svg>
+      </div>
+      <div class="rail-item">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+          <path
+            d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
+        </svg>
+      </div>
+      <div class="rail-item">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z" />
+        </svg>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <div class="sidebar-header">Core Systems</div>
+      <div class="nav-group">
+        <a href="#" class="nav-item active">Performance Center</a>
+        <a href="#" class="nav-item">AI Content Engine</a>
+        <a href="#" class="nav-item">Asset Telemetry</a>
+      </div>
+
+      <div class="sidebar-header">AI Labs</div>
+      <div class="nav-group">
+        <a href="#" class="nav-item">Strategic Planning</a>
+        <a href="#" class="nav-item">Neural Rendering</a>
+        <a href="#" class="nav-item">Race Logic</a>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="header-row">
+        <div>
+          <h1 class="text-3xl font-bold tracking-tighter">PERFORMANCE CENTER</h1>
+          <p class="text-sm text-gray-500 mt-1">Real-time AI Content Management & Telemetry</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="text-right">
+            <div class="text-[10px] text-gray-500 uppercase tracking-widest">System Status</div>
+            <div class="text-xs font-bold text-green-500">NOMINAL</div>
+          </div>
+          <div class="w-10 h-10 rounded-full bg-gray-800 border border-gray-700"></div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="card">
+          <div class="flex justify-between items-start">
+            <span class="text-[10px] text-gray-500 uppercase tracking-widest">Inference Speed</span>
+            <span class="ai-badge">Turbo</span>
+          </div>
+          <div class="telemetry-value">342.8</div>
+          <div class="telemetry-unit">tokens / sec</div>
+          <div class="mt-4 h-1 bg-gray-900 rounded-full overflow-hidden">
+            <div class="h-full bg-red-600 w-3/4"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="flex justify-between items-start">
+            <span class="text-[10px] text-gray-500 uppercase tracking-widest">Neural Load</span>
+            <span class="status-dot"></span>
+          </div>
+          <div class="telemetry-value">18.4%</div>
+          <div class="telemetry-unit">system pressure</div>
+          <div class="mt-4 flex gap-1">
+            <div class="h-4 w-1 bg-red-600"></div>
+            <div class="h-4 w-1 bg-red-600"></div>
+            <div class="h-4 w-1 bg-red-600"></div>
+            <div class="h-4 w-1 bg-gray-800"></div>
+            <div class="h-4 w-1 bg-gray-800"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="flex justify-between items-start">
+            <span class="text-[10px] text-gray-500 uppercase tracking-widest">Active Models</span>
+          </div>
+          <div class="telemetry-value">04</div>
+          <div class="telemetry-unit">neural instances</div>
+          <div class="mt-4 text-[10px] text-gray-500">
+            GPT-4o, Claude 3.5, Stable Diffusion XL
+          </div>
+        </div>
+
+        <div class="card ai-editor">
+          <div class="flex justify-between items-center">
+            <h3 class="text-sm font-bold uppercase tracking-widest">AI Prompt Cockpit</h3>
+            <span class="text-[10px] text-gray-500">READY FOR INPUT</span>
+          </div>
+          <textarea class="prompt-input" rows="4" placeholder="Describe the content you want to generate..."></textarea>
+          <div class="flex justify-between items-center mt-4">
+            <div class="flex gap-4">
+              <label class="flex items-center gap-2 text-xs text-gray-400">
+                <input type="checkbox" checked> High Fidelity
+              </label>
+              <label class="flex items-center gap-2 text-xs text-gray-400">
+                <input type="checkbox"> Strategic Mode
+              </label>
+            </div>
+            <button class="btn-race">Execute Sequence</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="text-sm font-bold uppercase tracking-widest mb-4">Live Telemetry</h3>
+          <div class="space-y-3">
+            <div class="flex justify-between text-xs">
+              <span class="text-gray-500">Latency</span>
+              <span class="text-yellow-400">12ms</span>
+            </div>
+            <div class="flex justify-between text-xs">
+              <span class="text-gray-500">Accuracy</span>
+              <span class="text-red-500">99.8%</span>
+            </div>
+            <div class="flex justify-between text-xs">
+              <span class="text-gray-500">VRAM Use</span>
+              <span class="text-gray-300">24.2GB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+@media (max-width: 980px) {
+.hero, .content {
+grid-template-columns: 1fr;
+}
+.sidebar {
+border-right: none;
+border-bottom: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+}
+.projects, .stats {
+grid-template-columns: 1fr;
+}
+}
+</style>
+</head>
+
+<body>
+  <div class="shell">
+    <div class="frame">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark"></span>
+          <strong>Ferrari AI CMS</strong>
+        </div>
+        <nav class="topnav"><span>1. Hero</span>
+          <span>2. Bento Grid (Key Features)</span>
+          <span>3. Detail Cards</span>
+          <span>4. Tech Specs</span>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">App Preview</span>
+          <h1>Ferrari AI CMS</h1>
+          <p>Dark Mode (OLED) direction for Financial Dashboard with minimal glow (text-shadow: 0 0 10px), dark-to-light
+            transitions, low white emission, high readability, visible focus.</p>
+          <div class="chip-row"><span class="chip">Financial Dashboard</span>
+            <span class="chip">Dark Mode (OLED)</span>
+            <span class="chip">FerrariSans</span>
+            <span class="chip">FerrariSans</span>
+          </div>
+          <div class="actions">
+            <a class="button-primary" href="#">Open Projects</a>
+            <a class="button-secondary" href="#">Read Notes</a>
+          </div>
+        </div>
+
+        <div class="preview-panel">
+          <div class="terminal">
+            <div class="terminal-bar">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <div class="terminal-body">
+              <div><span class="terminal-accent">$</span> whoami</div>
+              <div>designer-engineer / systems thinker / builder</div>
+              <div><span class="terminal-accent">$</span> ls ./featured-work</div>
+              <div>01_1. Hero.tsx</div>
+              <div>02_2. Bento Grid (Key Features).md</div>
+              <div>03_3. Detail Cards.json</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content">
+        <aside class="sidebar">
+          <h2>Navigation</h2>
+          <div class="sidebar-list">
+            <span>~/overview</span>
+            <span>~/projects</span>
+            <span>~/writing</span>
+            <span>~/contact</span>
+          </div>
+        </aside>
+
+        <div class="workspace">
+          <div class="stats">
+            <article class="stat-card">
+              <span>Repos</span>
+              <strong>42</strong>
+            </article>
+            <article class="stat-card">
+              <span>Systems</span>
+              <strong>12</strong>
+            </article>
+            <article class="stat-card">
+              <span>Years</span>
+              <strong>8+</strong>
+            </article>
+          </div>
+
+          <div class="projects">
+
+            <article class="project-card">
+              <div class="project-kicker">01</div>
+              <h3>1. Hero</h3>
+              <p>Dark Mode (OLED) direction for Financial Dashboard with minimal glow (text-shadow: 0 0 10px),
+                dark-to-light transitions, low white emission, high readability, visible focus.</p>
+            </article>
+
+
+            <article class="project-card">
+              <div class="project-kicker">02</div>
+              <h3>2. Bento Grid (Key Features)</h3>
+              <p>Dark Mode (OLED) direction for Financial Dashboard with minimal glow (text-shadow: 0 0 10px),
+                dark-to-light transitions, low white emission, high readability, visible focus.</p>
+            </article>
+
+
+            <article class="project-card">
+              <div class="project-kicker">03</div>
+              <h3>3. Detail Cards</h3>
+              <p>Dark Mode (OLED) direction for Financial Dashboard with minimal glow (text-shadow: 0 0 10px),
+                dark-to-light transitions, low white emission, high readability, visible focus.</p>
+            </article>
+
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+
+</html>

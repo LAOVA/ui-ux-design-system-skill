@@ -332,6 +332,13 @@ ANTI_PATTERN_FALLBACK = [
     "Do not hide focus states.",
 ]
 
+COMPONENT_SPEC_ROWS = [
+    ("Primary Button", "Action", "Solid emphasis for the primary decision on a surface.", "Default, hover, focus, pressed"),
+    ("Secondary Button", "Action", "Lower-emphasis path for alternate actions and escape hatches.", "Default, hover, focus"),
+    ("Card", "Container", "Groups related content with clear boundary and stable hierarchy.", "Default, hover"),
+    ("Input", "Form", "Accepts user data with strong legibility and visible feedback.", "Default, focus, error, disabled"),
+]
+
 
 def _safe(value: object, fallback: str = "") -> str:
     text = str(value or fallback)
@@ -550,6 +557,76 @@ def _spacing_tokens() -> str:
     )
 
 
+def _token_table_rows(values: list[tuple[str, str, str]]) -> str:
+    return "\n".join(
+        "\n".join(
+            [
+                '<div class="token-table-row grid grid-cols-[120px_110px_minmax(0,1fr)] gap-3 border-b px-4 py-3 text-sm max-sm:grid-cols-1">',
+                f'  <code class="font-semibold">{_safe(name)}</code>',
+                f'  <span class="theme-muted">{_safe(value)}</span>',
+                f'  <span class="theme-muted">{_safe(note)}</span>',
+                '</div>',
+            ]
+        )
+        for name, value, note in values
+    )
+
+
+def _color_role_table(colors: dict) -> str:
+    rows = []
+    role_notes = {
+        "primary": "Main action and highest-emphasis interactive color.",
+        "secondary": "Secondary action, support surfaces, or quieter emphasis.",
+        "accent": "Highlight, status emphasis, or editorial punch color.",
+        "background": "Page canvas and primary app backdrop.",
+        "foreground": "Primary text and high-contrast content color.",
+        "muted": "Low-contrast surfaces or secondary UI backplates.",
+        "border": "Hairlines, separators, and neutral edge definition.",
+        "destructive": "Error, destructive action, or risk state.",
+    }
+    for key, label in COLOR_KEYS:
+        value = colors.get(key)
+        if value:
+            rows.append((label, str(value), role_notes.get(key, "Semantic design token.")))
+    return _token_table_rows(rows)
+
+
+def _typography_scale_rows(normalized: dict) -> str:
+    values = [
+        ("Display", normalized["heading_font"], "Large-format system headlines and hero moments."),
+        ("Heading", normalized["heading_font"], "Section titles and content hierarchy anchors."),
+        ("Body", normalized["body_font"], "Primary reading text, paragraphs, and longer labels."),
+        ("UI Label", normalized["body_font"], "Controls, meta labels, small annotations, and captions."),
+    ]
+    return _token_table_rows(values)
+
+
+def _component_spec_rows() -> str:
+    return "\n".join(
+        "\n".join(
+            [
+                '<div class="token-table-row grid grid-cols-[140px_100px_1fr_180px] gap-3 border-b px-4 py-3 text-sm max-xl:grid-cols-1">',
+                f'  <strong>{_safe(name)}</strong>',
+                f'  <span class="theme-muted">{_safe(group)}</span>',
+                f'  <span class="theme-muted">{_safe(role)}</span>',
+                f'  <span class="theme-muted">{_safe(states)}</span>',
+                '</div>',
+            ]
+        )
+        for name, group, role, states in COMPONENT_SPEC_ROWS
+    )
+
+
+def _implementation_checks() -> str:
+    items = [
+        "Map all UI surfaces to semantic tokens before implementation begins.",
+        "Keep component variants constrained and name them before coding one-off exceptions.",
+        "Review contrast, focus visibility, and spacing density before shipping.",
+        "Validate responsive collapse order on mobile, tablet, and desktop breakpoints.",
+    ]
+    return _list_items(items, [])
+
+
 def _radius_tokens() -> str:
     values = [("radius-sm", "8px"), ("radius-md", "12px"), ("radius-lg", "16px")]
     return "\n".join(
@@ -615,12 +692,16 @@ def render_html(design_system: dict) -> str:
         "pattern_conversion": _safe(design_system.get("pattern", {}).get("conversion", "Guide users toward the primary action without clutter.")),
         "pattern_color_strategy": _safe(design_system.get("pattern", {}).get("color_strategy", "Use semantic colors deliberately rather than decoratively.")),
         "color_swatches": _color_swatches(design_system.get("colors", {})),
+        "color_role_rows": _color_role_table(design_system.get("colors", {})),
         "color_notes": _safe(design_system.get("colors", {}).get("notes", "Keep color semantic and intentional across surfaces, text, states, and actions.")),
         "typography_best_for": _safe(design_system.get("typography", {}).get("best_for", "Interfaces that need structured hierarchy and high readability.")),
+        "typography_scale_rows": _typography_scale_rows(normalized),
         "google_fonts_url": _safe(design_system.get("typography", {}).get("google_fonts_url", "https://fonts.google.com/")),
         "spacing_tokens": _spacing_tokens(),
         "radius_tokens": _radius_tokens(),
         "shadow_tokens": _shadow_tokens(),
+        "component_spec_rows": _component_spec_rows(),
+        "implementation_checks": _implementation_checks(),
         "navigation_guidance": _safe("Keep primary navigation stable, make active state obvious, and ensure dense data views stay easy to scan."),
         "accessibility_rules": _list_items(ACCESSIBILITY_RULES, []),
         "responsive_rules": _list_items(RESPONSIVE_RULES, []),

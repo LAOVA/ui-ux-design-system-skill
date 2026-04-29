@@ -12,10 +12,262 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{project_name}} Design Spec</title>
+  <title>Ferrari Personal Home Design Spec</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-{{styles}}
+
+    :root {
+      color-scheme: dark;
+      --page-bg: #181818;
+      --page-fg: #FFFFFF;
+      --surface-border: #303030;
+      --primary: #da291c;
+      --secondary: #181818;
+      --accent: #da291c;
+      --panel-bg: #4B4B4B;
+      --panel-bg-soft: #3D3D3D;
+      --panel-fg: #FFFFFF;
+      --panel-muted: #DFE3EA;
+      --preview-bg: #545454;
+      --shadow-card: 0 10px 30px rgba(15, 23, 42, 0.10);
+      --shadow-popover: 0 18px 48px rgba(15, 23, 42, 0.18);
+      --font-heading: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      --interactive-primary: #da291c;
+      --interactive-on-primary: #FFFFFF;
+      --interactive-primary-shadow: color-mix(in srgb, #da291c 22%, transparent);
+      --interactive-secondary-fg: #da291c;
+      --toggle-shell-bg: color-mix(in srgb, #3D3D3D 90%, white 10%);
+      --toggle-shell-border: color-mix(in srgb, #303030 82%, white 18%);
+      --toggle-button-fg: #DFE3EA;
+      --toggle-active-bg: color-mix(in srgb, #4B4B4B 92%, white 8%);
+      --toggle-active-fg: #FFFFFF;
+      --toggle-active-border: #303030;
+      --toggle-active-shadow: 0 6px 18px rgba(15, 23, 42, 0.10);
+    }
+    body[data-page-theme="dark"] {
+      color-scheme: dark;
+      --page-bg: #020617;
+      --page-fg: #F8FAFC;
+      --surface-border: #243244;
+      --panel-bg: #131C2E;
+      --panel-bg-soft: #1A2740;
+      --panel-fg: #F8FAFC;
+      --panel-muted: #94A3B8;
+      --preview-bg: #0B1220;
+      --preview-surface: #162033;
+      --preview-surface-strong: #10192A;
+      --preview-border: #243244;
+      --preview-fg: #F8FAFC;
+      --preview-muted: #94A3B8;
+      --shadow-card: 0 12px 36px rgba(2, 6, 23, 0.42);
+      --shadow-popover: 0 20px 54px rgba(2, 6, 23, 0.48);
+      --interactive-primary: #da291c;
+      --interactive-on-primary: #04110C;
+      --interactive-primary-shadow: color-mix(in srgb, #da291c 32%, transparent);
+      --interactive-secondary-fg: #D7FBE7;
+      --toggle-shell-bg: color-mix(in srgb, #1A2740 88%, #020617 12%);
+      --toggle-shell-border: #243244;
+      --toggle-button-fg: #94A3B8;
+      --toggle-active-bg: color-mix(in srgb, #131C2E 82%, white 18%);
+      --toggle-active-fg: #F8FAFC;
+      --toggle-active-border: #31415A;
+      --toggle-active-shadow: 0 8px 22px rgba(2, 6, 23, 0.34);
+    }
+    body[data-page-theme="light"] {
+      color-scheme: light;
+      --page-bg: #F8FAFC;
+      --page-fg: #0F172A;
+      --surface-border: #CBD5E1;
+      --panel-bg: #FFFFFF;
+      --panel-bg-soft: #F1F5F9;
+      --panel-fg: #0F172A;
+      --panel-muted: #475569;
+      --preview-bg: #FFFFFF;
+      --preview-surface: #F8FAFC;
+      --preview-surface-strong: #FFFFFF;
+      --preview-border: #CBD5E1;
+      --preview-fg: #0F172A;
+      --preview-muted: #475569;
+      --toggle-shell-bg: color-mix(in srgb, #F1F5F9 82%, white 18%);
+      --toggle-shell-border: #D7DEE8;
+      --toggle-button-fg: #6B7280;
+      --toggle-active-bg: #FFFFFF;
+      --toggle-active-fg: #1F2937;
+      --toggle-active-border: #D7DEE8;
+      --toggle-active-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      background: var(--page-bg);
+      color: var(--page-fg);
+      transition: background 180ms ease, color 180ms ease;
+    }
+    h1, h2, h3, h4, strong { font-family: var(--font-heading); }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    a {
+      color: var(--primary);
+      text-underline-offset: 0.16em;
+    }
+    .page-theme-floating {
+      background: color-mix(in srgb, var(--panel-bg) 86%, transparent);
+      border-color: color-mix(in srgb, var(--surface-border) 78%, white 22%);
+      box-shadow: var(--shadow-popover);
+      backdrop-filter: blur(14px);
+    }
+    .page-theme-switch {
+      background: var(--toggle-shell-bg);
+      border-color: var(--toggle-shell-border);
+    }
+    .page-theme-button {
+      background: transparent;
+      color: var(--toggle-button-fg);
+      border: 1px solid transparent;
+      transition: background 160ms ease, color 160ms ease, transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+    }
+    .page-theme-button:hover,
+    .theme-button-primary:hover,
+    .theme-button-secondary:hover {
+      transform: translateY(-1px);
+    }
+    .page-theme-button.active {
+      background: var(--toggle-active-bg);
+      color: var(--toggle-active-fg);
+      border-color: var(--toggle-active-border);
+      box-shadow: var(--toggle-active-shadow);
+    }
+    .theme-panel {
+      background: var(--panel-bg);
+      border-color: var(--surface-border);
+      color: var(--panel-fg);
+      box-shadow: var(--shadow-card);
+    }
+    .theme-soft {
+      background: var(--panel-bg-soft);
+      border-color: color-mix(in srgb, var(--surface-border) 76%, white 24%);
+      color: var(--panel-fg);
+    }
+    .theme-muted { color: var(--panel-muted); }
+    .theme-chip {
+      background: color-mix(in srgb, var(--panel-bg-soft) 92%, white 8%);
+      border-color: var(--surface-border);
+      color: var(--panel-fg);
+      box-shadow: var(--shadow-card);
+    }
+    .theme-tag {
+      background: color-mix(in srgb, var(--accent) 15%, white);
+      color: var(--accent);
+      border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+    }
+    .theme-button-primary {
+      background: var(--interactive-primary);
+      color: var(--interactive-on-primary);
+      box-shadow: 0 10px 24px var(--interactive-primary-shadow);
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+    .theme-button-secondary {
+      background: transparent;
+      color: var(--interactive-secondary-fg);
+      border: 1px solid color-mix(in srgb, var(--interactive-primary) 25%, var(--surface-border));
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+    .swatch-chip { border: 1px solid rgba(15, 23, 42, 0.08); }
+    .flow-step {
+      border: 1px solid color-mix(in srgb, var(--surface-border) 70%, white 30%);
+      background: var(--panel-bg-soft);
+    }
+    .flow-index {
+      background: color-mix(in srgb, var(--primary) 14%, white);
+      color: var(--primary);
+    }
+    .token-bar { background: linear-gradient(90deg, var(--primary), var(--accent)); }
+    .radius-box {
+      border: 1px solid var(--surface-border);
+      background: var(--panel-bg-soft);
+    }
+    .shadow-box {
+      background: var(--panel-bg-soft);
+      border: 1px solid color-mix(in srgb, var(--surface-border) 70%, white 30%);
+    }
+    .theme-input,
+    .theme-preview-surface,
+    .theme-preview-card,
+    .theme-table,
+    .theme-nav-item {
+      background: var(--preview-surface, var(--panel-bg-soft));
+      border-color: var(--preview-border, var(--surface-border));
+      color: var(--preview-fg, var(--panel-fg));
+    }
+    .theme-input::placeholder { color: var(--preview-muted, var(--panel-muted)); }
+    .theme-nav-item.active {
+      background: var(--interactive-primary);
+      color: var(--interactive-on-primary);
+      border-color: var(--interactive-primary);
+    }
+    .theme-status-positive {
+      background: color-mix(in srgb, var(--accent) 18%, white);
+      color: var(--accent);
+    }
+    .theme-status-neutral {
+      background: color-mix(in srgb, var(--secondary) 18%, white);
+      color: var(--secondary);
+    }
+    .theme-preview-window,
+    .theme-preview-surface,
+    .theme-preview-card,
+    .theme-input,
+    .theme-nav-item,
+    .theme-table {
+      --preview-surface: var(--panel-bg-soft);
+      --preview-surface-strong: var(--preview-bg);
+      --preview-border: color-mix(in srgb, var(--surface-border) 65%, white 35%);
+      --preview-fg: var(--panel-fg);
+      --preview-muted: var(--panel-muted);
+    }
+    .theme-preview-window {
+      background: var(--preview-surface-strong);
+      border-color: var(--preview-border);
+      transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
+    }
+    .theme-dot { background: color-mix(in srgb, var(--panel-muted) 45%, transparent); }
+    .theme-chart {
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--accent) 16%, transparent), transparent),
+        linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255,255,255,0.14) 1px, transparent 1px);
+      background-size: auto, 18px 18px, 18px 18px;
+      background-color: var(--preview-surface-strong);
+      border-color: color-mix(in srgb, var(--preview-border) 70%, white 30%);
+      position: relative;
+      overflow: hidden;
+    }
+    .theme-chart::after {
+      content: "";
+      position: absolute;
+      inset: auto 10px 18px 10px;
+      height: 3px;
+      border-radius: 999px;
+      background:
+        linear-gradient(90deg, var(--accent) 0%, var(--accent) 30%, transparent 30%),
+        linear-gradient(90deg, transparent 10%, var(--primary) 10%, var(--primary) 68%, transparent 68%);
+      opacity: 0.85;
+      transform: skewX(-18deg);
+    }
+    @media (max-width: 640px) {
+      .page-theme-floating {
+        width: calc(100% - 24px);
+        justify-content: space-between;
+      }
+    }
   </style>
 </head>
 
@@ -47,7 +299,7 @@
                 class="inline-flex rounded-full border px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] theme-soft theme-muted">
                 Design Spec
               </div>
-              <h2 class="mt-4 text-xl font-black tracking-[-0.03em]">{{project_name}}</h2>
+              <h2 class="mt-4 text-xl font-black tracking-[-0.03em]">Ferrari Personal Home</h2>
             </div>
             <div class="rounded-2xl border px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] theme-soft">
               v1
@@ -86,7 +338,7 @@
 
           <div class="mt-6 rounded-3xl border theme-soft p-4">
             <p class="text-xs font-semibold uppercase tracking-[0.16em] theme-muted">Reference Direction</p>
-            <p class="mt-3 text-sm leading-7">{{reference_direction}}</p>
+            <p class="mt-3 text-sm leading-7">Primary reference: Ferrari - Luxury automotive. Chiaroscuro black-white editorial, Ferrari Red with extreme sparseness</p>
           </div>
         </div>
       </aside>
@@ -97,8 +349,8 @@
             <div class="flex flex-wrap items-start justify-between gap-4">
               <div class="max-w-4xl">
                 <p class="text-xs font-semibold uppercase tracking-[0.22em] theme-muted">System Overview</p>
-                <h1 class="mt-4 max-w-4xl text-5xl font-black tracking-[-0.05em] md:text-7xl">{{project_name}}</h1>
-                <p class="mt-5 max-w-3xl text-lg leading-8 theme-muted">{{summary}}</p>
+                <h1 class="mt-4 max-w-4xl text-5xl font-black tracking-[-0.05em] md:text-7xl">Ferrari Personal Home</h1>
+                <p class="mt-5 max-w-3xl text-lg leading-8 theme-muted">Cinematic Editorial direction for Portfolio/Personal with smooth scroll, parallax, minimal entrance anim.</p>
               </div>
               <div class="rounded-3xl border px-4 py-3 text-right theme-soft">
                 <div class="text-xs font-semibold uppercase tracking-[0.16em] theme-muted">Artifact</div>
@@ -107,23 +359,27 @@
             </div>
 
             <div class="mt-8 flex flex-wrap gap-3">
-              {{hero_tags}}
+                        <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">Portfolio/Personal</span>
+          <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">Cinematic Editorial</span>
+          <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">Ferrari</span>
+          <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">Inter</span>
+          <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">Inter</span>
             </div>
 
             <div class="mt-8 grid gap-4 md:grid-cols-3">
               <article class="theme-soft rounded-3xl border p-4">
                 <p class="text-xs font-semibold uppercase tracking-[0.16em] theme-muted">Pattern</p>
-                <strong class="mt-3 block text-xl font-black">{{pattern_name}}</strong>
-                <p class="mt-2 text-sm leading-6 theme-muted">{{cta_placement}}</p>
+                <strong class="mt-3 block text-xl font-black">Cinematic Storytelling</strong>
+                <p class="mt-2 text-sm leading-6 theme-muted">Hero and Footer</p>
               </article>
               <article class="theme-soft rounded-3xl border p-4">
                 <p class="text-xs font-semibold uppercase tracking-[0.16em] theme-muted">Fonts</p>
-                <strong class="mt-3 block text-xl font-black">{{heading_font}}</strong>
-                <p class="mt-2 text-sm leading-6 theme-muted">{{body_font}}</p>
+                <strong class="mt-3 block text-xl font-black">Inter</strong>
+                <p class="mt-2 text-sm leading-6 theme-muted">Inter</p>
               </article>
               <article class="theme-soft rounded-3xl border p-4">
                 <p class="text-xs font-semibold uppercase tracking-[0.16em] theme-muted">Reference</p>
-                <strong class="mt-3 block text-xl font-black">{{reference_summary}}</strong>
+                <strong class="mt-3 block text-xl font-black">Ferrari</strong>
                 <p class="mt-2 text-sm leading-6 theme-muted">Used as directional input, not as a substitute for the system.</p>
               </article>
             </div>
@@ -182,19 +438,19 @@
       <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <article class="theme-panel rounded-3xl border p-5">
           <span class="block text-xs uppercase tracking-[0.16em] theme-muted">Category</span>
-          <strong class="mt-3 block text-2xl font-black">{{category}}</strong>
+          <strong class="mt-3 block text-2xl font-black">Portfolio/Personal</strong>
         </article>
         <article class="theme-panel rounded-3xl border p-5">
           <span class="block text-xs uppercase tracking-[0.16em] theme-muted">Style</span>
-          <strong class="mt-3 block text-2xl font-black">{{style_name}}</strong>
+          <strong class="mt-3 block text-2xl font-black">Cinematic Editorial</strong>
         </article>
         <article class="theme-panel rounded-3xl border p-5">
           <span class="block text-xs uppercase tracking-[0.16em] theme-muted">Pattern</span>
-          <strong class="mt-3 block text-2xl font-black">{{pattern_name}}</strong>
+          <strong class="mt-3 block text-2xl font-black">Cinematic Storytelling</strong>
         </article>
         <article class="theme-panel rounded-3xl border p-5">
           <span class="block text-xs uppercase tracking-[0.16em] theme-muted">Typography</span>
-          <strong class="mt-3 block text-2xl font-black">{{heading_font}} / {{body_font}}</strong>
+          <strong class="mt-3 block text-2xl font-black">Inter / Inter</strong>
         </article>
       </div>
 
@@ -227,19 +483,24 @@
         <article class="theme-panel rounded-3xl border p-5">
           <h3 class="text-lg font-bold">Keywords</h3>
           <div class="mt-4 flex flex-wrap gap-3">
-            {{style_keyword_chips}}
+                      <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">Luxury</span>
+          <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">high-contrast</span>
+          <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">cinematic</span>
+          <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">precise</span>
+          <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">editorial</span>
+          <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">authoritative</span>
           </div>
         </article>
         <article class="theme-panel rounded-3xl border p-5">
           <h3 class="text-lg font-bold">Best For</h3>
-          <p class="mt-4 leading-7">{{style_best_for}}</p>
+          <p class="mt-4 leading-7">Primary reference: Ferrari - Luxury automotive. Chiaroscuro black-white editorial, Ferrari Red with extreme sparseness</p>
         </article>
         <article class="theme-panel rounded-3xl border p-5">
           <h3 class="text-lg font-bold">Performance and Accessibility</h3>
           <ul class="mt-4 space-y-3 text-sm leading-7">
-            <li><strong>Performance:</strong> {{style_performance}}</li>
-            <li><strong>Accessibility:</strong> {{style_accessibility}}</li>
-            <li><strong>Effects:</strong> {{key_effects}}</li>
+            <li><strong>Performance:</strong> ✓ Excellent</li>
+            <li><strong>Accessibility:</strong> ✓ High Contrast (4.5:1+)</li>
+            <li><strong>Effects:</strong> Scroll anim (Intersection Observer), hover (300-400ms), entrance, parallax (3-5 layers), page transitions</li>
           </ul>
         </article>
       </div>
@@ -273,15 +534,30 @@
         <article class="theme-panel rounded-3xl border p-5">
           <h3 class="text-lg font-bold">Section Order</h3>
           <div class="mt-4 space-y-3">
-            {{pattern_flow}}
+                      <div class="flow-step flex items-start gap-3 rounded-2xl border px-3 py-3">
+            <span class="flow-index inline-flex h-10 w-10 items-center justify-center rounded-xl text-sm font-black">01</span>
+            <div class="pt-2"><strong class="text-base font-bold">Hero</strong></div>
+          </div>
+          <div class="flow-step flex items-start gap-3 rounded-2xl border px-3 py-3">
+            <span class="flow-index inline-flex h-10 w-10 items-center justify-center rounded-xl text-sm font-black">02</span>
+            <div class="pt-2"><strong class="text-base font-bold">Bio</strong></div>
+          </div>
+          <div class="flow-step flex items-start gap-3 rounded-2xl border px-3 py-3">
+            <span class="flow-index inline-flex h-10 w-10 items-center justify-center rounded-xl text-sm font-black">03</span>
+            <div class="pt-2"><strong class="text-base font-bold">Portfolio</strong></div>
+          </div>
+          <div class="flow-step flex items-start gap-3 rounded-2xl border px-3 py-3">
+            <span class="flow-index inline-flex h-10 w-10 items-center justify-center rounded-xl text-sm font-black">04</span>
+            <div class="pt-2"><strong class="text-base font-bold">CTA</strong></div>
+          </div>
           </div>
         </article>
         <article class="theme-panel rounded-3xl border p-5">
           <h3 class="text-lg font-bold">CTA Strategy</h3>
           <ul class="mt-4 space-y-3 text-sm leading-7">
-            <li><strong>Placement:</strong> {{cta_placement}}</li>
-            <li><strong>Conversion Focus:</strong> {{pattern_conversion}}</li>
-            <li><strong>Color Strategy:</strong> {{pattern_color_strategy}}</li>
+            <li><strong>Placement:</strong> Hero and Footer</li>
+            <li><strong>Conversion Focus:</strong> High-intent CTAs</li>
+            <li><strong>Color Strategy:</strong> Rosso Corsa accents</li>
           </ul>
         </article>
       </div>
@@ -307,11 +583,50 @@
         </div>
       </div>
       <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {{color_swatches}}
+                <article class="theme-panel rounded-3xl border p-5">
+          <div class="swatch-chip mb-3 aspect-[16/10] rounded-2xl border" style="background: #da291c;"></div>
+          <strong class="block text-2xl font-black">Primary</strong>
+          <span class="theme-muted mt-2 block text-sm"><code>primary</code> - #da291c</span>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <div class="swatch-chip mb-3 aspect-[16/10] rounded-2xl border" style="background: #181818;"></div>
+          <strong class="block text-2xl font-black">Secondary</strong>
+          <span class="theme-muted mt-2 block text-sm"><code>secondary</code> - #181818</span>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <div class="swatch-chip mb-3 aspect-[16/10] rounded-2xl border" style="background: #da291c;"></div>
+          <strong class="block text-2xl font-black">Accent</strong>
+          <span class="theme-muted mt-2 block text-sm"><code>accent</code> - #da291c</span>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <div class="swatch-chip mb-3 aspect-[16/10] rounded-2xl border" style="background: #181818;"></div>
+          <strong class="block text-2xl font-black">Background</strong>
+          <span class="theme-muted mt-2 block text-sm"><code>background</code> - #181818</span>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <div class="swatch-chip mb-3 aspect-[16/10] rounded-2xl border" style="background: #FFFFFF;"></div>
+          <strong class="block text-2xl font-black">Foreground</strong>
+          <span class="theme-muted mt-2 block text-sm"><code>foreground</code> - #FFFFFF</span>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <div class="swatch-chip mb-3 aspect-[16/10] rounded-2xl border" style="background: #969696;"></div>
+          <strong class="block text-2xl font-black">Muted</strong>
+          <span class="theme-muted mt-2 block text-sm"><code>muted</code> - #969696</span>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <div class="swatch-chip mb-3 aspect-[16/10] rounded-2xl border" style="background: #303030;"></div>
+          <strong class="block text-2xl font-black">Border</strong>
+          <span class="theme-muted mt-2 block text-sm"><code>border</code> - #303030</span>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <div class="swatch-chip mb-3 aspect-[16/10] rounded-2xl border" style="background: #da291c;"></div>
+          <strong class="block text-2xl font-black">Destructive</strong>
+          <span class="theme-muted mt-2 block text-sm"><code>destructive</code> - #da291c</span>
+        </article>
       </div>
       <article class="theme-panel mt-4 rounded-3xl border p-5">
         <h3 class="text-lg font-bold">Usage Notes</h3>
-        <p class="mt-4 leading-7">{{color_notes}}</p>
+        <p class="mt-4 leading-7">Rosso Corsa red used sparingly as a voltage accent on near-black canvas</p>
       </article>
 
       <div class="mt-4 grid gap-4 lg:grid-cols-3">
@@ -321,7 +636,7 @@
         </article>
         <article class="theme-panel rounded-3xl border p-5">
           <h3 class="text-lg font-bold">Reference Note</h3>
-          <p class="mt-4 text-sm leading-7 theme-muted">{{reference_direction}}</p>
+          <p class="mt-4 text-sm leading-7 theme-muted">Primary reference: Ferrari - Luxury automotive. Chiaroscuro black-white editorial, Ferrari Red with extreme sparseness</p>
         </article>
       </div>
 
@@ -336,7 +651,46 @@
             <span>Value</span>
             <span>Role</span>
           </div>
-          {{color_role_rows}}
+          <div class="token-table-row grid grid-cols-[120px_110px_minmax(0,1fr)] gap-3 border-b px-4 py-3 text-sm max-sm:grid-cols-1">
+  <code class="font-semibold">Primary</code>
+  <span class="theme-muted">#da291c</span>
+  <span class="theme-muted">Main action and highest-emphasis interactive color.</span>
+</div>
+<div class="token-table-row grid grid-cols-[120px_110px_minmax(0,1fr)] gap-3 border-b px-4 py-3 text-sm max-sm:grid-cols-1">
+  <code class="font-semibold">Secondary</code>
+  <span class="theme-muted">#181818</span>
+  <span class="theme-muted">Secondary action, support surfaces, or quieter emphasis.</span>
+</div>
+<div class="token-table-row grid grid-cols-[120px_110px_minmax(0,1fr)] gap-3 border-b px-4 py-3 text-sm max-sm:grid-cols-1">
+  <code class="font-semibold">Accent</code>
+  <span class="theme-muted">#da291c</span>
+  <span class="theme-muted">Highlight, status emphasis, or editorial punch color.</span>
+</div>
+<div class="token-table-row grid grid-cols-[120px_110px_minmax(0,1fr)] gap-3 border-b px-4 py-3 text-sm max-sm:grid-cols-1">
+  <code class="font-semibold">Background</code>
+  <span class="theme-muted">#181818</span>
+  <span class="theme-muted">Page canvas and primary app backdrop.</span>
+</div>
+<div class="token-table-row grid grid-cols-[120px_110px_minmax(0,1fr)] gap-3 border-b px-4 py-3 text-sm max-sm:grid-cols-1">
+  <code class="font-semibold">Foreground</code>
+  <span class="theme-muted">#FFFFFF</span>
+  <span class="theme-muted">Primary text and high-contrast content color.</span>
+</div>
+<div class="token-table-row grid grid-cols-[120px_110px_minmax(0,1fr)] gap-3 border-b px-4 py-3 text-sm max-sm:grid-cols-1">
+  <code class="font-semibold">Muted</code>
+  <span class="theme-muted">#969696</span>
+  <span class="theme-muted">Low-contrast surfaces or secondary UI backplates.</span>
+</div>
+<div class="token-table-row grid grid-cols-[120px_110px_minmax(0,1fr)] gap-3 border-b px-4 py-3 text-sm max-sm:grid-cols-1">
+  <code class="font-semibold">Border</code>
+  <span class="theme-muted">#303030</span>
+  <span class="theme-muted">Hairlines, separators, and neutral edge definition.</span>
+</div>
+<div class="token-table-row grid grid-cols-[120px_110px_minmax(0,1fr)] gap-3 border-b px-4 py-3 text-sm max-sm:grid-cols-1">
+  <code class="font-semibold">Destructive</code>
+  <span class="theme-muted">#da291c</span>
+  <span class="theme-muted">Error, destructive action, or risk state.</span>
+</div>
         </div>
       </article>
     </section>
@@ -353,22 +707,22 @@
       <div class="grid gap-4 lg:grid-cols-3">
         <article class="theme-panel rounded-3xl border p-5">
           <h3 class="text-lg font-bold">Heading System</h3>
-          <p class="mt-4 text-sm font-semibold uppercase tracking-[0.16em] theme-muted">{{heading_font}}</p>
+          <p class="mt-4 text-sm font-semibold uppercase tracking-[0.16em] theme-muted">Inter</p>
           <p class="mt-4 text-4xl font-black tracking-[-0.04em]">Build with clarity and momentum</p>
           <p class="mt-3 leading-7 theme-muted">A deliberate hierarchy makes dense products easier to trust.</p>
         </article>
         <article class="theme-panel rounded-3xl border p-5">
           <h3 class="text-lg font-bold">Body System</h3>
-          <p class="mt-4 text-sm font-semibold uppercase tracking-[0.16em] theme-muted">{{body_font}}</p>
+          <p class="mt-4 text-sm font-semibold uppercase tracking-[0.16em] theme-muted">Inter</p>
           <p class="mt-4 leading-8">Use body copy that is readable, measured, and calm enough to support product
             comprehension across long sessions and cross-functional review.</p>
         </article>
         <article class="theme-panel rounded-3xl border p-5">
           <h3 class="text-lg font-bold">Typography Notes</h3>
           <ul class="mt-4 space-y-3 text-sm leading-7">
-            <li><strong>Mood:</strong> {{typography_mood}}</li>
-            <li><strong>Best For:</strong> {{typography_best_for}}</li>
-            <li><strong>Google Fonts:</strong> <a href="{{google_fonts_url}}" target="_blank" rel="noreferrer">Open
+            <li><strong>Mood:</strong> cinematic, luxurious, precise, high-performance, authoritative</li>
+            <li><strong>Best For:</strong> High-end portfolios, executive personal brands, cinematic storytelling</li>
+            <li><strong>Google Fonts:</strong> <a href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" target="_blank" rel="noreferrer">Open
                 reference</a></li>
           </ul>
         </article>
@@ -385,7 +739,26 @@
             <span>Family</span>
             <span>Usage</span>
           </div>
-          {{typography_scale_rows}}
+          <div class="token-table-row grid grid-cols-[120px_110px_minmax(0,1fr)] gap-3 border-b px-4 py-3 text-sm max-sm:grid-cols-1">
+  <code class="font-semibold">Display</code>
+  <span class="theme-muted">Inter</span>
+  <span class="theme-muted">Large-format system headlines and hero moments.</span>
+</div>
+<div class="token-table-row grid grid-cols-[120px_110px_minmax(0,1fr)] gap-3 border-b px-4 py-3 text-sm max-sm:grid-cols-1">
+  <code class="font-semibold">Heading</code>
+  <span class="theme-muted">Inter</span>
+  <span class="theme-muted">Section titles and content hierarchy anchors.</span>
+</div>
+<div class="token-table-row grid grid-cols-[120px_110px_minmax(0,1fr)] gap-3 border-b px-4 py-3 text-sm max-sm:grid-cols-1">
+  <code class="font-semibold">Body</code>
+  <span class="theme-muted">Inter</span>
+  <span class="theme-muted">Primary reading text, paragraphs, and longer labels.</span>
+</div>
+<div class="token-table-row grid grid-cols-[120px_110px_minmax(0,1fr)] gap-3 border-b px-4 py-3 text-sm max-sm:grid-cols-1">
+  <code class="font-semibold">UI Label</code>
+  <span class="theme-muted">Inter</span>
+  <span class="theme-muted">Controls, meta labels, small annotations, and captions.</span>
+</div>
         </div>
       </article>
     </section>
@@ -403,19 +776,66 @@
         <article class="theme-panel rounded-3xl border p-5">
           <h3 class="text-lg font-bold">Spacing Scale</h3>
           <div class="mt-4 space-y-3">
-            {{spacing_tokens}}
+                      <div class="grid grid-cols-[88px_1fr_60px] items-center gap-3 max-sm:grid-cols-1">
+            <code class="theme-muted">space-1</code>
+            <div class="token-bar h-3 rounded-full" style="width: 18px;"></div>
+            <span class="text-sm">4px</span>
+          </div>
+          <div class="grid grid-cols-[88px_1fr_60px] items-center gap-3 max-sm:grid-cols-1">
+            <code class="theme-muted">space-2</code>
+            <div class="token-bar h-3 rounded-full" style="width: 32px;"></div>
+            <span class="text-sm">8px</span>
+          </div>
+          <div class="grid grid-cols-[88px_1fr_60px] items-center gap-3 max-sm:grid-cols-1">
+            <code class="theme-muted">space-3</code>
+            <div class="token-bar h-3 rounded-full" style="width: 54px;"></div>
+            <span class="text-sm">16px</span>
+          </div>
+          <div class="grid grid-cols-[88px_1fr_60px] items-center gap-3 max-sm:grid-cols-1">
+            <code class="theme-muted">space-4</code>
+            <div class="token-bar h-3 rounded-full" style="width: 78px;"></div>
+            <span class="text-sm">24px</span>
+          </div>
+          <div class="grid grid-cols-[88px_1fr_60px] items-center gap-3 max-sm:grid-cols-1">
+            <code class="theme-muted">space-5</code>
+            <div class="token-bar h-3 rounded-full" style="width: 120px;"></div>
+            <span class="text-sm">40px</span>
+          </div>
           </div>
         </article>
         <article class="theme-panel rounded-3xl border p-5">
           <h3 class="text-lg font-bold">Radius Scale</h3>
           <div class="mt-4 space-y-3">
-            {{radius_tokens}}
+                      <div class="grid grid-cols-[88px_1fr_72px] items-center gap-3 max-sm:grid-cols-1">
+            <code class="theme-muted">radius-sm</code>
+            <div class="radius-box h-11 rounded-2xl" style="border-radius: 8px;"></div>
+            <span class="text-sm">8px</span>
+          </div>
+          <div class="grid grid-cols-[88px_1fr_72px] items-center gap-3 max-sm:grid-cols-1">
+            <code class="theme-muted">radius-md</code>
+            <div class="radius-box h-11 rounded-2xl" style="border-radius: 12px;"></div>
+            <span class="text-sm">12px</span>
+          </div>
+          <div class="grid grid-cols-[88px_1fr_72px] items-center gap-3 max-sm:grid-cols-1">
+            <code class="theme-muted">radius-lg</code>
+            <div class="radius-box h-11 rounded-2xl" style="border-radius: 16px;"></div>
+            <span class="text-sm">16px</span>
+          </div>
           </div>
         </article>
         <article class="theme-panel rounded-3xl border p-5">
           <h3 class="text-lg font-bold">Elevation</h3>
           <div class="mt-4 space-y-3">
-            {{shadow_tokens}}
+                      <div class="grid grid-cols-[88px_1fr_72px] items-center gap-3 max-sm:grid-cols-1">
+            <code class="theme-muted">shadow-card</code>
+            <div class="shadow-box h-[52px] rounded-2xl" style="box-shadow: 0 10px 30px rgba(15, 23, 42, 0.10);"></div>
+            <span class="text-sm">Preview</span>
+          </div>
+          <div class="grid grid-cols-[88px_1fr_72px] items-center gap-3 max-sm:grid-cols-1">
+            <code class="theme-muted">shadow-popover</code>
+            <div class="shadow-box h-[52px] rounded-2xl" style="box-shadow: 0 18px 48px rgba(15, 23, 42, 0.18);"></div>
+            <span class="text-sm">Preview</span>
+          </div>
           </div>
         </article>
       </div>
@@ -452,7 +872,7 @@
             <button class="theme-button-primary rounded-2xl px-5 py-3 font-semibold">Primary Action</button>
             <button class="theme-button-secondary rounded-2xl px-5 py-3 font-semibold">Secondary Action</button>
           </div>
-          <p class="mt-4 text-sm leading-7">{{button_guidance}}</p>
+          <p class="mt-4 text-sm leading-7">Primary buttons should use #da291c and stay visually calm but obvious.</p>
         </article>
         <article class="theme-panel rounded-3xl border p-5">
           <h3 class="text-lg font-bold">Card</h3>
@@ -463,13 +883,13 @@
             <p class="mt-3 text-sm leading-7">Keep supporting surfaces subtle so hierarchy comes from structure, not
               decoration.</p>
           </div>
-          <p class="mt-4 text-sm leading-7">{{card_guidance}}</p>
+          <p class="mt-4 text-sm leading-7">Use soft boundaries, moderate radius, and structure-led hierarchy over decorative noise.</p>
         </article>
         <article class="theme-panel rounded-3xl border p-5">
           <h3 class="text-lg font-bold">Input</h3>
           <label class="mt-4 block text-sm font-medium theme-muted">Email</label>
           <input class="theme-input mt-2 w-full rounded-2xl border px-4 py-3" placeholder="team@example.com">
-          <p class="mt-4 text-sm leading-7">{{input_guidance}}</p>
+          <p class="mt-4 text-sm leading-7">Inputs should remain highly legible, with clear labels and visible focus treatment.</p>
         </article>
         <article class="theme-panel rounded-3xl border p-5">
           <h3 class="text-lg font-bold">Navigation + Table</h3>
@@ -492,7 +912,7 @@
                 class="theme-status-neutral inline-flex w-fit rounded-full px-2 py-1 text-xs font-semibold">Review</span><span>Pro</span>
             </div>
           </div>
-          <p class="mt-4 text-sm leading-7">{{navigation_guidance}}</p>
+          <p class="mt-4 text-sm leading-7">Keep primary navigation stable, make active state obvious, and ensure dense data views stay easy to scan.</p>
         </article>
       </div>
 
@@ -508,7 +928,30 @@
             <span>Usage</span>
             <span>Expected States</span>
           </div>
-          {{component_spec_rows}}
+          <div class="token-table-row grid grid-cols-[140px_100px_1fr_180px] gap-3 border-b px-4 py-3 text-sm max-xl:grid-cols-1">
+  <strong>Primary Button</strong>
+  <span class="theme-muted">Action</span>
+  <span class="theme-muted">Solid emphasis for the primary decision on a surface.</span>
+  <span class="theme-muted">Default, hover, focus, pressed</span>
+</div>
+<div class="token-table-row grid grid-cols-[140px_100px_1fr_180px] gap-3 border-b px-4 py-3 text-sm max-xl:grid-cols-1">
+  <strong>Secondary Button</strong>
+  <span class="theme-muted">Action</span>
+  <span class="theme-muted">Lower-emphasis path for alternate actions and escape hatches.</span>
+  <span class="theme-muted">Default, hover, focus</span>
+</div>
+<div class="token-table-row grid grid-cols-[140px_100px_1fr_180px] gap-3 border-b px-4 py-3 text-sm max-xl:grid-cols-1">
+  <strong>Card</strong>
+  <span class="theme-muted">Container</span>
+  <span class="theme-muted">Groups related content with clear boundary and stable hierarchy.</span>
+  <span class="theme-muted">Default, hover</span>
+</div>
+<div class="token-table-row grid grid-cols-[140px_100px_1fr_180px] gap-3 border-b px-4 py-3 text-sm max-xl:grid-cols-1">
+  <strong>Input</strong>
+  <span class="theme-muted">Form</span>
+  <span class="theme-muted">Accepts user data with strong legibility and visible feedback.</span>
+  <span class="theme-muted">Default, focus, error, disabled</span>
+</div>
         </div>
       </article>
     </section>
@@ -526,19 +969,24 @@
         <article class="theme-panel rounded-3xl border p-5">
           <h3 class="text-lg font-bold">Accessibility</h3>
           <ul class="mt-4 space-y-3 text-sm leading-7">
-            {{accessibility_rules}}
+                        <li>Contrast ratio 4.5:1 or better for body text.</li>
+            <li>Visible focus states on all interactive elements.</li>
+            <li>Minimum touch target around 44 by 44 pixels.</li>
           </ul>
         </article>
         <article class="theme-panel rounded-3xl border p-5">
           <h3 class="text-lg font-bold">Responsive</h3>
           <ul class="mt-4 space-y-3 text-sm leading-7">
-            {{responsive_rules}}
+                        <li>Use mobile-first layouts and avoid horizontal scrolling.</li>
+            <li>Adapt density and gutters at tablet and desktop widths.</li>
+            <li>Preserve readable line length and safe tap spacing.</li>
           </ul>
         </article>
         <article class="theme-panel rounded-3xl border p-5">
           <h3 class="text-lg font-bold">Avoid</h3>
           <ul class="mt-4 space-y-3 text-sm leading-7">
-            {{anti_patterns}}
+                        <li>Corporate templates</li>
+            <li>Generic layouts</li>
           </ul>
         </article>
       </div>
@@ -555,7 +1003,10 @@
         <article class="theme-panel rounded-3xl border p-5">
           <h3 class="text-lg font-bold">Build Checklist</h3>
           <ul class="mt-4 space-y-3 text-sm leading-7">
-            {{implementation_checks}}
+                        <li>Map all UI surfaces to semantic tokens before implementation begins.</li>
+            <li>Keep component variants constrained and name them before coding one-off exceptions.</li>
+            <li>Review contrast, focus visibility, and spacing density before shipping.</li>
+            <li>Validate responsive collapse order on mobile, tablet, and desktop breakpoints.</li>
           </ul>
         </article>
         <article class="theme-panel rounded-3xl border p-5">

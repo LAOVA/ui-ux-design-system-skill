@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ferrari Personal Home - Cinematic Preview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --bg: #181818;
+      --fg: #FFFFFF;
+      --primary: #da291c;
+      --border: #303030;
+      --muted: #969696;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    .rosso-corsa {
+      color: var(--primary);
+    }
+
+    .bg-rosso-corsa {
+      background-color: var(--primary);
+    }
+
+    .hero-gradient {
+      background: linear-gradient(180deg, rgba(24, 24, 24, 0) 0%, rgba(24, 24, 24, 0.8) 70%, #181818 100%);
+    }
+
+    .cinematic-hero {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.6);
+      z-index: -1;
+    }
+
+    .letter-spacing-tighter {
+      letter-spacing: -0.05em;
+    }
+
+    .letter-spacing-widest {
+      letter-spacing: 0.2em;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+      padding: 1rem 2.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #b01e0a;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      border: 1px solid white;
+      color: white;
+      padding: 1rem 2.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline:hover {
+      background-color: white;
+      color: black;
+    }
+
+    .editorial-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 24px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+
+    .cinematic-card {
+      background: #222;
+      border: 1px solid var(--border);
+      transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      overflow: hidden;
+    }
+
+    .cinematic-card:hover {
+      transform: scale(1.02);
+      border-color: var(--primary);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 w-full z-50 px-8 py-6 flex justify-between items-center mix-blend-difference">
+    <div class="text-xl font-black tracking-tighter uppercase italic">
+      Personal<span class="rosso-corsa">Brand</span>
+    </div>
+    <div class="hidden md:flex space-x-12 text-xs font-bold uppercase letter-spacing-widest">
+      <a href="#" class="hover:rosso-corsa transition">Story</a>
+      <a href="#" class="hover:rosso-corsa transition">Work</a>
+      <a href="#" class="hover:rosso-corsa transition">Contact</a>
+    </div>
+    <div>
+      <div class="h-10 w-1 bg-rosso-corsa"></div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="cinematic-hero">
+    <img src="https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&q=80&w=2000"
+      alt="Ferrari background" class="hero-image">
+    <div class="absolute inset-0 hero-gradient"></div>
+
+    <div class="relative z-10 text-center px-4">
+      <p class="text-xs font-bold uppercase letter-spacing-widest mb-6 rosso-corsa">High Performance Creative</p>
+      <h1 class="text-6xl md:text-9xl font-black letter-spacing-tighter mb-8 leading-none">
+        DRIVEN BY<br>EXCELLENCE.
+      </h1>
+      <div class="flex flex-col md:flex-row justify-center gap-6 mt-12">
+        <button class="btn-primary">View Portfolio</button>
+        <button class="btn-outline">The Story</button>
+      </div>
+    </div>
+
+    <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center opacity-50">
+      <div class="w-px h-12 bg-white mb-4"></div>
+      <span class="text-[10px] uppercase letter-spacing-widest">Scroll</span>
+    </div>
+  </header>
+
+  <!-- Bio Section -->
+  <section class="editorial-section">
+    <div class="grid md:grid-cols-2 gap-24 items-center">
+      <div>
+        <h2 class="text-4xl md:text-6xl font-black letter-spacing-tighter leading-tight mb-8">
+          The art of <span class="rosso-corsa">precision</span> in every pixel.
+        </h2>
+        <p class="text-lg text-muted leading-relaxed mb-8">
+          A design philosophy rooted in Italian luxury and automotive excellence. I build digital experiences that feel
+          as powerful and precise as a V12 engine.
+        </p>
+        <div class="flex items-center space-x-4">
+          <div class="w-12 h-1 bg-rosso-corsa"></div>
+          <span class="text-sm font-bold uppercase tracking-widest">Est. 2018</span>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="absolute -top-4 -left-4 w-full h-full border border-rosso-corsa z-0"></div>
+        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1000"
+          alt="Detail" class="relative z-10 w-full shadow-2xl grayscale hover:grayscale-0 transition-all duration-700">
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Section -->
+  <section class="editorial-section bg-neutral-900/30">
+    <div class="mb-16">
+      <p class="text-xs font-bold uppercase letter-spacing-widest mb-4 rosso-corsa">Selected Work</p>
+      <h2 class="text-5xl font-black letter-spacing-tighter">The Racing Line.</h2>
+    </div>
+
+    <div class="card-grid">
+      <div class="cinematic-card group">
+        <div class="h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=800"
+            alt="Project 1" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+        </div>
+        <div class="p-8">
+          <span class="text-[10px] font-bold uppercase tracking-widest text-muted mb-2 block">01 / Interaction</span>
+          <h3 class="text-2xl font-black mb-4 uppercase">Hyperflow Dashboard</h3>
+          <p class="text-sm text-muted mb-6">Real-time data visualization for high-stakes environments.</p>
+          <a href="#" class="text-xs font-bold uppercase tracking-widest rosso-corsa hover:underline">Explore →</a>
+        </div>
+      </div>
+
+      <div class="cinematic-card group">
+        <div class="h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=800"
+            alt="Project 2" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+        </div>
+        <div class="p-8">
+          <span class="text-[10px] font-bold uppercase tracking-widest text-muted mb-2 block">02 / Identity</span>
+          <h3 class="text-2xl font-black mb-4 uppercase">Veloce Brand System</h3>
+          <p class="text-sm text-muted mb-6">A visual language built for speed and luxury.</p>
+          <a href="#" class="text-xs font-bold uppercase tracking-widest rosso-corsa hover:underline">Explore →</a>
+        </div>
+      </div>
+
+      <div class="cinematic-card group">
+        <div class="h-64 overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=800"
+            alt="Project 3" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+        </div>
+        <div class="p-8">
+          <span class="text-[10px] font-bold uppercase tracking-widest text-muted mb-2 block">03 / Strategy</span>
+          <h3 class="text-2xl font-black mb-4 uppercase">Scuderia Marketing</h3>
+          <p class="text-sm text-muted mb-6">Campaign architecture for elite automotive brands.</p>
+          <a href="#" class="text-xs font-bold uppercase tracking-widest rosso-corsa hover:underline">Explore →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="editorial-section border-t border-border flex flex-col md:flex-row justify-between items-center gap-8">
+    <div>
+      <div class="text-2xl font-black tracking-tighter uppercase italic mb-2">
+        Personal<span class="rosso-corsa">Brand</span>
+      </div>
+      <p class="text-xs text-muted uppercase tracking-widest">© 2026 Driven by Passion.</p>
+    </div>
+    <div class="flex space-x-8">
+      <a href="#" class="text-xs font-bold uppercase tracking-widest hover:rosso-corsa transition">Instagram</a>
+      <a href="#" class="text-xs font-bold uppercase tracking-widest hover:rosso-corsa transition">LinkedIn</a>
+      <a href="#" class="text-xs font-bold uppercase tracking-widest hover:rosso-corsa transition">Dribbble</a>
+    </div>
+    <button class="btn-primary">Contact Me</button>
+  </footer>
+</body>
+
+</html>
