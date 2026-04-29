@@ -80,6 +80,7 @@ If the search output is noisy or insufficient, read the relevant CSV-backed doma
 - Prefer semantic tokens over raw hex values when describing systems.
 - Always surface accessibility, responsiveness, and interaction constraints for implementation-facing outputs.
 - For HTML outputs, prefer deterministic template rendering over ad hoc generated markup.
+- `design-spec.html` should load Tailwind from `https://cdn.tailwindcss.com` and use Tailwind utilities for layout and presentation wherever practical, keeping custom CSS limited to theme variables and a small preview layer.
 - If the user asks to generate a design system and does not specify a target format, produce both `design-spec.html` and `DESIGN.md` by default and summarize the result briefly.
 - Keep `design-spec.html` and `DESIGN.md` aligned by rendering them from the same normalized design-system data.
 - If multiple directions are plausible, narrow to one recommended direction and one fallback rather than listing many equal options.

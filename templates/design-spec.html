@@ -1,163 +1,350 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{project_name}} Design Spec</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
 {{styles}}
   </style>
 </head>
-<body>
-  <main class="page">
-    <section class="hero">
-      <div class="eyebrow">Design Spec</div>
-      <h1>{{project_name}}</h1>
-      <p class="lede">{{summary}}</p>
-      <div class="hero-grid">
-        <div class="stat-card">
-          <span class="label">Category</span>
-          <strong>{{category}}</strong>
+
+<body data-page-theme="light" class="min-h-screen antialiased">
+  <div
+    class="page-theme-floating fixed left-1/2 top-4 z-50 flex -translate-x-1/2 items-center gap-3 rounded-full border px-3 py-2 shadow-2xl backdrop-blur-xl">
+    <div class="page-theme-switch inline-flex items-center gap-1 rounded-full border p-1">
+      <button class="page-theme-button rounded-full px-3 py-2 text-sm font-semibold" type="button"
+        data-page-theme="dark" aria-pressed="false">Dark</button>
+      <button class="page-theme-button active rounded-full px-3 py-2 text-sm font-semibold" type="button"
+        data-page-theme="light" aria-pressed="true">Light</button>
+    </div>
+  </div>
+
+  <main class="mx-auto max-w-7xl px-5 pb-24 pt-28 md:px-8">
+    <section class="grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.9fr)]">
+      <div class="space-y-5">
+        <div
+          class="inline-flex rounded-full border px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] theme-soft theme-muted">
+          Design Spec
         </div>
-        <div class="stat-card">
-          <span class="label">Style</span>
-          <strong>{{style_name}}</strong>
+        <div class="space-y-4">
+          <h1 class="max-w-4xl text-5xl font-black tracking-[-0.05em] md:text-7xl">{{project_name}}</h1>
+          <p class="max-w-3xl text-lg leading-8 theme-muted">{{summary}}</p>
         </div>
-        <div class="stat-card">
-          <span class="label">Pattern</span>
-          <strong>{{pattern_name}}</strong>
+        <div class="flex flex-wrap gap-3">
+          {{hero_tags}}
         </div>
       </div>
-    </section>
 
-    <section class="section">
-      <h2>Pattern Summary</h2>
-      <div class="detail-grid">
-        <article class="panel">
-          <h3>Section Order</h3>
-          <p>{{pattern_sections}}</p>
-        </article>
-        <article class="panel">
-          <h3>CTA Placement</h3>
-          <p>{{cta_placement}}</p>
-        </article>
-        <article class="panel">
-          <h3>Key Effects</h3>
-          <p>{{key_effects}}</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Color Palette</h2>
-      <div class="swatch-grid">
-{{color_swatches}}
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Typography</h2>
-      <div class="detail-grid">
-        <article class="panel">
-          <h3>Heading Font</h3>
-          <p class="font-heading">{{heading_font}}</p>
-          <p class="sample-title">Build with clarity and momentum</p>
-        </article>
-        <article class="panel">
-          <h3>Body Font</h3>
-          <p class="font-body">{{body_font}}</p>
-          <p class="sample-body">Use body copy that is readable, measured, and calm enough to support product comprehension.</p>
-        </article>
-        <article class="panel">
-          <h3>Mood</h3>
-          <p>{{typography_mood}}</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Tokens</h2>
-      <div class="token-grid">
-        <article class="panel">
-          <h3>Spacing</h3>
-          <ul>
-            <li><code>space-1</code>: 4px</li>
-            <li><code>space-2</code>: 8px</li>
-            <li><code>space-3</code>: 16px</li>
-            <li><code>space-4</code>: 24px</li>
-            <li><code>space-5</code>: 40px</li>
-          </ul>
-        </article>
-        <article class="panel">
-          <h3>Radius</h3>
-          <ul>
-            <li><code>radius-sm</code>: 8px</li>
-            <li><code>radius-md</code>: 12px</li>
-            <li><code>radius-lg</code>: 16px</li>
-          </ul>
-        </article>
-        <article class="panel">
-          <h3>Elevation</h3>
-          <ul>
-            <li><code>shadow-card</code>: 0 10px 30px rgba(15, 23, 42, 0.10)</li>
-            <li><code>shadow-popover</code>: 0 18px 48px rgba(15, 23, 42, 0.18)</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section class="section">
-      <h2>Component Guidance</h2>
-      <div class="component-grid">
-        <article class="panel">
-          <h3>Buttons</h3>
-          <div class="button-row">
-            <button class="btn btn-primary">Primary Action</button>
-            <button class="btn btn-secondary">Secondary Action</button>
+      <aside class="theme-panel rounded-[28px] border p-4 shadow-xl">
+        <div class="theme-preview-window rounded-[24px] border p-4 md:p-5">
+          <div class="mb-4 flex gap-2">
+            <span class="h-2.5 w-2.5 rounded-full theme-dot"></span>
+            <span class="h-2.5 w-2.5 rounded-full theme-dot"></span>
+            <span class="h-2.5 w-2.5 rounded-full theme-dot"></span>
           </div>
-          <p>{{button_guidance}}</p>
-        </article>
-        <article class="panel">
-          <h3>Card</h3>
-          <div class="card-preview">
-            <span class="card-tag">Insight</span>
-            <strong>Use low-noise surfaces</strong>
-            <p>Keep supporting surfaces subtle so hierarchy comes from structure, not decoration.</p>
+          <div class="grid gap-4 md:grid-cols-[120px_minmax(0,1fr)]">
+            <div class="theme-preview-surface rounded-[20px] border p-3">
+              <div class="theme-nav-item active rounded-xl px-3 py-2 text-sm font-semibold">Overview</div>
+              <div class="theme-nav-item mt-2 rounded-xl px-3 py-2 text-sm">Analytics</div>
+              <div class="theme-nav-item mt-2 rounded-xl px-3 py-2 text-sm">Settings</div>
+            </div>
+            <div class="theme-preview-surface rounded-[20px] border p-4">
+              <div class="grid gap-3 sm:grid-cols-2">
+                <div class="theme-preview-card rounded-2xl border p-4">
+                  <strong class="block text-3xl font-black">78%</strong>
+                  <span class="text-sm theme-muted">Adoption</span>
+                </div>
+                <div class="theme-preview-card rounded-2xl border p-4">
+                  <strong class="block text-3xl font-black">24h</strong>
+                  <span class="text-sm theme-muted">Response Time</span>
+                </div>
+              </div>
+              <div class="theme-chart mt-4 h-32 rounded-2xl border"></div>
+              <div class="mt-4 flex flex-wrap gap-3">
+                <button class="theme-button-primary rounded-2xl px-5 py-3 font-semibold">Primary</button>
+                <button class="theme-button-secondary rounded-2xl px-5 py-3 font-semibold">Secondary</button>
+              </div>
+            </div>
           </div>
-          <p>{{card_guidance}}</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="mt-12">
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">System Snapshot</h2>
+          <p class="mt-2 max-w-3xl theme-muted">Use this section to understand the design direction at a glance before
+            reading detailed rules.</p>
+        </div>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <article class="theme-panel rounded-3xl border p-5">
+          <span class="block text-xs uppercase tracking-[0.16em] theme-muted">Category</span>
+          <strong class="mt-3 block text-2xl font-black">{{category}}</strong>
         </article>
-        <article class="panel">
-          <h3>Input</h3>
-          <label class="input-label">Email</label>
-          <input class="input-preview" placeholder="team@example.com">
-          <p>{{input_guidance}}</p>
+        <article class="theme-panel rounded-3xl border p-5">
+          <span class="block text-xs uppercase tracking-[0.16em] theme-muted">Style</span>
+          <strong class="mt-3 block text-2xl font-black">{{style_name}}</strong>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <span class="block text-xs uppercase tracking-[0.16em] theme-muted">Pattern</span>
+          <strong class="mt-3 block text-2xl font-black">{{pattern_name}}</strong>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <span class="block text-xs uppercase tracking-[0.16em] theme-muted">Typography</span>
+          <strong class="mt-3 block text-2xl font-black">{{heading_font}} / {{body_font}}</strong>
         </article>
       </div>
     </section>
 
-    <section class="section">
-      <h2>Rules</h2>
-      <div class="detail-grid">
-        <article class="panel">
-          <h3>Accessibility</h3>
-          <ul>
-{{accessibility_rules}}
+    <section class="mt-12">
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">Visual Direction</h2>
+          <p class="mt-2 max-w-3xl theme-muted">These traits should stay stable across landing pages, dashboards, and
+            product surfaces.</p>
+        </div>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-3">
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Keywords</h3>
+          <div class="mt-4 flex flex-wrap gap-3">
+            {{style_keyword_chips}}
+          </div>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Best For</h3>
+          <p class="mt-4 leading-7">{{style_best_for}}</p>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Performance and Accessibility</h3>
+          <ul class="mt-4 space-y-3 text-sm leading-7">
+            <li><strong>Performance:</strong> {{style_performance}}</li>
+            <li><strong>Accessibility:</strong> {{style_accessibility}}</li>
+            <li><strong>Effects:</strong> {{key_effects}}</li>
           </ul>
         </article>
-        <article class="panel">
-          <h3>Responsive</h3>
-          <ul>
-{{responsive_rules}}
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">Flow and Layout</h2>
+          <p class="mt-2 max-w-3xl theme-muted">Use the recommended information hierarchy as the default page structure.
+          </p>
+        </div>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-2">
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Section Order</h3>
+          <div class="mt-4 space-y-3">
+            {{pattern_flow}}
+          </div>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">CTA Strategy</h3>
+          <ul class="mt-4 space-y-3 text-sm leading-7">
+            <li><strong>Placement:</strong> {{cta_placement}}</li>
+            <li><strong>Conversion Focus:</strong> {{pattern_conversion}}</li>
+            <li><strong>Color Strategy:</strong> {{pattern_color_strategy}}</li>
           </ul>
         </article>
-        <article class="panel">
-          <h3>Avoid</h3>
-          <ul>
-{{anti_patterns}}
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">Color Palette</h2>
+          <p class="mt-2 max-w-3xl theme-muted">Semantic tokens should be used consistently in code and UI reviews.</p>
+        </div>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {{color_swatches}}
+      </div>
+      <article class="theme-panel mt-4 rounded-3xl border p-5">
+        <h3 class="text-lg font-bold">Usage Notes</h3>
+        <p class="mt-4 leading-7">{{color_notes}}</p>
+      </article>
+    </section>
+
+    <section class="mt-12">
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">Typography</h2>
+          <p class="mt-2 max-w-3xl theme-muted">Use typography to create structure first, then motion and color as
+            support.</p>
+        </div>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-3">
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Heading System</h3>
+          <p class="mt-4 text-sm font-semibold uppercase tracking-[0.16em] theme-muted">{{heading_font}}</p>
+          <p class="mt-4 text-4xl font-black tracking-[-0.04em]">Build with clarity and momentum</p>
+          <p class="mt-3 leading-7 theme-muted">A deliberate hierarchy makes dense products easier to trust.</p>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Body System</h3>
+          <p class="mt-4 text-sm font-semibold uppercase tracking-[0.16em] theme-muted">{{body_font}}</p>
+          <p class="mt-4 leading-8">Use body copy that is readable, measured, and calm enough to support product
+            comprehension across long sessions and cross-functional review.</p>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Typography Notes</h3>
+          <ul class="mt-4 space-y-3 text-sm leading-7">
+            <li><strong>Mood:</strong> {{typography_mood}}</li>
+            <li><strong>Best For:</strong> {{typography_best_for}}</li>
+            <li><strong>Google Fonts:</strong> <a href="{{google_fonts_url}}" target="_blank" rel="noreferrer">Open
+                reference</a></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">Tokens</h2>
+          <p class="mt-2 max-w-3xl theme-muted">These foundational values should become design tokens in the
+            implementation layer.</p>
+        </div>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-3">
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Spacing Scale</h3>
+          <div class="mt-4 space-y-3">
+            {{spacing_tokens}}
+          </div>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Radius Scale</h3>
+          <div class="mt-4 space-y-3">
+            {{radius_tokens}}
+          </div>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Elevation</h3>
+          <div class="mt-4 space-y-3">
+            {{shadow_tokens}}
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">Component Gallery</h2>
+          <p class="mt-2 max-w-3xl theme-muted">Preview component behavior at a glance, then use the notes below to keep
+            implementation aligned.</p>
+        </div>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-2 2xl:grid-cols-4">
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Buttons</h3>
+          <div class="mt-4 flex flex-wrap gap-3">
+            <button class="theme-button-primary rounded-2xl px-5 py-3 font-semibold">Primary Action</button>
+            <button class="theme-button-secondary rounded-2xl px-5 py-3 font-semibold">Secondary Action</button>
+          </div>
+          <p class="mt-4 text-sm leading-7">{{button_guidance}}</p>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Card</h3>
+          <div class="theme-soft mt-4 rounded-3xl border p-5">
+            <span
+              class="theme-tag inline-flex rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em]">Insight</span>
+            <strong class="mt-4 block text-xl font-black">Use low-noise surfaces</strong>
+            <p class="mt-3 text-sm leading-7">Keep supporting surfaces subtle so hierarchy comes from structure, not
+              decoration.</p>
+          </div>
+          <p class="mt-4 text-sm leading-7">{{card_guidance}}</p>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Input</h3>
+          <label class="mt-4 block text-sm font-medium theme-muted">Email</label>
+          <input class="theme-input mt-2 w-full rounded-2xl border px-4 py-3" placeholder="team@example.com">
+          <p class="mt-4 text-sm leading-7">{{input_guidance}}</p>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Navigation + Table</h3>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="theme-nav-item active rounded-full px-3 py-2 text-sm font-semibold">Overview</span>
+            <span class="theme-nav-item rounded-full px-3 py-2 text-sm">Usage</span>
+            <span class="theme-nav-item rounded-full px-3 py-2 text-sm">Billing</span>
+          </div>
+          <div class="theme-table mt-4 overflow-hidden rounded-2xl border">
+            <div
+              class="grid grid-cols-[1.3fr_1fr_0.8fr] gap-3 border-b px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] theme-muted">
+              <span>Team</span><span>Status</span><span>Plan</span>
+            </div>
+            <div class="grid grid-cols-[1.3fr_1fr_0.8fr] gap-3 px-4 py-3 text-sm">
+              <span>Platform</span><span
+                class="theme-status-positive inline-flex w-fit rounded-full px-2 py-1 text-xs font-semibold">Healthy</span><span>Scale</span>
+            </div>
+            <div class="grid grid-cols-[1.3fr_1fr_0.8fr] gap-3 border-t px-4 py-3 text-sm">
+              <span>Growth</span><span
+                class="theme-status-neutral inline-flex w-fit rounded-full px-2 py-1 text-xs font-semibold">Review</span><span>Pro</span>
+            </div>
+          </div>
+          <p class="mt-4 text-sm leading-7">{{navigation_guidance}}</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">Rules and Risks</h2>
+          <p class="mt-2 max-w-3xl theme-muted">Keep these close during implementation and review so quality does not
+            drift late in delivery.</p>
+        </div>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-3">
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Accessibility</h3>
+          <ul class="mt-4 space-y-3 text-sm leading-7">
+            {{accessibility_rules}}
+          </ul>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Responsive</h3>
+          <ul class="mt-4 space-y-3 text-sm leading-7">
+            {{responsive_rules}}
+          </ul>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Avoid</h3>
+          <ul class="mt-4 space-y-3 text-sm leading-7">
+            {{anti_patterns}}
           </ul>
         </article>
       </div>
     </section>
   </main>
+
+  <script>
+    (() => {
+      const buttons = document.querySelectorAll('.page-theme-button');
+      const root = document.body;
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const nextTheme = button.getAttribute('data-page-theme') || 'light';
+          root.setAttribute('data-page-theme', nextTheme);
+          buttons.forEach((item) => {
+            const isActive = item === button;
+            item.classList.toggle('active', isActive);
+            item.setAttribute('aria-pressed', String(isActive));
+          });
+        });
+      });
+    })();
+  </script>
 </body>
+
 </html>

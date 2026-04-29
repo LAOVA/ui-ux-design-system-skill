@@ -50,11 +50,15 @@ Produce a lightweight style-guide page that a human can open locally and scan qu
 
 ## Output Rules
 
-- Prefer one self-contained HTML file with embedded CSS.
+- Prefer one HTML file that loads Tailwind with:
+  - `<script src="https://cdn.tailwindcss.com"></script>`
+- Use Tailwind utility classes for layout, spacing, typography, and most surfaces to keep markup and custom CSS small.
+- Keep embedded CSS limited to theme variables, theme switching, and a small number of custom preview styles that are awkward to express purely with Tailwind.
 - Keep markup deterministic and template-based.
 - Use semantic color labels, not only visual swatches.
 - Keep preview components simple and stable.
-- Avoid external dependencies for the first version.
+- External dependency exception:
+  - Tailwind CDN is the default and expected dependency for this artifact.
 
 ## Default File Name
 

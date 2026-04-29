@@ -68,6 +68,8 @@ Prefer:
 - copy-ready rules
 - limited but clear component previews
 - a single self-contained HTML file unless the user explicitly wants separate assets
+- Tailwind CDN plus utility-first markup for most structure and spacing
+- only a thin custom CSS layer for theme variables and preview-specific behavior
 
 ## Page Override
 

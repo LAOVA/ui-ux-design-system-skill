@@ -58,6 +58,7 @@ Process:
 1. Generate or load the design-system data first.
 2. Normalize it into a consistent structure for export.
 3. Render the HTML from a template instead of freehand markup.
+   Default to Tailwind CDN plus utility classes for layout and spacing, with only a small custom CSS theme layer.
 4. Include the sections required by [html-spec-contract.md](html-spec-contract.md).
 5. Save the artifact to a user-visible path when the user asks for a file output.
 
