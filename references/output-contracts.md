@@ -3,10 +3,11 @@
 Use these structures when the user wants a deliverable instead of a conversational recommendation.
 
 Default generation rule:
-- When the user asks to generate a design system and does not specify an output format, generate both `design-spec.html` and `DESIGN.md`.
+- When the user asks to generate a design system and does not specify an output format, first generate the intermediate bundle, then author both `design-spec.html` and `DESIGN.md`.
 - Pair those artifacts with a short summary of the chosen direction and where the files were written.
-- Render both artifacts from the same normalized design-system data so sections stay aligned.
+- Render both artifacts from the same synthesized normalized design-system data so sections stay aligned.
 - Write default artifacts under `./artifacts/<timestamp>/` rather than the repository root.
+- Write `manifest.json` in that same run directory to record the official inputs and outputs.
 
 ## Design System Spec
 
@@ -75,6 +76,7 @@ Prefer:
 - a single self-contained HTML file unless the user explicitly wants separate assets
 - Tailwind CDN plus utility-first markup for most structure and spacing
 - only a thin custom CSS layer for theme variables and preview-specific behavior
+- a rendered file that still contains the canonical template signature comment
 
 Do not:
 - replace the template with a custom landing page, dashboard, editor, CMS, or mobile screen

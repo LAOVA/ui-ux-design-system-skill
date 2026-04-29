@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 r"""
-Reference-style reasoning layer for uiux-design-system.
+Reference-and-rules reasoning layer for uiux-design-system.
 
-This wraps the upstream UI/UX Pro Max generator with a lightweight
-awesome-design-md matcher so generated outputs include explicit brand
-reference direction as part of the design-system data.
+Workflow:
+1. Read reference-style candidates from awesome-design-md.
+2. Read structured design-system output from ui-ux-pro-max-skill.
+3. Synthesize both into one final design-system object.
+4. Hand that single object to downstream renderers.
 """
 
 from __future__ import annotations
@@ -101,22 +103,52 @@ def _reference_query_suffix(references: list[dict]) -> str:
     return " ".join(ref["name"] for ref in references[:2])
 
 
-def generate_design_system(query: str, project_name: str | None = None) -> dict:
-    references = match_reference_styles(query)
-    enriched_query = f"{query} {_reference_query_suffix(references)}".strip()
+def collect_reference_context(query: str, limit: int = 3) -> dict:
+    references = match_reference_styles(query, limit=limit)
+    primary_reference = references[0] if references else None
+    return {
+        "query": query,
+        "references": references,
+        "reference_summary": ", ".join(ref["name"] for ref in references),
+        "reference_direction": (
+            f"Primary reference: {primary_reference['name']} - {primary_reference['summary']}"
+            if primary_reference
+            else "No direct brand reference match found."
+        ),
+        "query_suffix": _reference_query_suffix(references),
+    }
 
+
+def collect_structured_result(query: str, project_name: str | None = None) -> dict:
     generator = DesignSystemGenerator()
-    design_system = generator.generate(enriched_query, project_name)
+    return generator.generate(query, project_name)
+
+
+def synthesize_design_system(
+    query: str,
+    project_name: str | None,
+    reference_context: dict,
+    structured_result: dict,
+) -> dict:
+    references = reference_context.get("references", [])
+    design_system = structured_result
 
     design_system["original_query"] = query
     design_system["reference_styles"] = references
-    design_system["reference_summary"] = ", ".join(ref["name"] for ref in references)
+    design_system["reference_summary"] = reference_context.get("reference_summary", "")
+    design_system["reference_direction"] = reference_context.get(
+        "reference_direction",
+        "No direct brand reference match found.",
+    )
+    design_system["project_name"] = design_system.get("project_name") or project_name or "Untitled Project"
+    design_system["source_pipeline"] = {
+        "reference_source": "awesome-design-md",
+        "structured_source": "ui-ux-pro-max-skill",
+        "synthesis": "scripts/reasoning.py",
+    }
 
     if references:
         primary_reference = references[0]
-        design_system["reference_direction"] = (
-            f"Primary reference: {primary_reference['name']} - {primary_reference['summary']}"
-        )
         existing_best_for = design_system.get("style", {}).get("best_for", "")
         reference_fit = f"Reference fit: {primary_reference['summary']}"
         design_system["style"]["best_for"] = (
@@ -124,7 +156,29 @@ def generate_design_system(query: str, project_name: str | None = None) -> dict:
             if existing_best_for
             else reference_fit
         )
-    else:
-        design_system["reference_direction"] = "No direct brand reference match found."
 
     return design_system
+
+
+def build_generation_bundle(query: str, project_name: str | None = None) -> dict:
+    reference_context = collect_reference_context(query)
+    structured_query = f"{query} {reference_context.get('query_suffix', '')}".strip()
+    structured_result = collect_structured_result(structured_query, project_name)
+    final_design_system = synthesize_design_system(
+        query=query,
+        project_name=project_name,
+        reference_context=reference_context,
+        structured_result=structured_result,
+    )
+    return {
+        "query": query,
+        "project_name": project_name or final_design_system.get("project_name"),
+        "reference_context": reference_context,
+        "structured_query": structured_query,
+        "structured_result": structured_result,
+        "final_design_system": final_design_system,
+    }
+
+
+def generate_design_system(query: str, project_name: str | None = None) -> dict:
+    return build_generation_bundle(query, project_name)["final_design_system"]

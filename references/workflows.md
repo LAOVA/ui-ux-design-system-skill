@@ -33,10 +33,11 @@ Process:
    - page type
    - tone
    - density
-2. Run a structured search in `ui-ux-pro-max-skill`.
-3. Pull supporting references from `awesome-design-md`.
-4. Decide one primary direction.
-5. Produce:
+2. Read reference-style input from `awesome-design-md`.
+3. Read structured design-system output from `ui-ux-pro-max-skill`.
+4. Synthesize those two result sets into one shared design-system object.
+5. Decide one primary direction.
+6. Produce:
    - style direction
    - semantic palette
    - typography system
@@ -46,28 +47,42 @@ Process:
    - accessibility and responsive constraints
    - anti-patterns
 
+Execution note:
+- Prefer `scripts/generate.py` as the top-level command for this workflow.
+- `scripts/reasoning.py` should do the source fusion: reference input first, structured output second, synthesis third.
+- `scripts/generate.py` should then write `generation-bundle.json` and `manifest.json`, not the final deliverables.
+- After that, the LLM should read the bundle and author the final `DESIGN.md` and `design-spec.html`.
+
 Default output rule:
-- If the user asks to generate or create a design system and does not specify a format, generate both `design-spec.html` and `DESIGN.md` and provide a short written summary.
-- If the user explicitly asks for `DESIGN.md`, Markdown, JSON, or another format, honor that instead.
+- If the user asks to generate or create a design system and does not specify a format, first generate the intermediate bundle, then author both `design-spec.html` and `DESIGN.md` from that bundle.
+- If the user explicitly asks for `DESIGN.md`, Markdown, JSON, or another format, honor that instead after bundle generation.
 - Unless the user explicitly overrides the path, store generated artifacts under `./artifacts/<timestamp>/`.
+- Treat `./artifacts/<timestamp>/manifest.json` as the official record of the run.
 
 ## 3. Design-Spec HTML
 
 Use when the user wants a browsable design spec, lightweight style guide page, or HTML artifact that previews the system visually.
 
 Process:
-1. Generate or load the design-system data first.
-2. Normalize it into a consistent structure for export.
-3. Read `templates/design-spec.html` and treat it as the required structural contract.
-4. Render the HTML from that template instead of freehand markup.
+1. Prefer `scripts/generate.py` as the top-level generator so the run starts from one shared bundle.
+2. Generate or load the synthesized design-system data first.
+3. Normalize it into a consistent structure for export.
+4. Read `templates/design-spec.html` and treat it as the required structural contract.
+5. Author the HTML from that template instead of freehand markup for a different page type.
    Default to Tailwind CDN plus utility classes for layout and spacing, with only a small custom CSS theme layer.
-5. Include the sections required by [html-spec-contract.md](html-spec-contract.md).
-6. Save the artifact to a user-visible path when the user asks for a file output.
+6. Include the sections required by [html-spec-contract.md](html-spec-contract.md).
+7. Save the artifact to a user-visible path when the user asks for a file output.
+8. Verify the generated file contains the required template signature. If signature verification fails, treat the run as failed rather than silently accepting the HTML.
 
 Important distinction:
 - `design-spec.html` is a spec page.
 - A dashboard, editor, landing page, CMS, or app screen preview is a separate artifact type.
 - If the user asks for both, generate `design-spec.html` from the template and create the app preview separately.
+
+Script role reminder:
+- `scripts/generate.py` is the orchestrator and recommended entry point for intermediate data.
+- `scripts/build_design_spec.py` is the dedicated HTML exporter.
+- `scripts/build_design_md.py` is the dedicated Markdown exporter.
 
 ## 4. Page Override
 

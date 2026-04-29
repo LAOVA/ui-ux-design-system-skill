@@ -59,6 +59,7 @@ This file defines a design-system specification artifact, not an application moc
 - Use Tailwind utility classes for layout, spacing, typography, and most surfaces to keep markup and custom CSS small.
 - Keep embedded CSS limited to theme variables, theme switching, and a small number of custom preview styles that are awkward to express purely with Tailwind.
 - Keep markup deterministic and template-based.
+- A valid `design-spec.html` must preserve the template signature comment from `templates/design-spec.html`. If the signature is missing, the artifact should be treated as non-compliant.
 - Use semantic color labels, not only visual swatches.
 - Keep preview components simple and stable.
 - External dependency exception:

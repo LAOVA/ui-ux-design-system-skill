@@ -1,4 +1,4 @@
 interface:
   display_name: "UIUX Design System"
   short_description: "Turn product briefs into usable UI systems"
-  default_prompt: "Use $uiux-design-system to turn this product brief into a design system and generate matching design-spec.html and DESIGN.md artifacts by default. Keep design-spec.html aligned to the provided template structure instead of replacing it with a custom app mockup."
+  default_prompt: "Use $uiux-design-system to turn this product brief into a design system. First run scripts/generate.py to create generation-bundle.json and manifest.json. Then read that bundle and author the final DESIGN.md and design-spec.html in the same artifacts run directory. For design-spec.html, keep the canonical template structure and treat the output as valid only if it preserves the required template signature instead of replacing it with a custom app mockup."

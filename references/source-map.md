@@ -62,10 +62,10 @@ Core data domains:
 
 ### For a new product brief
 
-1. Search product and style guidance in `ui-ux-pro-max-skill`
-2. Match 1-3 brand references from `awesome-design-md`
+1. Match 1-3 brand references from `awesome-design-md`
+2. Read product and style guidance from `ui-ux-pro-max-skill`
 3. Pull color, typography, UX, and stack guidance
-4. Synthesize into one recommended system
+4. Synthesize the reference results and structured results into one recommended system
 
 ### For a visual-direction request
 
