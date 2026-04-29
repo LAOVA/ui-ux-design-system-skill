@@ -81,6 +81,7 @@ If the search output is noisy or insufficient, read the relevant CSV-backed doma
 - Always surface accessibility, responsiveness, and interaction constraints for implementation-facing outputs.
 - For HTML outputs, prefer deterministic template rendering over ad hoc generated markup.
 - `templates/design-spec.html` is the canonical design-system HTML template. Treat it as a required output contract, not a loose inspiration source.
+- When producing `design-spec.html`, use `scripts/search.py` or `scripts/build_design_spec.py`. Do not hand-author the file body as a substitute for template rendering.
 - Do not replace `design-spec.html` with a bespoke application mockup, landing page, dashboard, editor, or prototype layout just because that feels more visually direct.
 - When generating `design-spec.html`, preserve the template's document role: it is a design-system specification page, not an app screen preview.
 - It is acceptable to fill the template with a brand's design language and to update token values, copy, swatches, component notes, and preview styling, but not to change the artifact into a different page type.

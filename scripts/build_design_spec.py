@@ -28,6 +28,24 @@ def default_output_path(filename: str = "design-spec.html") -> Path:
     return ROOT_DIR / "artifacts" / stamp / filename
 
 
+REQUIRED_TEMPLATE_MARKERS = [
+    "TEMPLATE_SIGNATURE: uiux-design-system/design-spec/v1",
+    "<!-- Required spec sections begin -->",
+    "<!-- Required spec sections end -->",
+    'class="page-theme-floating',
+    'data-page-theme="light"',
+    'data-page-theme="dark"',
+    "System Snapshot",
+    "Visual Direction",
+    "Flow and Layout",
+    "Color Palette",
+    "Typography",
+    "Tokens",
+    "Component Gallery",
+    "Rules and Risks",
+]
+
+
 DEFAULT_STYLES = """
     :root {
       color-scheme: {{theme_mode}};
@@ -612,7 +630,19 @@ def render_html(design_system: dict) -> str:
     output = template
     for key, value in replacements.items():
         output = output.replace(f"{{{{{key}}}}}", value)
+    _validate_rendered_html(output)
     return output
+
+
+def _validate_rendered_html(output: str) -> None:
+    missing = [marker for marker in REQUIRED_TEMPLATE_MARKERS if marker not in output]
+    if missing:
+        raise ValueError(
+            "Rendered design-spec.html is missing required template markers: "
+            + ", ".join(missing)
+        )
+    if "{{" in output or "}}" in output:
+        raise ValueError("Rendered design-spec.html still contains unreplaced template placeholders.")
 
 
 def main() -> int:
