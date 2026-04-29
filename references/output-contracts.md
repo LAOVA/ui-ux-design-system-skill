@@ -3,13 +3,16 @@
 Use these structures when the user wants a deliverable instead of a conversational recommendation.
 
 Default generation rule:
-- When the user asks to generate a design system and does not specify an output format, first generate the intermediate bundle, then author `design-spec.html`, `DESIGN.md`, and `app-preview.html`.
+- When the user asks to generate a design system and does not specify an output format, first generate the intermediate bundle, then script-render `design-spec.html` and `DESIGN.md`.
+- If a realistic product-facing mockup is also needed, generate `app-preview.html` last from the finalized `DESIGN.md`.
 - Pair those artifacts with a short summary of the chosen direction and where the files were written.
-- Render all artifacts from the same synthesized normalized design-system data so sections stay aligned.
+- Render the spec artifacts from the same synthesized normalized design-system data so sections stay aligned, then let `app-preview.html` express that direction more freely.
 - Write default artifacts under `./artifacts/<timestamp>/` rather than the repository root.
 - Write `manifest.json` in that same run directory to record the official inputs and outputs.
 - The final `DESIGN.md`, `design-spec.html`, and `app-preview.html` must be written into that same run directory, not a sibling folder such as `demo/` and not a second timestamped folder.
-- Final delivery is only complete after `scripts/finalize_manifest.py` updates `manifest.json.workflow_stage` to `final-artifacts-authored`.
+- The LLM may inspect the bundle or trigger a rerender, but must not manually patch `DESIGN.md` or `design-spec.html` in place after they are rendered.
+- `app-preview.html` is the exception: it should be authored after `DESIGN.md` is finalized, using the product requirements and that document as the direct design brief.
+- Spec delivery is complete after `scripts/finalize_manifest.py` updates `manifest.json.workflow_stage` to `spec-artifacts-finalized`; if `app-preview.html` is later added, rerun `scripts/finalize_manifest.py` so the manifest records it.
 
 ## Design System Spec
 
@@ -85,11 +88,10 @@ Do not:
 - remove core spec sections in favor of a more “realistic” app layout
 - reinterpret “HTML output” to mean “freeform UI mockup” when the requested artifact is `design-spec.html`
 
-## Page Override
-
 ## `app-preview.html`
 
 Treat this as the concrete UI mockup companion to `design-spec.html`.
+Treat the product requirements and `DESIGN.md` as the direct source documents for this artifact.
 
 Include:
 
@@ -103,6 +105,9 @@ Prefer:
 - one self-contained HTML file
 - Tailwind CDN plus a thin custom theme layer
 - realistic but scoped mockups instead of sprawling multi-screen prototypes
+- a layout and narrative that are free to diverge from the spec page template as long as they stay faithful to `DESIGN.md`
+
+## Page Override
 
 Keep it short. Include only what differs from the global system:
 

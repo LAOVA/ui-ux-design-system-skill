@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferrari E-Commerce - 极致性能与优雅</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #da291c; /* Rosso Corsa */
+            --color-background: #181818;
+            --color-foreground: #ffffff;
+            --color-muted: #666666;
+            --color-border: #303030;
+        }
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--color-background);
+            color: var(--color-foreground);
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .text-rosso { color: var(--color-primary); }
+        .bg-rosso { background-color: var(--color-primary); }
+        .border-rosso { border-color: var(--color-primary); }
+        
+        .glass {
+            background: rgba(48, 48, 48, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(24, 24, 24, 0) 0%, rgba(24, 24, 24, 0.8) 80%, rgba(24, 24, 24, 1) 100%);
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 300px);
+            gap: 1.5rem;
+        }
+
+        .bento-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            transition: transform 0.3s ease;
+        }
+        .bento-item:hover {
+            transform: scale(1.02);
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 0.25rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .btn-primary:hover {
+            background-color: #b01e0a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(218, 41, 28, 0.4);
+        }
+
+        .nav-link {
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--color-primary);
+        }
+    </style>
+</head>
+<body>
+    <nav class="fixed top-0 left-0 right-0 z-50 px-8 py-6 flex justify-between items-center glass">
+        <div class="flex items-center space-x-8">
+            <a href="#" class="text-2xl font-bold tracking-tighter">FERRARI <span class="text-rosso">STORE</span></a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#" class="nav-link text-sm">车型系列</a>
+                <a href="#" class="nav-link text-sm">个性化定制</a>
+                <a href="#" class="nav-link text-sm">官方配件</a>
+                <a href="#" class="nav-link text-sm">车主精品</a>
+            </div>
+        </div>
+        <div class="flex items-center space-x-6">
+            <button class="nav-link text-sm">搜索</button>
+            <button class="nav-link text-sm">账户</button>
+            <button class="relative">
+                <span class="nav-link text-sm">购物袋</span>
+                <span class="absolute -top-2 -right-2 bg-rosso text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <section class="relative h-screen flex items-center justify-start px-8 md:px-24 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&q=80&w=2000" alt="Ferrari SF90" class="w-full h-full object-cover">
+            <div class="absolute inset-0 hero-gradient"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-2xl">
+            <h2 class="text-rosso font-bold uppercase tracking-widest mb-4">全新 SF90 Stradale</h2>
+            <h1 class="text-6xl md:text-8xl font-bold leading-tight mb-8">
+                超越极限<br>定义未来
+            </h1>
+            <p class="text-xl text-gray-300 mb-10 leading-relaxed">
+                这是法拉利首款插电式混合动力量产车型，开启了马拉内罗历史的新篇章。1000匹马力，惊人的推重比，带来无与伦比的驾驶体验。
+            </p>
+            <div class="flex space-x-4">
+                <a href="#" class="btn-primary">立即订购</a>
+                <a href="#" class="px-8 py-3 border border-white text-white uppercase tracking-widest text-sm hover:bg-white hover:text-black transition-all">探索详情</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-8 md:px-24">
+        <div class="flex justify-between items-end mb-12">
+            <div>
+                <h3 class="text-rosso font-bold uppercase tracking-widest mb-2">精选推荐</h3>
+                <h2 class="text-4xl font-bold">马拉内罗系列</h2>
+            </div>
+            <a href="#" class="text-sm border-b border-rosso pb-1 hover:text-rosso transition-all">查看全部精品</a>
+        </div>
+
+        <div class="bento-grid">
+            <div class="bento-item col-span-2 row-span-2 bg-zinc-900">
+                <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&q=80&w=1200" alt="Ferrari Roma" class="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity">
+                <div class="absolute bottom-8 left-8">
+                    <h4 class="text-2xl font-bold mb-2">Ferrari Roma</h4>
+                    <p class="text-gray-400 text-sm mb-4">La Nuova Dolce Vita - 全新意式甜美生活</p>
+                    <span class="text-rosso font-bold">EXPLORE </span>
+                </div>
+            </div>
+
+            <div class="bento-item col-span-2 row-span-1 bg-zinc-800 p-8 flex flex-col justify-center">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h4 class="text-xl font-bold mb-2">碳纤维空气动力学套件</h4>
+                        <p class="text-gray-400 text-sm">专为 812 Superfast 打造</p>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=300" alt="Parts" class="w-32 h-32 object-contain">
+                </div>
+            </div>
+
+            <div class="bento-item col-span-1 row-span-1 bg-zinc-900 p-6 flex flex-col justify-between">
+                <img src="https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?auto=format&fit=crop&q=80&w=300" alt="Watch" class="w-full h-32 object-contain mb-4">
+                <div>
+                    <h4 class="font-bold">Hublot Ferrari 特别版</h4>
+                    <p class="text-rosso text-sm mt-2">￥128,000</p>
+                </div>
+            </div>
+
+            <div class="bento-item col-span-1 row-span-1 bg-white p-6 flex flex-col justify-between text-black">
+                <div class="bg-rosso text-white text-[10px] px-2 py-1 absolute top-4 right-4 uppercase font-bold">New</div>
+                <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=300" alt="Apparel" class="w-full h-32 object-contain mb-4">
+                <div>
+                    <h4 class="font-bold">Scuderia 赛车夹克</h4>
+                    <p class="text-gray-500 text-sm mt-2">￥2,450</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-black">
+        <div class="px-8 md:px-24 grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h3 class="text-rosso font-bold uppercase tracking-widest mb-4">核心科技</h3>
+                <h2 class="text-5xl font-bold mb-8 leading-tight">灵魂深处的<br>红色动力</h2>
+                <div class="space-y-8">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 flex-shrink-0 bg-rosso flex items-center justify-center font-bold text-xl">V8</div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">双涡轮增压引擎</h4>
+                            <p class="text-gray-400">连续四年荣获年度国际引擎大奖，输出功率高达720cv。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 flex-shrink-0 border border-rosso flex items-center justify-center font-bold text-xl">S</div>
+                        <div>
+                            <h4 class="text-xl font-bold mb-2">侧滑角控制系统 (SSC)</h4>
+                            <p class="text-gray-400">第6.0版控制系统，完美平衡动态性能与操控极限。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative group">
+                <img src="https://images.unsplash.com/photo-1611859328053-3cbc9f9399f4?auto=format&fit=crop&q=80&w=1000" alt="Engine" class="rounded-lg shadow-2xl grayscale hover:grayscale-0 transition-all duration-700">
+                <div class="absolute -bottom-6 -right-6 w-48 h-48 border-b-2 border-r-2 border-rosso"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-16 px-8 md:px-24 border-t border-border">
+        <div class="grid md:grid-cols-4 gap-12 mb-16">
+            <div class="col-span-1 md:col-span-1">
+                <h2 class="text-2xl font-bold mb-6">FERRARI</h2>
+                <p class="text-gray-500 text-sm leading-relaxed">
+                    法拉利不仅仅是一辆车，它是对速度的渴望，是对卓越的追求，更是意大利工艺的巅峰象征。
+                </p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-6 uppercase text-sm tracking-widest">探索</h4>
+                <ul class="space-y-4 text-gray-400 text-sm">
+                    <li><a href="#" class="hover:text-rosso">赛道传承</a></li>
+                    <li><a href="#" class="hover:text-rosso">经典车型</a></li>
+                    <li><a href="#" class="hover:text-rosso">Formula 1</a></li>
+                    <li><a href="#" class="hover:text-rosso">杂志馆</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-6 uppercase text-sm tracking-widest">服务</h4>
+                <ul class="space-y-4 text-gray-400 text-sm">
+                    <li><a href="#" class="hover:text-rosso">查找经销商</a></li>
+                    <li><a href="#" class="hover:text-rosso">售后保养</a></li>
+                    <li><a href="#" class="hover:text-rosso">金融方案</a></li>
+                    <li><a href="#" class="hover:text-rosso">官方认证二手车</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-6 uppercase text-sm tracking-widest">订阅动态</h4>
+                <p class="text-gray-400 text-sm mb-4">加入马拉内罗俱乐部，获取最新资讯。</p>
+                <div class="flex">
+                    <input type="email" placeholder="您的邮箱" class="bg-zinc-900 border border-zinc-800 px-4 py-2 w-full focus:outline-none focus:border-rosso">
+                    <button class="bg-rosso px-4 py-2 text-white uppercase text-xs font-bold">提交</button>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 border-t border-border pt-8">
+            <p> 2026 Ferrari S.p.A. 保留所有权利</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#">隐私政策</a>
+                <a href="#">法律条款</a>
+                <a href="#">Cookie 设置</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -111,9 +111,10 @@ Responsibility:
 Responsibility:
 - emit `generation-bundle.json`
 - emit `manifest.json` for the official intermediate run outputs
-- let the LLM author `DESIGN.md`
-- let the LLM author `design-spec.html`
-- verify and finalize the run manifest after those files are authored
+- script-render `DESIGN.md`
+- script-render `design-spec.html`
+- let the LLM author `app-preview.html` from the product requirements plus finalized `DESIGN.md`
+- verify and finalize the run manifest after those files are rendered
 - emit page overrides
 - emit review reports
 
@@ -123,5 +124,5 @@ Responsibility:
 2. Reuse `ui-ux-pro-max-skill` search logic before rewriting anything
 3. Add reference parsing for `awesome-design-md`
 4. Add a small reasoning layer that merges both result sets
-5. Add formatter outputs, including `DESIGN.md` and `design-spec.html`
+5. Add formatter outputs, including `DESIGN.md`, `design-spec.html`, and `app-preview.html`
 6. Add review mode last

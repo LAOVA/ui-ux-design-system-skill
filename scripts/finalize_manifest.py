@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 r"""
-Finalize a generation run after the LLM has authored final artifacts.
+Finalize a generation run after the script-rendered design-system artifacts are present.
 
 This script verifies that DESIGN.md and design-spec.html exist in the exact
-directory recorded by manifest.json.final_output_dir, then updates the manifest
-to mark the run as completed.
+directory recorded by manifest.json.final_output_dir. If app-preview.html also
+exists, it records that as the final preview artifact. This lets the workflow
+separate deterministic spec rendering from the later LLM-authored preview step.
 """
 
 from __future__ import annotations
@@ -55,25 +56,29 @@ def finalize_run(run_dir: Path) -> Path:
 
     design_md_path = final_output_dir / "DESIGN.md"
     design_spec_path = final_output_dir / "design-spec.html"
-    app_preview_path = final_output_dir / "app-preview.html"
-
     _require_file(design_md_path, "DESIGN.md")
     _require_file(design_spec_path, "design-spec.html")
-    _require_file(app_preview_path, "app-preview.html")
     _verify_same_dir(design_md_path, final_output_dir, "DESIGN.md")
     _verify_same_dir(design_spec_path, final_output_dir, "design-spec.html")
-    _verify_same_dir(app_preview_path, final_output_dir, "app-preview.html")
     _verify_html_signature(design_spec_path)
 
     outputs = manifest.get("outputs", {})
     outputs["generation-bundle.json"] = outputs.get("generation-bundle.json", str(run_dir / "generation-bundle.json"))
     outputs["DESIGN.md"] = str(design_md_path)
     outputs["design-spec.html"] = str(design_spec_path)
-    outputs["app-preview.html"] = str(app_preview_path)
+
+    app_preview_path = final_output_dir / "app-preview.html"
+    if app_preview_path.exists():
+        _verify_same_dir(app_preview_path, final_output_dir, "app-preview.html")
+        outputs["app-preview.html"] = str(app_preview_path)
+        manifest["workflow_stage"] = "preview-artifact-recorded"
+        manifest["next_step"] = "Run completed. DESIGN.md and design-spec.html were script-rendered and verified, and app-preview.html was authored from the product requirements plus DESIGN.md in final_output_dir."
+    else:
+        outputs.pop("app-preview.html", None)
+        manifest["workflow_stage"] = "spec-artifacts-finalized"
+        manifest["next_step"] = "DESIGN.md and design-spec.html were script-rendered and verified. Author app-preview.html from the product requirements plus DESIGN.md in final_output_dir when a product mockup is needed."
 
     manifest["outputs"] = outputs
-    manifest["workflow_stage"] = "final-artifacts-authored"
-    manifest["next_step"] = "Run completed. Final DESIGN.md, design-spec.html, and app-preview.html were authored in final_output_dir."
 
     _write_json(manifest_path, manifest)
     return manifest_path
@@ -81,7 +86,7 @@ def finalize_run(run_dir: Path) -> Path:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Update manifest.json after final DESIGN.md and design-spec.html are authored."
+        description="Update manifest.json after DESIGN.md and design-spec.html are rendered and verified, and optionally record app-preview.html if present."
     )
     parser.add_argument("run_dir", help="Artifacts run directory containing manifest.json")
     args = parser.parse_args()

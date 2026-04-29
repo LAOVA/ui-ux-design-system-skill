@@ -20,7 +20,6 @@ if str(ROOT_DIR / "scripts") not in sys.path:
     sys.path.insert(0, str(ROOT_DIR / "scripts"))
 
 from build_design_md import render_markdown  # type: ignore  # noqa: E402
-from build_app_preview import render_html as render_app_preview_html  # type: ignore  # noqa: E402
 from build_design_spec import render_html  # type: ignore  # noqa: E402
 
 
@@ -55,19 +54,15 @@ def render_run(run_dir: Path) -> Path:
 
     design_md_path = run_dir / "DESIGN.md"
     design_spec_path = run_dir / "design-spec.html"
-    app_preview_path = run_dir / "app-preview.html"
-
     _write_text(design_md_path, render_markdown(final_design_system))
     _write_text(design_spec_path, render_html(final_design_system))
-    _write_text(app_preview_path, render_app_preview_html(final_design_system))
 
     outputs = manifest.setdefault("outputs", {})
     outputs["DESIGN.md"] = str(design_md_path)
     outputs["design-spec.html"] = str(design_spec_path)
-    outputs["app-preview.html"] = str(app_preview_path)
     manifest["final_output_dir"] = str(run_dir)
-    manifest["workflow_stage"] = "final-artifacts-rendered"
-    manifest["next_step"] = "Run rendered from generation-bundle.json. Run finalize_manifest.py to verify and mark completion."
+    manifest["workflow_stage"] = "spec-artifacts-rendered"
+    manifest["next_step"] = "Run rendered from generation-bundle.json. Run finalize_manifest.py to verify DESIGN.md and design-spec.html, then author app-preview.html from the product requirements plus DESIGN.md if requested."
     _write_text(_manifest_path(run_dir), json.dumps(manifest, ensure_ascii=False, indent=2))
     return run_dir
 
@@ -86,10 +81,8 @@ def main() -> int:
     render_run(run_dir)
     design_md_path = run_dir / "DESIGN.md"
     design_spec_path = run_dir / "design-spec.html"
-    app_preview_path = run_dir / "app-preview.html"
     print(f"Rendered DESIGN.md: {design_md_path}")
     print(f"Rendered design-spec.html: {design_spec_path}")
-    print(f"Rendered app-preview.html: {app_preview_path}")
     print(f"Updated manifest: {_manifest_path(run_dir)}")
     return 0
 

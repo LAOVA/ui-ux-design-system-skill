@@ -7,9 +7,7 @@ Default behavior:
     2. Read structured design-system output from ui-ux-pro-max-skill.
     3. Synthesize both into one shared design-system dataset.
     4. Write that shared dataset as an intermediate generation bundle.
-
-Final DESIGN.md and design-spec.html should be created after an LLM reads the
-bundle and then renders the final artifacts intentionally.
+    5. Optionally render and finalize all end-user artifacts from that bundle.
 
 This script is the recommended top-level command.
 """
@@ -65,7 +63,7 @@ def _write_manifest(run_dir: Path, bundle: dict, files: dict[str, Path]) -> None
         "structured_query": bundle.get("structured_query"),
         "source_pipeline": bundle.get("final_design_system", {}).get("source_pipeline", {}),
         "workflow_stage": "bundle-generated",
-        "next_step": "Use render_artifacts.py on this run directory so DESIGN.md, design-spec.html, and app-preview.html are rendered from generation-bundle.json in the same final_output_dir.",
+        "next_step": "Use render_artifacts.py on this run directory so DESIGN.md and design-spec.html are rendered from generation-bundle.json in the same final_output_dir. After that, author app-preview.html from the product requirements plus DESIGN.md if requested.",
         "outputs": {name: str(path) for name, path in files.items()},
     }
     _write_text(
@@ -76,7 +74,7 @@ def _write_manifest(run_dir: Path, bundle: dict, files: dict[str, Path]) -> None
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Primary generator entry point. Builds the intermediate generation bundle used by the final LLM-authored DESIGN.md and design-spec.html."
+        description="Primary generator entry point. Builds the intermediate generation bundle and, in complete mode, script-renders DESIGN.md and design-spec.html."
     )
     parser.add_argument("query", help='Brief such as "AI SaaS dashboard"')
     parser.add_argument("--project-name", "-p", default=None, help="Project name shown in outputs")
@@ -125,7 +123,6 @@ def main() -> int:
         finalize_run(run_dir)
         print(f"Rendered DESIGN.md: {run_dir / 'DESIGN.md'}")
         print(f"Rendered design-spec.html: {run_dir / 'design-spec.html'}")
-        print(f"Rendered app-preview.html: {run_dir / 'app-preview.html'}")
         print(f"Finalized manifest: {run_dir / 'manifest.json'}")
     return 0
 

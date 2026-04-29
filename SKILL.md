@@ -33,9 +33,10 @@ Keep this file lean. Read only the reference file that matches the current task:
    Extract the traits that matter: mood, palette, typography, layout density, component feel, interaction style, and anti-patterns.
    Do not paste long source passages or dump raw tables unless the user asks for them.
 
-5. Let the LLM read the generated bundle and then render final artifacts from that shared object.
+5. Use the generated bundle as the only source for final artifacts.
    Default to a concise recommendation with rationale for advisory requests.
    For generation requests, default to producing a browsable `design-spec.html`, a matching `DESIGN.md`, and an `app-preview.html` artifact even if the user does not explicitly ask for them, unless they ask for a different output format.
+   `DESIGN.md` and `design-spec.html` must be rendered by scripts from the shared bundle. `app-preview.html` should be authored last by the LLM from the finalized `DESIGN.md`.
    When the user wants an artifact, emit a structured `DESIGN.md`, design-system spec, design-spec HTML, page override, or review report that follows [references/output-contracts.md](references/output-contracts.md).
 
 ## Source Usage
@@ -58,11 +59,11 @@ Prefer the existing local search tooling when you need product, style, color, ty
 - `.\scripts\generate.py` is the primary generator entry point for this skill.
   It does not only search: it reads reference input, reads structured design-system output, synthesizes one shared dataset, then writes an intermediate `generation-bundle.json`.
 - `.\scripts\render_artifacts.py` is the preferred final renderer.
-  It reads an existing run directory and renders `DESIGN.md`, `design-spec.html`, and `app-preview.html` from the same bundle.
+  It reads an existing run directory and renders `DESIGN.md` and `design-spec.html` from the same bundle.
 - `.\scripts\build_design_spec.py` and `.\scripts\build_design_md.py` are exporter-level scripts.
   They are fallback exporter utilities, not the primary workflow.
 - `.\scripts\finalize_manifest.py` is the run-closing utility.
-  After the LLM writes final `DESIGN.md` and `design-spec.html`, use it to verify same-directory output and mark the run as complete.
+  After the scripts render the final artifacts, use it to verify same-directory output and mark the run as complete.
 - `.\scripts\search.py` remains as a compatibility wrapper, but new calls should prefer `generate.py`.
 
 ```powershell
@@ -94,19 +95,21 @@ If the search output is noisy or insufficient, read the relevant CSV-backed doma
 - Always surface accessibility, responsiveness, and interaction constraints for implementation-facing outputs.
 - For HTML outputs, prefer deterministic template rendering over ad hoc generated markup.
 - `templates/design-spec.html` is the canonical design-system HTML template. Treat it as a required output contract, not a loose inspiration source.
-- Prefer `scripts/generate.py` as the top-level command and `scripts/render_artifacts.py` as the default final-artifact renderer.
+- Prefer `scripts/generate.py` as the top-level command and `scripts/render_artifacts.py` as the default spec-artifact renderer.
 - Treat `scripts/reasoning.py` as the source-fusion layer:
   it reads `awesome-design-md`, reads `ui-ux-pro-max-skill`, then synthesizes the shared design-system object consumed by the renderers.
-- Do not treat the immediate output of `scripts/generate.py` as the final deliverable. The final `DESIGN.md` and `design-spec.html` should be rendered only after the LLM reads `generation-bundle.json` and `manifest.json`.
+- Do not treat the intermediate bundle alone as the final deliverable. The final `DESIGN.md` and `design-spec.html` should be rendered from `generation-bundle.json` and recorded in `manifest.json`, then `app-preview.html` should be authored from the finalized `DESIGN.md`.
+- The LLM may inspect bundle contents and rerun generation, but it must not directly edit `DESIGN.md` or `design-spec.html` after rendering.
 - The final `DESIGN.md`, `design-spec.html`, and `app-preview.html` must be written back into the same `./artifacts/<timestamp>/` directory recorded by `manifest.json`.
 - Do not create a parallel final-delivery directory such as `demo/`, the repository root, or a second `artifacts/<other-timestamp>/` directory for the same run.
-- After rendering the final files, run `scripts/finalize_manifest.py` on that run directory. A run is not fully complete until `manifest.json.workflow_stage` becomes `final-artifacts-authored`.
-- When producing `design-spec.html`, the LLM must read `templates/design-spec.html` and author the file against that structure. Do not hand-author a different page type as a substitute for template rendering.
+- After rendering the spec artifacts, run `scripts/finalize_manifest.py` on that run directory. A run is not fully complete until `manifest.json.workflow_stage` becomes `spec-artifacts-finalized`, and rerunning finalize after `app-preview.html` is added should move it to `preview-artifact-recorded`.
+- When producing `design-spec.html`, the renderer must read `templates/design-spec.html` and fill that structure. Do not hand-author a different page type as a substitute for template rendering.
 - Treat script execution plus template-signature verification as the success condition for `design-spec.html`. A hand-authored HTML file without the required template signature is not a valid completion.
 - Do not replace `design-spec.html` with a bespoke application mockup, landing page, dashboard, editor, or prototype layout just because that feels more visually direct.
 - When generating `design-spec.html`, preserve the template's document role: it is a design-system specification page, not an app screen preview.
 - It is acceptable to fill the template with a brand's design language and to update token values, copy, swatches, component notes, and preview styling, but not to change the artifact into a different page type.
 - `app-preview.html` is part of the default artifact set for generation requests and should be treated as the concrete product-facing mockup companion to `design-spec.html`.
+- `app-preview.html` should be authored after `DESIGN.md` is finalized, using the product requirements and `DESIGN.md` as the direct brief.
 - Do not use `app-preview.html` as a substitute for `design-spec.html`.
 - If script execution is unavailable, manually mirror the existing template structure as closely as possible instead of inventing a new layout from scratch.
 - `design-spec.html` should load Tailwind from `https://cdn.tailwindcss.com` and use Tailwind utilities for layout and presentation wherever practical, keeping custom CSS limited to theme variables and a small preview layer.

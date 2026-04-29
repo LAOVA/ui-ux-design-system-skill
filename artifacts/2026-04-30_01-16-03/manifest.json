@@ -1,0 +1,21 @@
+{
+  "query": "Ferrari style e-commerce website",
+  "project_name": "Ferrari E-Commerce",
+  "run_dir": "E:\\project\\skills\\ui-ux-design-system-skill\\artifacts\\2026-04-30_01-16-03",
+  "final_output_dir": "E:\\project\\skills\\ui-ux-design-system-skill\\artifacts\\2026-04-30_01-16-03",
+  "reference_summary": "Ferrari, ClickHouse, Framer",
+  "structured_query": "Ferrari style e-commerce website Ferrari ClickHouse",
+  "source_pipeline": {
+    "reference_source": "awesome-design-md",
+    "structured_source": "ui-ux-pro-max-skill",
+    "synthesis": "scripts/reasoning.py"
+  },
+  "workflow_stage": "preview-artifact-recorded",
+  "next_step": "Run completed. DESIGN.md and design-spec.html were script-rendered and verified, and app-preview.html was authored from the product requirements plus DESIGN.md in final_output_dir.",
+  "outputs": {
+    "generation-bundle.json": "E:\\project\\skills\\ui-ux-design-system-skill\\artifacts\\2026-04-30_01-16-03\\generation-bundle.json",
+    "DESIGN.md": "E:\\project\\skills\\ui-ux-design-system-skill\\artifacts\\2026-04-30_01-16-03\\DESIGN.md",
+    "design-spec.html": "E:\\project\\skills\\ui-ux-design-system-skill\\artifacts\\2026-04-30_01-16-03\\design-spec.html",
+    "app-preview.html": "E:\\project\\skills\\ui-ux-design-system-skill\\artifacts\\2026-04-30_01-16-03\\app-preview.html"
+  }
+}
