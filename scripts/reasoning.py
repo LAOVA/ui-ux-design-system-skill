@@ -179,6 +179,65 @@ def _extract_reference_markdown_overrides(design_md: str) -> dict:
     }
 
 
+def _build_brief_profile(query: str, structured_result: dict) -> dict:
+    lowered = query.lower()
+    strong_geek_terms = [
+        "geek",
+        "hacker",
+        "terminal",
+        "cli",
+        "monospace",
+        "developer portfolio",
+        "personal homepage",
+        "portfolio",
+    ]
+    has_geek_intent = any(term in lowered for term in strong_geek_terms)
+    category = str(structured_result.get("category", "")).lower()
+    typography = structured_result.get("typography", {}) or {}
+    heading_font = str(typography.get("heading", "")).lower()
+    body_font = str(typography.get("body", "")).lower()
+    mood = str(typography.get("mood", "")).lower()
+    colors = structured_result.get("colors", {}) or {}
+    background = str(colors.get("background", "")).strip()
+
+    protect_terminal_identity = has_geek_intent or any(
+        token in " ".join([category, heading_font, body_font, mood])
+        for token in ["portfolio", "terminal", "hacker", "monospace", "developer"]
+    )
+    prefers_dark = background.lower() in {"#09090b", "#111111", "#18181b", "#000000"}
+
+    return {
+        "has_geek_intent": has_geek_intent,
+        "protect_terminal_identity": protect_terminal_identity,
+        "prefers_dark": prefers_dark,
+    }
+
+
+def _apply_brief_intent_overrides(design_system: dict, brief_profile: dict) -> dict:
+    if not brief_profile.get("has_geek_intent"):
+        return design_system
+
+    colors = design_system.setdefault("colors", {})
+    typography = design_system.setdefault("typography", {})
+    style = design_system.setdefault("style", {})
+
+    if not brief_profile.get("prefers_dark"):
+        colors["background"] = "#09090B"
+        colors["foreground"] = "#F5F5F5"
+        colors["primary"] = "#F5F5F5"
+        colors["on_primary"] = "#09090B"
+        colors["secondary"] = "#18181B"
+        colors["muted"] = "#111827"
+        colors["border"] = "#27272A"
+        colors["text"] = "#F5F5F5"
+        colors["ring"] = colors.get("ring") or "#2563EB"
+
+    typography["heading"] = typography.get("heading") or "JetBrains Mono"
+    typography["body"] = typography.get("body") or "JetBrains Mono"
+    style["name"] = "Geek Terminal"
+    return design_system
+
+
 def _is_bmw_m_variant(query: str) -> bool:
     lowered = query.lower()
     return any(
@@ -187,7 +246,13 @@ def _is_bmw_m_variant(query: str) -> bool:
     )
 
 
-def _apply_reference_overrides(design_system: dict, reference_context: dict, query: str) -> dict:
+def _apply_reference_overrides(
+    design_system: dict,
+    reference_context: dict,
+    query: str,
+    brief_profile: dict | None = None,
+) -> dict:
+    brief_profile = brief_profile or {}
     design_md = reference_context.get("_primary_reference_design_md", "")
     frontmatter = _parse_design_md_frontmatter(design_md)
     if not frontmatter:
@@ -200,6 +265,26 @@ def _apply_reference_overrides(design_system: dict, reference_context: dict, que
         ds_style = design_system.setdefault("style", {})
         overrides_applied: list[str] = []
 
+        protected_color_keys = set()
+        protected_typography_keys = set()
+        if brief_profile.get("protect_terminal_identity"):
+            protected_color_keys.update(
+                {
+                    "background",
+                    "foreground",
+                    "primary",
+                    "on_primary",
+                    "secondary",
+                    "accent",
+                    "border",
+                    "muted",
+                    "ring",
+                    "cta",
+                    "text",
+                }
+            )
+            protected_typography_keys.update({"heading", "body"})
+
         for source_key, target_key in [
             ("background", "background"),
             ("foreground", "foreground"),
@@ -211,20 +296,20 @@ def _apply_reference_overrides(design_system: dict, reference_context: dict, que
             ("muted", "muted"),
         ]:
             value = markdown_overrides.get(source_key)
-            if value:
+            if value and target_key not in protected_color_keys:
                 ds_colors[target_key] = value
                 overrides_applied.append(f"colors.{target_key}")
 
-        if markdown_overrides.get("heading_font"):
+        if markdown_overrides.get("heading_font") and "heading" not in protected_typography_keys:
             ds_type["heading"] = markdown_overrides["heading_font"]
             overrides_applied.append("typography.heading")
-        if markdown_overrides.get("body_font"):
+        if markdown_overrides.get("body_font") and "body" not in protected_typography_keys:
             ds_type["body"] = markdown_overrides["body_font"]
             overrides_applied.append("typography.body")
-        if markdown_overrides.get("style_name"):
+        if markdown_overrides.get("style_name") and not brief_profile.get("protect_terminal_identity"):
             ds_style["name"] = markdown_overrides["style_name"]
             overrides_applied.append("style.name")
-        if markdown_overrides.get("key_effects"):
+        if markdown_overrides.get("key_effects") and not brief_profile.get("protect_terminal_identity"):
             design_system["key_effects"] = markdown_overrides["key_effects"]
             overrides_applied.append("key_effects")
 
@@ -238,6 +323,7 @@ def _apply_reference_overrides(design_system: dict, reference_context: dict, que
     colors = frontmatter.get("colors", {}) or {}
     typography = frontmatter.get("typography", {}) or {}
     is_bmw_m = _is_bmw_m_variant(query)
+    protect_terminal_identity = bool(brief_profile.get("protect_terminal_identity"))
 
     def token(*keys: str) -> str:
         for key in keys:
@@ -281,6 +367,22 @@ def _apply_reference_overrides(design_system: dict, reference_context: dict, que
         "text": text,
     }
     for key, value in color_map.items():
+        if not value:
+            continue
+        if protect_terminal_identity and key in {
+            "primary",
+            "secondary",
+            "accent",
+            "background",
+            "foreground",
+            "muted",
+            "border",
+            "on_primary",
+            "ring",
+            "cta",
+            "text",
+        }:
+            continue
         if value:
             ds_colors[key] = value
             overrides_applied.append(f"colors.{key}")
@@ -293,31 +395,28 @@ def _apply_reference_overrides(design_system: dict, reference_context: dict, que
         (typography.get("body-md") or {}).get("fontFamily")
         or (typography.get("body-sm") or {}).get("fontFamily")
     )
-    if heading_font:
+    if heading_font and not protect_terminal_identity:
         ds_type["heading"] = heading_font
         overrides_applied.append("typography.heading")
-    if body_font:
+    if body_font and not protect_terminal_identity:
         ds_type["body"] = body_font
         overrides_applied.append("typography.body")
 
-    if frontmatter.get("description"):
+    if frontmatter.get("description") and not protect_terminal_identity:
         ds_type["mood"] = str(frontmatter["description"])
         overrides_applied.append("typography.mood")
 
-    ds_type["best_for"] = (
-        "Automotive forums, enthusiast communities, performance showcases"
-        if is_bmw_m
-        else "Automotive brand sites, model showcases, dealer and reservation flows"
-    )
-    ds_type["google_fonts_url"] = ""
-    ds_type["css_import"] = ""
-    overrides_applied.extend(
-        [
-            "typography.best_for",
-            "typography.google_fonts_url",
-            "typography.css_import",
-        ]
-    )
+    if is_bmw_m:
+        ds_type["best_for"] = "Automotive forums, enthusiast communities, performance showcases"
+        overrides_applied.append("typography.best_for")
+        ds_type["google_fonts_url"] = ""
+        ds_type["css_import"] = ""
+        overrides_applied.extend(
+            [
+                "typography.google_fonts_url",
+                "typography.css_import",
+            ]
+        )
 
     if "forum" in query.lower() and design_system.get("reference_summary", "").startswith("BMW"):
         design_system["category"] = "Automotive Community / Forum"
@@ -663,6 +762,8 @@ def synthesize_design_system(
 ) -> dict:
     references = reference_context.get("references", [])
     design_system = copy.deepcopy(structured_result)
+    brief_profile = _build_brief_profile(query, structured_result)
+    design_system = _apply_brief_intent_overrides(design_system, brief_profile)
 
     design_system["original_query"] = query
     design_system["reference_styles"] = references
@@ -701,13 +802,15 @@ def synthesize_design_system(
         primary_reference = references[0]
         existing_best_for = design_system.get("style", {}).get("best_for", "")
         reference_fit = f"Reference fit: {primary_reference['summary']}"
-        design_system["style"]["best_for"] = (
-            f"{existing_best_for} {reference_fit}".strip()
-            if existing_best_for
-            else reference_fit
-        )
+        if not brief_profile.get("protect_terminal_identity"):
+            design_system["style"]["best_for"] = (
+                f"{existing_best_for} {reference_fit}".strip()
+                if existing_best_for
+                else reference_fit
+            )
 
-    return _apply_reference_overrides(design_system, reference_context, query)
+    design_system["brief_profile"] = brief_profile
+    return _apply_reference_overrides(design_system, reference_context, query, brief_profile)
 
 
 def build_generation_bundle(query: str, project_name: str | None = None) -> dict:

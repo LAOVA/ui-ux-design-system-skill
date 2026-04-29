@@ -45,14 +45,8 @@ def _verify_html_signature(path: Path) -> None:
         )
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser(
-        description="Update manifest.json after final DESIGN.md and design-spec.html are authored."
-    )
-    parser.add_argument("run_dir", help="Artifacts run directory containing manifest.json")
-    args = parser.parse_args()
-
-    run_dir = Path(args.run_dir).resolve()
+def finalize_run(run_dir: Path) -> Path:
+    run_dir = run_dir.resolve()
     manifest_path = run_dir / "manifest.json"
     _require_file(manifest_path, "manifest.json")
 
@@ -78,6 +72,17 @@ def main() -> int:
     manifest["next_step"] = "Run completed. Final DESIGN.md and design-spec.html were authored in final_output_dir."
 
     _write_json(manifest_path, manifest)
+    return manifest_path
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Update manifest.json after final DESIGN.md and design-spec.html are authored."
+    )
+    parser.add_argument("run_dir", help="Artifacts run directory containing manifest.json")
+    args = parser.parse_args()
+
+    manifest_path = finalize_run(Path(args.run_dir))
     print(f"Finalized manifest: {manifest_path}")
     return 0
 

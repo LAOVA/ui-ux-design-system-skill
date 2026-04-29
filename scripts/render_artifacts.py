@@ -47,17 +47,7 @@ def _write_text(path: Path, content: str) -> None:
     path.write_text(content, encoding="utf-8")
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser(
-        description="Render final DESIGN.md and design-spec.html from an existing generation bundle."
-    )
-    parser.add_argument(
-        "run_dir",
-        help="Artifact run directory containing generation-bundle.json and manifest.json",
-    )
-    args = parser.parse_args()
-
-    run_dir = _resolve_run_dir(args.run_dir)
+def render_run(run_dir: Path) -> Path:
     bundle = _load_json(_bundle_path(run_dir))
     manifest = _load_json(_manifest_path(run_dir))
     final_design_system = bundle["final_design_system"]
@@ -75,7 +65,23 @@ def main() -> int:
     manifest["workflow_stage"] = "final-artifacts-rendered"
     manifest["next_step"] = "Run rendered from generation-bundle.json. Run finalize_manifest.py to verify and mark completion."
     _write_text(_manifest_path(run_dir), json.dumps(manifest, ensure_ascii=False, indent=2))
+    return run_dir
 
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Render final DESIGN.md and design-spec.html from an existing generation bundle."
+    )
+    parser.add_argument(
+        "run_dir",
+        help="Artifact run directory containing generation-bundle.json and manifest.json",
+    )
+    args = parser.parse_args()
+
+    run_dir = _resolve_run_dir(args.run_dir)
+    render_run(run_dir)
+    design_md_path = run_dir / "DESIGN.md"
+    design_spec_path = run_dir / "design-spec.html"
     print(f"Rendered DESIGN.md: {design_md_path}")
     print(f"Rendered design-spec.html: {design_spec_path}")
     print(f"Updated manifest: {_manifest_path(run_dir)}")

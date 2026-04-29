@@ -31,7 +31,9 @@ if str(ROOT_DIR / "scripts") not in sys.path:
 if str(UPSTREAM_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(UPSTREAM_SCRIPTS))
 
+from finalize_manifest import finalize_run  # type: ignore  # noqa: E402
 from reasoning import build_generation_bundle  # type: ignore  # noqa: E402
+from render_artifacts import render_run  # type: ignore  # noqa: E402
 
 
 def _default_run_dir() -> Path:
@@ -63,7 +65,7 @@ def _write_manifest(run_dir: Path, bundle: dict, files: dict[str, Path]) -> None
         "structured_query": bundle.get("structured_query"),
         "source_pipeline": bundle.get("final_design_system", {}).get("source_pipeline", {}),
         "workflow_stage": "bundle-generated",
-        "next_step": "LLM must read generation-bundle.json, then create DESIGN.md and design-spec.html in this same run directory. Do not write final artifacts to demo/, the project root, or a different artifacts directory.",
+        "next_step": "Use render_artifacts.py on this run directory so DESIGN.md and design-spec.html are rendered from generation-bundle.json in the same final_output_dir.",
         "outputs": {name: str(path) for name, path in files.items()},
     }
     _write_text(
@@ -91,6 +93,12 @@ def main() -> int:
         default=None,
         help="Primary output file path.",
     )
+    parser.add_argument(
+        "--workflow",
+        choices=["bundle", "complete"],
+        default="complete",
+        help="Whether to stop after bundle generation or also render final artifacts. Defaults to complete.",
+    )
     args = parser.parse_args()
 
     bundle = build_generation_bundle(args.query, args.project_name)
@@ -112,6 +120,12 @@ def main() -> int:
     _write_manifest(run_dir, bundle, {"generation-bundle.json": output_path})
     print(f"Generated generation bundle: {output_path}")
     print(f"Generated manifest: {run_dir / 'manifest.json'}")
+    if args.workflow == "complete":
+        render_run(run_dir)
+        finalize_run(run_dir)
+        print(f"Rendered DESIGN.md: {run_dir / 'DESIGN.md'}")
+        print(f"Rendered design-spec.html: {run_dir / 'design-spec.html'}")
+        print(f"Finalized manifest: {run_dir / 'manifest.json'}")
     return 0
 
 
