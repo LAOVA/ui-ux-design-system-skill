@@ -32,9 +32,6 @@ REQUIRED_TEMPLATE_MARKERS = [
     "TEMPLATE_SIGNATURE: uiux-design-system/design-spec/v1",
     "<!-- Required spec sections begin -->",
     "<!-- Required spec sections end -->",
-    'class="page-theme-floating',
-    'data-page-theme="light"',
-    'data-page-theme="dark"',
     "System Snapshot",
     "Visual Direction",
     "Flow and Layout",
@@ -60,83 +57,72 @@ DEFAULT_STYLES = """
       --panel-fg: {{panel_fg}};
       --panel-muted: {{panel_muted}};
       --preview-bg: {{preview_bg}};
-      --shadow-card: 0 10px 30px rgba(15, 23, 42, 0.10);
-      --shadow-popover: 0 18px 48px rgba(15, 23, 42, 0.18);
+      --shadow-card: {{shadow_card}};
+      --shadow-popover: {{shadow_popover}};
       --font-heading: {{heading_font_css}};
       --font-body: {{body_font_css}};
       --interactive-primary: {{primary}};
       --interactive-on-primary: {{on_primary}};
-      --interactive-primary-shadow: color-mix(in srgb, {{primary}} 22%, transparent);
-      --interactive-secondary-fg: {{primary}};
-      --toggle-shell-bg: color-mix(in srgb, {{panel_bg_soft}} 90%, white 10%);
-      --toggle-shell-border: color-mix(in srgb, {{border}} 82%, white 18%);
-      --toggle-button-fg: {{panel_muted}};
-      --toggle-active-bg: color-mix(in srgb, {{panel_bg}} 92%, white 8%);
-      --toggle-active-fg: {{panel_fg}};
-      --toggle-active-border: {{border}};
-      --toggle-active-shadow: 0 6px 18px rgba(15, 23, 42, 0.10);
-    }
-    body[data-page-theme="dark"] {
-      color-scheme: dark;
-      --page-bg: #020617;
-      --page-fg: #F8FAFC;
-      --surface-border: #243244;
-      --panel-bg: #131C2E;
-      --panel-bg-soft: #1A2740;
-      --panel-fg: #F8FAFC;
-      --panel-muted: #94A3B8;
-      --preview-bg: #0B1220;
-      --preview-surface: #162033;
-      --preview-surface-strong: #10192A;
-      --preview-border: #243244;
-      --preview-fg: #F8FAFC;
-      --preview-muted: #94A3B8;
-      --shadow-card: 0 12px 36px rgba(2, 6, 23, 0.42);
-      --shadow-popover: 0 20px 54px rgba(2, 6, 23, 0.48);
-      --interactive-primary: {{accent}};
-      --interactive-on-primary: #04110C;
-      --interactive-primary-shadow: color-mix(in srgb, {{accent}} 32%, transparent);
-      --interactive-secondary-fg: #D7FBE7;
-      --toggle-shell-bg: color-mix(in srgb, #1A2740 88%, #020617 12%);
-      --toggle-shell-border: #243244;
-      --toggle-button-fg: #94A3B8;
-      --toggle-active-bg: color-mix(in srgb, #131C2E 82%, white 18%);
-      --toggle-active-fg: #F8FAFC;
-      --toggle-active-border: #31415A;
-      --toggle-active-shadow: 0 8px 22px rgba(2, 6, 23, 0.34);
-    }
-    body[data-page-theme="light"] {
-      color-scheme: light;
-      --page-bg: #F8FAFC;
-      --page-fg: #0F172A;
-      --surface-border: #CBD5E1;
-      --panel-bg: #FFFFFF;
-      --panel-bg-soft: #F1F5F9;
-      --panel-fg: #0F172A;
-      --panel-muted: #475569;
-      --preview-bg: #FFFFFF;
-      --preview-surface: #F8FAFC;
-      --preview-surface-strong: #FFFFFF;
-      --preview-border: #CBD5E1;
-      --preview-fg: #0F172A;
-      --preview-muted: #475569;
-      --toggle-shell-bg: color-mix(in srgb, #F1F5F9 82%, white 18%);
-      --toggle-shell-border: #D7DEE8;
-      --toggle-button-fg: #6B7280;
-      --toggle-active-bg: #FFFFFF;
-      --toggle-active-fg: #1F2937;
-      --toggle-active-border: #D7DEE8;
-      --toggle-active-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+      --interactive-primary-shadow: {{interactive_primary_shadow}};
+      --interactive-secondary-fg: {{interactive_secondary_fg}};
+      --page-accent-wash: {{page_accent_wash}};
+      --page-accent-glow: {{page_accent_glow}};
+      --page-grid-line: {{page_grid_line}};
+      --panel-radius: {{panel_radius}};
+      --chip-radius: {{chip_radius}};
+      --button-radius: {{button_radius}};
+      --panel-border-width: {{panel_border_width}};
+      --panel-shadow: {{panel_shadow}};
+      --panel-soft-shadow: {{panel_soft_shadow}};
+      --heading-case: {{heading_case}};
+      --heading-spacing: {{heading_spacing}};
+      --body-spacing: {{body_spacing}};
+      --heading-style: {{heading_style}};
+      --heading-weight: {{heading_weight}};
+      --panel-backdrop: {{panel_backdrop}};
+      --surface_noise: {{surface_noise}};
+      --nav-active-accent: {{nav_active_accent}};
+      --nav-active-shadow: {{nav_active_shadow}};
+      --nav-item-radius: {{nav_item_radius}};
+      --panel_gradient: {{panel_gradient}};
+      --soft_panel_gradient: {{soft_panel_gradient}};
+      --hero_kicker_color: {{hero_kicker_color}};
+      --tag_bg: {{tag_bg}};
+      --tag_fg: {{tag_fg}};
+      --tag_border: {{tag_border}};
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: var(--font-body);
-      background: var(--page-bg);
+      background:
+        var(--surface_noise),
+        linear-gradient(180deg, color-mix(in srgb, var(--page-bg) 96%, black 4%), var(--page-bg)),
+        radial-gradient(circle at top left, var(--page-accent-wash), transparent 34%),
+        radial-gradient(circle at top right, var(--page-accent-glow), transparent 30%);
       color: var(--page-fg);
       transition: background 180ms ease, color 180ms ease;
+      letter-spacing: var(--body-spacing);
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(var(--page-grid-line, transparent) 1px, transparent 1px),
+        linear-gradient(90deg, var(--page-grid-line, transparent) 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: 0.28;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.28), transparent 48%);
     }
     h1, h2, h3, h4, strong { font-family: var(--font-heading); }
+    h1, h2, h3, h4 {
+      letter-spacing: var(--heading-spacing);
+      text-transform: var(--heading-case);
+      font-style: var(--heading-style);
+      font-weight: var(--heading-weight);
+    }
     code {
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: 0.92em;
@@ -149,43 +135,24 @@ DEFAULT_STYLES = """
       color: var(--primary);
       text-underline-offset: 0.16em;
     }
-    .page-theme-floating {
-      background: color-mix(in srgb, var(--panel-bg) 86%, transparent);
-      border-color: color-mix(in srgb, var(--surface-border) 78%, white 22%);
-      box-shadow: var(--shadow-popover);
-      backdrop-filter: blur(14px);
-    }
-    .page-theme-switch {
-      background: var(--toggle-shell-bg);
-      border-color: var(--toggle-shell-border);
-    }
-    .page-theme-button {
-      background: transparent;
-      color: var(--toggle-button-fg);
-      border: 1px solid transparent;
-      transition: background 160ms ease, color 160ms ease, transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
-    }
-    .page-theme-button:hover,
     .theme-button-primary:hover,
     .theme-button-secondary:hover {
       transform: translateY(-1px);
     }
-    .page-theme-button.active {
-      background: var(--toggle-active-bg);
-      color: var(--toggle-active-fg);
-      border-color: var(--toggle-active-border);
-      box-shadow: var(--toggle-active-shadow);
-    }
     .theme-panel {
-      background: var(--panel-bg);
+      background: var(--panel_gradient);
       border-color: var(--surface-border);
+      border-width: var(--panel-border-width);
       color: var(--panel-fg);
-      box-shadow: var(--shadow-card);
+      box-shadow: var(--panel-shadow);
+      border-radius: var(--panel-radius) !important;
+      backdrop-filter: var(--panel-backdrop);
     }
     .theme-soft {
-      background: var(--panel-bg-soft);
+      background: var(--soft_panel_gradient);
       border-color: color-mix(in srgb, var(--surface-border) 76%, white 24%);
       color: var(--panel-fg);
+      box-shadow: var(--panel-soft-shadow);
     }
     .theme-muted { color: var(--panel-muted); }
     .theme-chip {
@@ -193,23 +160,26 @@ DEFAULT_STYLES = """
       border-color: var(--surface-border);
       color: var(--panel-fg);
       box-shadow: var(--shadow-card);
+      border-radius: var(--chip-radius) !important;
     }
     .theme-tag {
-      background: color-mix(in srgb, var(--accent) 15%, white);
-      color: var(--accent);
-      border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+      background: var(--tag_bg);
+      color: var(--tag_fg);
+      border: 1px solid var(--tag_border);
     }
     .theme-button-primary {
       background: var(--interactive-primary);
       color: var(--interactive-on-primary);
       box-shadow: 0 10px 24px var(--interactive-primary-shadow);
       transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+      border-radius: var(--button-radius) !important;
     }
     .theme-button-secondary {
       background: transparent;
       color: var(--interactive-secondary-fg);
       border: 1px solid color-mix(in srgb, var(--interactive-primary) 25%, var(--surface-border));
       transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+      border-radius: var(--button-radius) !important;
     }
     .swatch-chip { border: 1px solid rgba(15, 23, 42, 0.08); }
     .flow-step {
@@ -243,6 +213,15 @@ DEFAULT_STYLES = """
       background: var(--interactive-primary);
       color: var(--interactive-on-primary);
       border-color: var(--interactive-primary);
+      box-shadow: var(--nav-active-shadow);
+    }
+    .theme-nav-item {
+      border-radius: var(--nav-item-radius) !important;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+    }
+    .theme-nav-item:hover {
+      transform: translateX(2px);
+      border-color: color-mix(in srgb, var(--nav-active-accent) 40%, var(--surface-border));
     }
     .theme-status-positive {
       background: color-mix(in srgb, var(--accent) 18%, white);
@@ -252,9 +231,6 @@ DEFAULT_STYLES = """
       background: color-mix(in srgb, var(--secondary) 18%, white);
       color: var(--secondary);
     }
-    .theme-preview-window,
-    .theme-preview-surface,
-    .theme-preview-card,
     .theme-input,
     .theme-nav-item,
     .theme-table {
@@ -264,41 +240,7 @@ DEFAULT_STYLES = """
       --preview-fg: var(--panel-fg);
       --preview-muted: var(--panel-muted);
     }
-    .theme-preview-window {
-      background: var(--preview-surface-strong);
-      border-color: var(--preview-border);
-      transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
-    }
-    .theme-dot { background: color-mix(in srgb, var(--panel-muted) 45%, transparent); }
-    .theme-chart {
-      background:
-        linear-gradient(180deg, color-mix(in srgb, var(--accent) 16%, transparent), transparent),
-        linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px),
-        linear-gradient(180deg, rgba(255,255,255,0.14) 1px, transparent 1px);
-      background-size: auto, 18px 18px, 18px 18px;
-      background-color: var(--preview-surface-strong);
-      border-color: color-mix(in srgb, var(--preview-border) 70%, white 30%);
-      position: relative;
-      overflow: hidden;
-    }
-    .theme-chart::after {
-      content: "";
-      position: absolute;
-      inset: auto 10px 18px 10px;
-      height: 3px;
-      border-radius: 999px;
-      background:
-        linear-gradient(90deg, var(--accent) 0%, var(--accent) 30%, transparent 30%),
-        linear-gradient(90deg, transparent 10%, var(--primary) 10%, var(--primary) 68%, transparent 68%);
-      opacity: 0.85;
-      transform: skewX(-18deg);
-    }
-    @media (max-width: 640px) {
-      .page-theme-floating {
-        width: calc(100% - 24px);
-        justify-content: space-between;
-      }
-    }
+    .theme-kicker { color: var(--hero_kicker_color); }
 """
 
 
@@ -387,11 +329,132 @@ def _font_css(font_name: str, fallback: str) -> str:
     return f"'{font_name}', {fallback}"
 
 
+def _style_profile(style_name: str, keywords: str, effects: str, heading_font: str) -> dict[str, str]:
+    style_text = " ".join([style_name, keywords, effects, heading_font]).lower()
+    profile = {
+        "page_accent_wash": "color-mix(in srgb, var(--accent) 10%, transparent)",
+        "page_accent_glow": "color-mix(in srgb, var(--primary) 8%, transparent)",
+        "page_grid_line": "transparent",
+        "panel_radius": "32px",
+        "chip_radius": "999px",
+        "button_radius": "18px",
+        "panel_border_width": "1px",
+        "panel_shadow": "0 16px 42px rgba(15, 23, 42, 0.08)",
+        "panel_soft_shadow": "0 10px 24px rgba(15, 23, 42, 0.05)",
+        "heading_case": "none",
+        "heading_spacing": "-0.04em",
+        "body_spacing": "0",
+        "heading_style": "normal",
+        "heading_weight": "800",
+        "panel_backdrop": "none",
+        "surface_noise": "none",
+        "nav_active_accent": "var(--accent)",
+        "nav_active_shadow": "0 10px 24px color-mix(in srgb, var(--accent) 20%, transparent)",
+        "nav_item_radius": "20px",
+        "panel_gradient": "linear-gradient(180deg, var(--panel-bg), var(--panel-bg))",
+        "soft_panel_gradient": "linear-gradient(180deg, var(--panel-bg-soft), var(--panel-bg-soft))",
+        "hero_kicker_color": "var(--panel-muted)",
+        "tag_bg": "color-mix(in srgb, var(--accent) 15%, white)",
+        "tag_fg": "var(--accent)",
+        "tag_border": "color-mix(in srgb, var(--accent) 25%, transparent)",
+    }
+
+    if any(token in style_text for token in ["glass", "gloss", "frosted"]):
+        profile.update({
+            "panel_backdrop": "blur(18px)",
+            "panel_shadow": "0 18px 48px rgba(15, 23, 42, 0.12)",
+            "panel_soft_shadow": "0 12px 28px rgba(15, 23, 42, 0.08)",
+            "page_accent_wash": "color-mix(in srgb, var(--accent) 16%, transparent)",
+            "page_accent_glow": "color-mix(in srgb, white 18%, transparent)",
+        })
+
+    if any(token in style_text for token in ["geek", "terminal", "mono", "code", "cyber", "developer"]):
+        profile.update({
+            "page_grid_line": "color-mix(in srgb, var(--accent) 10%, transparent)",
+            "panel_radius": "24px",
+            "chip_radius": "14px",
+            "button_radius": "14px",
+            "panel_border_width": "1.5px",
+            "panel_shadow": "0 18px 44px rgba(2, 6, 23, 0.18)",
+            "panel_soft_shadow": "0 10px 24px rgba(2, 6, 23, 0.10)",
+            "heading_case": "uppercase",
+            "heading_spacing": "-0.03em",
+            "body_spacing": "0.01em",
+            "heading_weight": "700",
+            "surface_noise": "linear-gradient(180deg, color-mix(in srgb, var(--accent) 4%, transparent), transparent)",
+            "nav_item_radius": "12px",
+            "panel_gradient": "linear-gradient(180deg, color-mix(in srgb, var(--panel-bg) 94%, black 6%), var(--panel-bg))",
+            "soft_panel_gradient": "linear-gradient(180deg, color-mix(in srgb, var(--panel-bg-soft) 90%, black 10%), var(--panel-bg-soft))",
+            "hero_kicker_color": "var(--accent)",
+        })
+
+    if any(token in style_text for token in ["editorial", "luxury", "cinematic", "serif"]):
+        profile.update({
+            "panel_radius": "20px",
+            "chip_radius": "999px",
+            "button_radius": "999px",
+            "panel_shadow": "0 20px 54px rgba(15, 23, 42, 0.10)",
+            "heading_spacing": "-0.05em",
+            "body_spacing": "0.005em",
+            "page_accent_wash": "color-mix(in srgb, var(--accent) 8%, transparent)",
+            "page_accent_glow": "color-mix(in srgb, #ffffff 10%, transparent)",
+            "heading_weight": "600",
+            "panel_gradient": "linear-gradient(180deg, color-mix(in srgb, var(--panel-bg) 88%, white 12%), var(--panel-bg))",
+            "soft_panel_gradient": "linear-gradient(180deg, color-mix(in srgb, var(--panel-bg-soft) 84%, white 16%), var(--panel-bg-soft))",
+        })
+
+    if any(token in style_text for token in ["block", "brutal", "grid", "industrial"]):
+        profile.update({
+            "panel_radius": "18px",
+            "chip_radius": "12px",
+            "button_radius": "12px",
+            "panel_border_width": "2px",
+            "panel_shadow": "0 10px 0 rgba(15, 23, 42, 0.16)",
+            "panel_soft_shadow": "0 6px 0 rgba(15, 23, 42, 0.10)",
+            "heading_spacing": "-0.03em",
+            "nav_item_radius": "10px",
+        })
+
+    if any(token in style_text for token in ["ferrari", "bmw", "bugatti", "automotive", "motorsport", "racing"]):
+        profile.update({
+            "page_accent_wash": "color-mix(in srgb, var(--primary) 18%, transparent)",
+            "page_accent_glow": "color-mix(in srgb, #7a0f06 24%, transparent)",
+            "page_grid_line": "color-mix(in srgb, var(--primary) 6%, transparent)",
+            "panel_radius": "18px",
+            "chip_radius": "999px",
+            "button_radius": "10px",
+            "panel_border_width": "1px",
+            "panel_shadow": "0 18px 40px rgba(0, 0, 0, 0.34)",
+            "panel_soft_shadow": "0 10px 22px rgba(0, 0, 0, 0.24)",
+            "heading_case": "uppercase",
+            "heading_spacing": "-0.035em",
+            "heading_style": "italic",
+            "heading_weight": "700",
+            "body_spacing": "0.01em",
+            "surface_noise": "linear-gradient(90deg, color-mix(in srgb, var(--primary) 4%, transparent), transparent 42%)",
+            "nav_active_accent": "var(--primary)",
+            "nav_active_shadow": "inset 3px 0 0 var(--primary)",
+            "nav_item_radius": "10px",
+            "panel_gradient": "linear-gradient(180deg, color-mix(in srgb, var(--panel-bg) 94%, black 6%), color-mix(in srgb, var(--panel-bg) 88%, #2a0c09 12%))",
+            "soft_panel_gradient": "linear-gradient(180deg, color-mix(in srgb, var(--panel-bg-soft) 94%, black 6%), color-mix(in srgb, var(--panel-bg-soft) 88%, #2a0c09 12%))",
+            "hero_kicker_color": "color-mix(in srgb, var(--primary) 70%, white 30%)",
+            "tag_bg": "color-mix(in srgb, var(--primary) 14%, transparent)",
+            "tag_fg": "color-mix(in srgb, white 92%, var(--primary) 8%)",
+            "tag_border": "color-mix(in srgb, var(--primary) 35%, transparent)",
+        })
+
+    return profile
+
+
 def _normalize(design_system: dict) -> dict:
     colors = design_system.get("colors", {})
     style = design_system.get("style", {})
     pattern = design_system.get("pattern", {})
     typography = design_system.get("typography", {})
+    style_keywords = str(style.get("keywords", ""))
+    style_effects = str(style.get("effects", ""))
+    heading_font = typography.get("heading", "Inter")
+    profile = _style_profile(str(style.get("name", "Minimalism")), style_keywords, style_effects, str(heading_font))
 
     def color_value(key: str, fallback: str) -> str:
         value = colors.get(key)
@@ -434,6 +497,7 @@ def _normalize(design_system: dict) -> dict:
         "anti_patterns_raw": design_system.get("anti_patterns", ""),
         "reference_summary": design_system.get("reference_summary", ""),
         "reference_direction": design_system.get("reference_direction", ""),
+        **profile,
     }
 
 
@@ -454,11 +518,11 @@ def normalize_design_system(design_system: dict) -> dict:
     is_dark_theme = _relative_luminance(background) < 0.18
 
     if is_dark_theme:
-        panel_bg = _mix_hex(background, "#FFFFFF", 0.78)
-        panel_bg_soft = _mix_hex(background, "#FFFFFF", 0.84)
-        panel_fg = _mix_hex(foreground, "#FFFFFF", 0.92)
-        panel_muted = _mix_hex(foreground, "#94A3B8", 0.7)
-        preview_bg = _mix_hex(background, "#FFFFFF", 0.74)
+        panel_bg = _mix_hex(background, "#FFFFFF", 0.88)
+        panel_bg_soft = _mix_hex(background, "#FFFFFF", 0.92)
+        panel_fg = _mix_hex(foreground, "#FFFFFF", 0.96)
+        panel_muted = _mix_hex(foreground, "#94A3B8", 0.78)
+        preview_bg = _mix_hex(background, "#FFFFFF", 0.86)
     else:
         panel_bg = _mix_hex("#FFFFFF", background, 0.92)
         panel_bg_soft = _mix_hex("#FFFFFF", background, 0.86)
@@ -472,6 +536,10 @@ def normalize_design_system(design_system: dict) -> dict:
     normalized["panel_muted"] = panel_muted
     normalized["preview_bg"] = preview_bg
     normalized["theme_mode"] = "dark" if is_dark_theme else "light"
+    normalized["shadow_card"] = "0 18px 40px rgba(0, 0, 0, 0.22)" if is_dark_theme else "0 10px 30px rgba(15, 23, 42, 0.10)"
+    normalized["shadow_popover"] = "0 22px 56px rgba(0, 0, 0, 0.34)" if is_dark_theme else "0 18px 48px rgba(15, 23, 42, 0.18)"
+    normalized["interactive_primary_shadow"] = f"color-mix(in srgb, {normalized['primary']} 28%, transparent)" if is_dark_theme else f"color-mix(in srgb, {normalized['primary']} 22%, transparent)"
+    normalized["interactive_secondary_fg"] = _mix_hex(normalized["foreground"], normalized["primary"], 0.4) if is_dark_theme else normalized["primary"]
     return normalized
 
 
