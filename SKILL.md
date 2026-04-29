@@ -57,6 +57,8 @@ Prefer the existing local search tooling when you need product, style, color, ty
 
 - `.\scripts\generate.py` is the primary generator entry point for this skill.
   It does not only search: it reads reference input, reads structured design-system output, synthesizes one shared dataset, then writes an intermediate `generation-bundle.json`.
+- `.\scripts\render_artifacts.py` is the preferred final renderer.
+  It reads an existing run directory and renders both `DESIGN.md` and `design-spec.html` from the same bundle.
 - `.\scripts\build_design_spec.py` and `.\scripts\build_design_md.py` are exporter-level scripts.
   They are fallback exporter utilities, not the primary workflow.
 - `.\scripts\finalize_manifest.py` is the run-closing utility.
@@ -67,6 +69,7 @@ Prefer the existing local search tooling when you need product, style, color, ty
 py .\scripts\generate.py "<query>" --project-name "<Project Name>"
 py .\scripts\generate.py "<query>" --format bundle
 py .\scripts\generate.py "<query>" --format design-system-json
+py .\scripts\render_artifacts.py ".\artifacts\<timestamp>"
 py .\scripts\finalize_manifest.py ".\artifacts\<timestamp>"
 py .\ui-ux-pro-max-skill\scripts\search.py "<query>" --design-system -p "<Project Name>"
 py .\ui-ux-pro-max-skill\scripts\search.py "<query>" --domain style
@@ -91,13 +94,13 @@ If the search output is noisy or insufficient, read the relevant CSV-backed doma
 - Always surface accessibility, responsiveness, and interaction constraints for implementation-facing outputs.
 - For HTML outputs, prefer deterministic template rendering over ad hoc generated markup.
 - `templates/design-spec.html` is the canonical design-system HTML template. Treat it as a required output contract, not a loose inspiration source.
-- Prefer `scripts/generate.py` as the top-level command. It writes the intermediate bundle that the LLM must read before authoring final artifacts.
+- Prefer `scripts/generate.py` as the top-level command and `scripts/render_artifacts.py` as the default final-artifact renderer.
 - Treat `scripts/reasoning.py` as the source-fusion layer:
   it reads `awesome-design-md`, reads `ui-ux-pro-max-skill`, then synthesizes the shared design-system object consumed by the renderers.
-- Do not treat the immediate output of `scripts/generate.py` as the final deliverable. The final `DESIGN.md` and `design-spec.html` should be authored only after the LLM reads `generation-bundle.json` and `manifest.json`.
+- Do not treat the immediate output of `scripts/generate.py` as the final deliverable. The final `DESIGN.md` and `design-spec.html` should be rendered only after the LLM reads `generation-bundle.json` and `manifest.json`.
 - The final `DESIGN.md` and `design-spec.html` must be written back into the same `./artifacts/<timestamp>/` directory recorded by `manifest.json`.
 - Do not create a parallel final-delivery directory such as `demo/`, the repository root, or a second `artifacts/<other-timestamp>/` directory for the same run.
-- After authoring the final files, run `scripts/finalize_manifest.py` on that run directory. A run is not fully complete until `manifest.json.workflow_stage` becomes `final-artifacts-authored`.
+- After rendering the final files, run `scripts/finalize_manifest.py` on that run directory. A run is not fully complete until `manifest.json.workflow_stage` becomes `final-artifacts-authored`.
 - When producing `design-spec.html`, the LLM must read `templates/design-spec.html` and author the file against that structure. Do not hand-author a different page type as a substitute for template rendering.
 - Treat script execution plus template-signature verification as the success condition for `design-spec.html`. A hand-authored HTML file without the required template signature is not a valid completion.
 - Do not replace `design-spec.html` with a bespoke application mockup, landing page, dashboard, editor, or prototype layout just because that feels more visually direct.

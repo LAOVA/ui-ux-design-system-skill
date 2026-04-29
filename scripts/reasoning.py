@@ -36,13 +36,29 @@ if str(UPSTREAM_SCRIPTS) not in sys.path:
 from design_system import DesignSystemGenerator  # type: ignore  # noqa: E402
 
 
-REFERENCE_LINE_RE = re.compile(r"- \[\*\*(?P<name>.+?)\*\*\]\(.+?\) - (?P<summary>.+)")
+REFERENCE_LINE_RE = re.compile(r"- \[\*\*(?P<name>.+?)\*\*\]\((?P<url>.+?)\) - (?P<summary>.+)")
 HEX_COLOR_RE = re.compile(r"#[0-9A-Fa-f]{6}")
 REDIRECT_RE = re.compile(r"details have been moved to:\s*(?P<url>https?://\S+)", re.IGNORECASE)
 
 
 def _tokenize(text: str) -> list[str]:
     return re.findall(r"[a-z0-9\.\-\+]+", text.lower())
+
+
+def _slugify_reference_name(value: str) -> str:
+    lowered = (value or "").strip().lower()
+    if not lowered:
+        return ""
+    compact = re.sub(r"\s+", " ", lowered)
+    compact = compact.replace(" & ", " and ")
+    return compact.replace(" ", "-")
+
+
+def _slug_from_reference_url(url: str) -> str:
+    match = re.search(r"getdesign\.md/(?P<slug>[^/]+)/design-md/?$", url.strip(), re.IGNORECASE)
+    if not match:
+        return ""
+    return match.group("slug").strip().lower()
 
 
 def _parse_design_md_frontmatter(content: str) -> dict:
@@ -74,6 +90,95 @@ def _extract_font_name(font_value: object) -> str:
     return first
 
 
+def _extract_backtick_value(patterns: list[str], text: str) -> str:
+    for pattern in patterns:
+        match = re.search(pattern, text, re.IGNORECASE | re.DOTALL)
+        if match:
+            return match.group(1).strip()
+    return ""
+
+
+def _extract_reference_markdown_overrides(design_md: str) -> dict:
+    if not design_md:
+        return {}
+
+    hex_values = list(dict.fromkeys(HEX_COLOR_RE.findall(design_md)))
+    heading_font = _extract_backtick_value(
+        [
+            r"Display\s*/\s*Buttons\*?\*?:\s*`([^`]+)`",
+            r"Display\s*/\s*Buttons.*?`([^`]+)`",
+            r"Heading Font.*?`([^`]+)`",
+        ],
+        design_md,
+    )
+    body_font = _extract_backtick_value(
+        [
+            r"Body\s*/\s*Headings\*?\*?:\s*`([^`]+)`",
+            r"Body\s*/\s*Headings.*?`([^`]+)`",
+            r"Body Font.*?`([^`]+)`",
+        ],
+        design_md,
+    )
+    background = _extract_backtick_value(
+        [
+            r"Dark Background.*?`(#[0-9A-Fa-f]{6})`",
+            r"Background.*?`(#[0-9A-Fa-f]{6})`",
+        ],
+        design_md,
+    )
+    foreground = _extract_backtick_value(
+        [
+            r"Pure White.*?`(#[0-9A-Fa-f]{6})`",
+            r"Text Primary.*?`(#[0-9A-Fa-f]{6})`",
+            r"Foreground.*?`(#[0-9A-Fa-f]{6})`",
+        ],
+        design_md,
+    )
+    border = _extract_backtick_value(
+        [
+            r"Border Default.*?`(#[0-9A-Fa-f]{6})`",
+            r"Border Strong.*?`(#[0-9A-Fa-f]{6})`",
+        ],
+        design_md,
+    )
+    accent = _extract_backtick_value(
+        [
+            r"Accent.*?`(#[0-9A-Fa-f]{6})`",
+            r"Ring Blue.*?`(#[0-9A-Fa-f]{6})`",
+        ],
+        design_md,
+    )
+
+    if not background and hex_values:
+        background = hex_values[0]
+    if not foreground and len(hex_values) > 1:
+        foreground = hex_values[1]
+    if not accent and len(hex_values) > 2:
+        accent = hex_values[2]
+
+    style_name_match = re.search(
+        r"([A-Za-z][A-Za-z\-\s]+minimalism)",
+        design_md,
+        re.IGNORECASE,
+    )
+    key_characteristics = re.findall(r"-\s+([^\n]+)", design_md)
+
+    return {
+        "style_name": style_name_match.group(1).strip().title() if style_name_match else "",
+        "heading_font": heading_font,
+        "body_font": body_font,
+        "background": background,
+        "foreground": foreground,
+        "primary": foreground,
+        "on_primary": background,
+        "secondary": background,
+        "accent": accent,
+        "border": border,
+        "muted": border,
+        "key_effects": ", ".join(key_characteristics[:3]),
+    }
+
+
 def _is_bmw_m_variant(query: str) -> bool:
     lowered = query.lower()
     return any(
@@ -86,6 +191,48 @@ def _apply_reference_overrides(design_system: dict, reference_context: dict, que
     design_md = reference_context.get("_primary_reference_design_md", "")
     frontmatter = _parse_design_md_frontmatter(design_md)
     if not frontmatter:
+        markdown_overrides = _extract_reference_markdown_overrides(design_md)
+        if not markdown_overrides:
+            return design_system
+
+        ds_colors = design_system.setdefault("colors", {})
+        ds_type = design_system.setdefault("typography", {})
+        ds_style = design_system.setdefault("style", {})
+        overrides_applied: list[str] = []
+
+        for source_key, target_key in [
+            ("background", "background"),
+            ("foreground", "foreground"),
+            ("primary", "primary"),
+            ("on_primary", "on_primary"),
+            ("secondary", "secondary"),
+            ("accent", "accent"),
+            ("border", "border"),
+            ("muted", "muted"),
+        ]:
+            value = markdown_overrides.get(source_key)
+            if value:
+                ds_colors[target_key] = value
+                overrides_applied.append(f"colors.{target_key}")
+
+        if markdown_overrides.get("heading_font"):
+            ds_type["heading"] = markdown_overrides["heading_font"]
+            overrides_applied.append("typography.heading")
+        if markdown_overrides.get("body_font"):
+            ds_type["body"] = markdown_overrides["body_font"]
+            overrides_applied.append("typography.body")
+        if markdown_overrides.get("style_name"):
+            ds_style["name"] = markdown_overrides["style_name"]
+            overrides_applied.append("style.name")
+        if markdown_overrides.get("key_effects"):
+            design_system["key_effects"] = markdown_overrides["key_effects"]
+            overrides_applied.append("key_effects")
+
+        if overrides_applied:
+            ds_colors["notes"] = "Reference-constrained palette from remote DESIGN.md heuristics"
+            overrides_applied.append("colors.notes")
+            design_system["reference_overrides_applied"] = overrides_applied
+
         return design_system
 
     colors = frontmatter.get("colors", {}) or {}
@@ -112,6 +259,9 @@ def _apply_reference_overrides(design_system: dict, reference_context: dict, que
     border = token("hairline", "hairline-strong")
     on_primary = token("on-primary", "on-dark")
     destructive = token("error")
+    ring = token("primary", "m-blue-dark", "m-blue-light")
+    cta = token("primary", "m-blue-dark", "m-red")
+    text = token("on-dark", "ink", "body-strong") if is_bmw_m else token("ink", "body", "body-strong")
 
     if is_bmw_m and token("m-blue-dark"):
         primary = token("m-blue-dark")
@@ -126,6 +276,9 @@ def _apply_reference_overrides(design_system: dict, reference_context: dict, que
         "border": border,
         "on_primary": on_primary,
         "destructive": destructive,
+        "ring": ring,
+        "cta": cta,
+        "text": text,
     }
     for key, value in color_map.items():
         if value:
@@ -150,6 +303,21 @@ def _apply_reference_overrides(design_system: dict, reference_context: dict, que
     if frontmatter.get("description"):
         ds_type["mood"] = str(frontmatter["description"])
         overrides_applied.append("typography.mood")
+
+    ds_type["best_for"] = (
+        "Automotive forums, enthusiast communities, performance showcases"
+        if is_bmw_m
+        else "Automotive brand sites, model showcases, dealer and reservation flows"
+    )
+    ds_type["google_fonts_url"] = ""
+    ds_type["css_import"] = ""
+    overrides_applied.extend(
+        [
+            "typography.best_for",
+            "typography.google_fonts_url",
+            "typography.css_import",
+        ]
+    )
 
     if "forum" in query.lower() and design_system.get("reference_summary", "").startswith("BMW"):
         design_system["category"] = "Automotive Community / Forum"
@@ -181,12 +349,14 @@ def load_reference_catalog() -> list[dict]:
 
         name = match.group("name").strip()
         summary = match.group("summary").strip()
-        slug = name.lower().replace(" ", "-")
+        url = match.group("url").strip()
+        slug = _slug_from_reference_url(url) or _slugify_reference_name(name)
         keywords = _tokenize(f"{name} {current_group} {summary}")
         catalog.append(
             {
                 "name": name,
                 "slug": slug,
+                "url": url,
                 "group": current_group,
                 "summary": summary,
                 "keywords": keywords,
@@ -198,7 +368,13 @@ def load_reference_catalog() -> list[dict]:
 def _slug_variants(name: str, slug: str) -> list[str]:
     variants = {
         slug.lower(),
-        name.lower().replace(" ", "-"),
+        slug.lower().replace(".", "-"),
+        slug.lower().replace("-", "."),
+        slug.lower().replace(".", ""),
+        slug.lower().replace("-", ""),
+        _slugify_reference_name(name),
+        _slugify_reference_name(name).replace(".", "-"),
+        _slugify_reference_name(name).replace("-", "."),
         name.lower().replace(" ", ""),
         name.lower(),
     }
