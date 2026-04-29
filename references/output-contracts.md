@@ -8,6 +8,8 @@ Default generation rule:
 - Render both artifacts from the same synthesized normalized design-system data so sections stay aligned.
 - Write default artifacts under `./artifacts/<timestamp>/` rather than the repository root.
 - Write `manifest.json` in that same run directory to record the official inputs and outputs.
+- The final `DESIGN.md` and `design-spec.html` must be written into that same run directory, not a sibling folder such as `demo/` and not a second timestamped folder.
+- Final delivery is only complete after `scripts/finalize_manifest.py` updates `manifest.json.workflow_stage` to `final-artifacts-authored`.
 
 ## Design System Spec
 

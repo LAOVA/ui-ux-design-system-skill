@@ -49,6 +49,7 @@ uiux-design-system/
 |- scripts/                    # add later when implementation begins
 |  |- generate.py              # primary generator entry point and orchestrator
 |  |- search.py                # compatibility wrapper that forwards to generate.py
+|  |- finalize_manifest.py     # verify final artifacts and mark the run complete
 |  |- reference_search.py
 |  |- design_system.py
 |  |- build_design_spec.py
@@ -112,6 +113,7 @@ Responsibility:
 - emit `manifest.json` for the official intermediate run outputs
 - let the LLM author `DESIGN.md`
 - let the LLM author `design-spec.html`
+- verify and finalize the run manifest after those files are authored
 - emit page overrides
 - emit review reports
 

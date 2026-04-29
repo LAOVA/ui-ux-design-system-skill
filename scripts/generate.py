@@ -57,17 +57,21 @@ def _write_manifest(run_dir: Path, bundle: dict, files: dict[str, Path]) -> None
     manifest = {
         "query": bundle.get("query"),
         "project_name": bundle.get("project_name"),
+        "run_dir": str(run_dir),
+        "final_output_dir": str(run_dir),
         "reference_summary": bundle.get("reference_context", {}).get("reference_summary", ""),
         "structured_query": bundle.get("structured_query"),
         "source_pipeline": bundle.get("final_design_system", {}).get("source_pipeline", {}),
         "workflow_stage": "bundle-generated",
-        "next_step": "LLM must read generation-bundle.json, then create DESIGN.md and design-spec.html in this same run directory.",
+        "next_step": "LLM must read generation-bundle.json, then create DESIGN.md and design-spec.html in this same run directory. Do not write final artifacts to demo/, the project root, or a different artifacts directory.",
         "outputs": {name: str(path) for name, path in files.items()},
     }
     _write_text(
         run_dir / "manifest.json",
         json.dumps(manifest, ensure_ascii=False, indent=2),
     )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Primary generator entry point. Builds the intermediate generation bundle used by the final LLM-authored DESIGN.md and design-spec.html."

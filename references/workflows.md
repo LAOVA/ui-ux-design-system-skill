@@ -52,12 +52,16 @@ Execution note:
 - `scripts/reasoning.py` should do the source fusion: reference input first, structured output second, synthesis third.
 - `scripts/generate.py` should then write `generation-bundle.json` and `manifest.json`, not the final deliverables.
 - After that, the LLM should read the bundle and author the final `DESIGN.md` and `design-spec.html`.
+- Those final files must be written into the exact same run directory recorded by `manifest.json.final_output_dir`.
+- Treat writing to `demo/`, the repository root, or a second run directory as a workflow failure for that generation.
+- After authoring the final files, run `scripts/finalize_manifest.py <run_dir>` so the manifest moves from `bundle-generated` to `final-artifacts-authored`.
 
 Default output rule:
 - If the user asks to generate or create a design system and does not specify a format, first generate the intermediate bundle, then author both `design-spec.html` and `DESIGN.md` from that bundle.
 - If the user explicitly asks for `DESIGN.md`, Markdown, JSON, or another format, honor that instead after bundle generation.
 - Unless the user explicitly overrides the path, store generated artifacts under `./artifacts/<timestamp>/`.
 - Treat `./artifacts/<timestamp>/manifest.json` as the official record of the run.
+- The final artifacts for that run must stay in the same directory as `generation-bundle.json` and `manifest.json`.
 
 ## 3. Design-Spec HTML
 
