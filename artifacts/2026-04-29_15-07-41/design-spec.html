@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--
+  CANONICAL DESIGN-SPEC TEMPLATE
+  TEMPLATE_SIGNATURE: uiux-design-system/design-spec/v1
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude AI CMS 设计规范</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #FAF5F2;
+      --text-primary: #0F172A;
+      --text-muted: #78716C;
+      --brand-primary: #D97706;
+      --ai-accent: #8B5CF6;
+      --border-subtle: #EEEDED;
+      --radius-xl: 16px;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+    }
+
+    h1, h2, h3, .serif {
+      font-family: 'Newsreader', serif;
+    }
+
+    .theme-panel {
+      background: white;
+      border-color: var(--border-subtle);
+    }
+
+    .theme-muted {
+      color: var(--text-muted);
+    }
+
+    .theme-button-primary {
+      background-color: var(--brand-primary);
+      color: white;
+      transition: all 0.2s ease;
+    }
+
+    .theme-button-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .theme-button-secondary {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+    }
+
+    .theme-input {
+      background: #F6F1EE;
+      border-color: transparent;
+    }
+
+    .theme-input:focus {
+      outline: none;
+      border-color: var(--brand-primary);
+      background: white;
+    }
+
+    .theme-nav-item.active {
+      background: #F1ECE8;
+      color: var(--text-primary);
+    }
+
+    [data-page-theme="dark"] {
+      --bg-main: #1A1614;
+      --text-primary: #F5F1EE;
+      --text-muted: #A8A29E;
+      --border-subtle: #2E2A27;
+    }
+
+    [data-page-theme="dark"] .theme-panel {
+      background: #231F1D;
+    }
+    
+    [data-page-theme="dark"] .theme-input {
+      background: #2E2A27;
+    }
+  </style>
+</head>
+
+<body data-page-theme="light" class="min-h-screen antialiased">
+  <div
+    class="page-theme-floating fixed left-1/2 top-4 z-50 flex -translate-x-1/2 items-center gap-3 rounded-full border px-3 py-2 shadow-2xl backdrop-blur-xl bg-white/80">
+    <div class="page-theme-switch inline-flex items-center gap-1 rounded-full border p-1">
+      <button class="page-theme-button active rounded-full px-3 py-2 text-sm font-semibold" type="button"
+        data-page-theme="light" aria-pressed="true">明亮</button>
+      <button class="page-theme-button rounded-full px-3 py-2 text-sm font-semibold" type="button"
+        data-page-theme="dark" aria-pressed="false">深色</button>
+    </div>
+  </div>
+
+  <main class="mx-auto max-w-7xl px-5 pb-24 pt-28 md:px-8">
+    <section class="grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.9fr)]">
+      <div class="space-y-5">
+        <div
+          class="inline-flex rounded-full border px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] theme-muted">
+          Design Spec
+        </div>
+        <div class="space-y-4">
+          <h1 class="max-w-4xl text-5xl font-medium tracking-tight md:text-7xl">Claude AI CMS</h1>
+          <p class="max-w-3xl text-lg leading-8 theme-muted">一套专注于人文气息、编辑感与高效 AI 协作的内容管理系统设计规范。</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <span class="rounded-full bg-orange-100 text-orange-700 px-3 py-1 text-xs font-medium">Warm Neutrals</span>
+          <span class="rounded-full bg-purple-100 text-purple-700 px-3 py-1 text-xs font-medium">AI Focused</span>
+          <span class="rounded-full bg-stone-100 text-stone-700 px-3 py-1 text-xs font-medium">Editorial Typography</span>
+        </div>
+      </div>
+
+      <aside class="theme-panel rounded-[28px] border p-4 shadow-xl">
+        <div class="theme-preview-window rounded-[24px] border p-4 md:p-5 bg-[#FAF5F2]/50">
+          <div class="mb-4 flex gap-2">
+            <span class="h-2.5 w-2.5 rounded-full bg-red-400/20"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-yellow-400/20"></span>
+            <span class="h-2.5 w-2.5 rounded-full bg-green-400/20"></span>
+          </div>
+          <div class="grid gap-4 md:grid-cols-[120px_minmax(0,1fr)]">
+            <div class="theme-preview-surface rounded-[20px] border p-3 bg-white/40">
+              <div class="theme-nav-item active rounded-xl px-3 py-2 text-xs font-semibold">文章列表</div>
+              <div class="theme-nav-item mt-2 rounded-xl px-3 py-2 text-xs theme-muted">AI 助手</div>
+              <div class="theme-nav-item mt-2 rounded-xl px-3 py-2 text-xs theme-muted">设置</div>
+            </div>
+            <div class="theme-preview-surface rounded-[20px] border p-4 bg-white">
+              <div class="space-y-3">
+                <div class="h-4 w-3/4 bg-stone-100 rounded"></div>
+                <div class="h-4 w-full bg-stone-50 rounded"></div>
+                <div class="h-4 w-5/6 bg-stone-50 rounded"></div>
+              </div>
+              <div class="mt-6 flex flex-wrap gap-3">
+                <button class="theme-button-primary rounded-xl px-4 py-2 text-xs font-semibold">发布文章</button>
+                <button class="theme-button-secondary rounded-xl px-4 py-2 text-xs font-semibold">AI 润色</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="mt-12">
+      <div class="mb-5">
+        <h2 class="text-3xl font-medium tracking-tight">视觉方向</h2>
+        <p class="mt-2 theme-muted">核心设计特质：人文、简约、高效。</p>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-3">
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">关键词</h3>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-stone-100 rounded-full text-xs">Warm</span>
+            <span class="px-3 py-1 bg-stone-100 rounded-full text-xs">Minimalist</span>
+            <span class="px-3 py-1 bg-stone-100 rounded-full text-xs">Editorial</span>
+            <span class="px-3 py-1 bg-stone-100 rounded-full text-xs">Focused</span>
+          </div>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">适用场景</h3>
+          <p class="mt-4 text-sm leading-7">长篇内容创作、知识库管理、AI 辅助写作、极简博客系统。</p>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">交互效果</h3>
+          <ul class="mt-4 space-y-2 text-sm theme-muted">
+            <li>• 平滑的淡入淡出 (250ms)</li>
+            <li>• 聚焦时的柔和阴影</li>
+            <li>• AI 生成内容的打字机效果</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-3xl font-medium tracking-tight">调色板</h2>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div class="space-y-3">
+          <div class="h-24 rounded-2xl border" style="background: #FAF5F2;"></div>
+          <div>
+            <div class="font-bold">Background</div>
+            <div class="text-xs theme-muted">#FAF5F2</div>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="h-24 rounded-2xl border" style="background: #0F172A;"></div>
+          <div>
+            <div class="font-bold">Text Primary</div>
+            <div class="text-xs theme-muted">#0F172A</div>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="h-24 rounded-2xl border" style="background: #D97706;"></div>
+          <div>
+            <div class="font-bold">Brand Primary</div>
+            <div class="text-xs theme-muted">#D97706</div>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="h-24 rounded-2xl border" style="background: #8B5CF6;"></div>
+          <div>
+            <div class="font-bold">AI Accent</div>
+            <div class="text-xs theme-muted">#8B5CF6</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-3xl font-medium tracking-tight">字体展示</h2>
+      <div class="mt-6 grid gap-4 lg:grid-cols-2">
+        <article class="theme-panel rounded-3xl border p-6">
+          <h3 class="text-xs font-bold uppercase tracking-widest theme-muted mb-4">Headings - Newsreader</h3>
+          <p class="text-5xl font-medium serif leading-tight">人文感与阅读的愉悦</p>
+          <p class="mt-4 theme-muted">衬线字体赋予了系统一种权威而温暖的特质，适合长文标题。</p>
+        </article>
+        <article class="theme-panel rounded-3xl border p-6">
+          <h3 class="text-xs font-bold uppercase tracking-widest theme-muted mb-4">Body - Inter</h3>
+          <p class="text-lg leading-relaxed">无衬线字体确保了界面操作的清晰与现代感。在复杂的后台管理中，高可读性是第一优先级。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-3xl font-medium tracking-tight">核心组件</h2>
+      <div class="mt-6 grid gap-4 lg:grid-cols-3">
+        <article class="theme-panel rounded-3xl border p-6">
+          <h3 class="text-sm font-bold mb-4">按钮状态</h3>
+          <div class="flex flex-col gap-3">
+            <button class="theme-button-primary rounded-xl px-6 py-3 font-semibold">主要操作</button>
+            <button class="theme-button-secondary rounded-xl px-6 py-3 font-semibold">次要操作</button>
+          </div>
+        </article>
+        <article class="theme-panel rounded-3xl border p-6">
+          <h3 class="text-sm font-bold mb-4">表单输入</h3>
+          <div class="space-y-4">
+            <input class="theme-input w-full rounded-xl px-4 py-3 text-sm" placeholder="文章标题...">
+            <textarea class="theme-input w-full rounded-xl px-4 py-3 text-sm h-24" placeholder="开始创作..."></textarea>
+          </div>
+        </article>
+        <article class="theme-panel rounded-3xl border p-6">
+          <h3 class="text-sm font-bold mb-4">AI 提示卡片</h3>
+          <div class="bg-purple-50 border border-purple-100 rounded-2xl p-4">
+            <div class="text-purple-700 text-xs font-bold uppercase mb-2">AI 建议</div>
+            <p class="text-sm text-purple-900 italic">"您可以尝试将第一段缩减，以提高开头的中签率。"</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const buttons = document.querySelectorAll('.page-theme-button');
+      const root = document.body;
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const nextTheme = button.getAttribute('data-page-theme') || 'light';
+          root.setAttribute('data-page-theme', nextTheme);
+          buttons.forEach((item) => {
+            const isActive = item === button;
+            item.classList.toggle('active', isActive);
+            item.setAttribute('aria-pressed', String(isActive));
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+
+</html>

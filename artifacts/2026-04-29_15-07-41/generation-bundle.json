@@ -1,0 +1,335 @@
+{
+  "query": "Claude style AI CMS interface design with warm neutrals, serif typography, and minimalist layout",
+  "project_name": "Claude-AI-CMS",
+  "reference_context": {
+    "query": "Claude style AI CMS interface design with warm neutrals, serif typography, and minimalist layout",
+    "references": [
+      {
+        "name": "Claude",
+        "slug": "claude",
+        "group": "AI & LLM Platforms",
+        "summary": "Anthropic's AI assistant. Warm terracotta accent, clean editorial layout",
+        "keywords": [
+          "claude",
+          "ai",
+          "llm",
+          "platforms",
+          "anthropic",
+          "s",
+          "ai",
+          "assistant.",
+          "warm",
+          "terracotta",
+          "accent",
+          "clean",
+          "editorial",
+          "layout"
+        ]
+      },
+      {
+        "name": "Minimax",
+        "slug": "minimax",
+        "group": "AI & LLM Platforms",
+        "summary": "AI model provider. Bold dark interface with neon accents",
+        "keywords": [
+          "minimax",
+          "ai",
+          "llm",
+          "platforms",
+          "ai",
+          "model",
+          "provider.",
+          "bold",
+          "dark",
+          "interface",
+          "with",
+          "neon",
+          "accents"
+        ]
+      },
+      {
+        "name": "Starbucks",
+        "slug": "starbucks",
+        "group": "E-commerce & Retail",
+        "summary": "Coffee retail flagship. Four-tier earth-green system, warm cream canvas, proprietary SoDoSans typography",
+        "keywords": [
+          "starbucks",
+          "e-commerce",
+          "retail",
+          "coffee",
+          "retail",
+          "flagship.",
+          "four-tier",
+          "earth-green",
+          "system",
+          "warm",
+          "cream",
+          "canvas",
+          "proprietary",
+          "sodosans",
+          "typography"
+        ]
+      }
+    ],
+    "reference_summary": "Claude, Minimax, Starbucks",
+    "reference_direction": "Primary reference: Claude - Anthropic's AI assistant. Warm terracotta accent, clean editorial layout",
+    "query_suffix": "Claude Minimax"
+  },
+  "structured_query": "Claude style AI CMS interface design with warm neutrals, serif typography, and minimalist layout Claude Minimax",
+  "structured_result": {
+    "project_name": "Claude-AI-CMS",
+    "category": "Home Decoration & Interior Design",
+    "pattern": {
+      "name": "App Store Style Landing",
+      "sections": "1. Hero with device mockup, 2. Screenshots carousel, 3. Features with icons, 4. Reviews/ratings, 5. Download CTAs",
+      "cta_placement": "Download buttons prominent (App Store + Play Store) throughout",
+      "color_strategy": "Dark/light matching app store feel. Star ratings in gold. Screenshots with device frames.",
+      "conversion": "Show real screenshots. Include ratings (4.5+ stars). QR code for mobile. Platform-specific CTAs."
+    },
+    "style": {
+      "name": "Minimalism & Swiss Style",
+      "type": "General",
+      "effects": "Subtle hover (200-250ms), smooth transitions, sharp shadows if any, clear type hierarchy, fast loading",
+      "keywords": "Clean, simple, spacious, functional, white space, high contrast, geometric, sans-serif, grid-based, essential",
+      "best_for": "Enterprise apps, dashboards, documentation sites, SaaS platforms, professional tools Reference fit: Anthropic's AI assistant. Warm terracotta accent, clean editorial layout",
+      "performance": "⚡ Excellent",
+      "accessibility": "✓ WCAG AAA",
+      "light_mode": "✓ Full",
+      "dark_mode": "✓ Full"
+    },
+    "colors": {
+      "primary": "#78716C",
+      "on_primary": "#FFFFFF",
+      "secondary": "#A8A29E",
+      "accent": "#D97706",
+      "background": "#FAF5F2",
+      "foreground": "#0F172A",
+      "muted": "#F6F6F6",
+      "border": "#EEEDED",
+      "destructive": "#DC2626",
+      "ring": "#78716C",
+      "notes": "Interior warm grey + gold accent",
+      "cta": "#D97706",
+      "text": "#0F172A"
+    },
+    "typography": {
+      "heading": "Archivo",
+      "body": "Space Grotesk",
+      "mood": "minimal, portfolio, designer, creative, clean, artistic",
+      "best_for": "Design portfolios, creative professionals, minimalist brands",
+      "google_fonts_url": "https://fonts.google.com/share?selection.family=Archivo:wght@300;400;500;600;700|Space+Grotesk:wght@300;400;500;600;700",
+      "css_import": "@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');"
+    },
+    "key_effects": "Subtle hover (200-250ms), smooth transitions, sharp shadows if any, clear type hierarchy, fast loading",
+    "anti_patterns": "Excessive decoration",
+    "decision_rules": {
+      "if_ux_focused": "prioritize-clarity",
+      "if_mobile": "optimize-touch-targets"
+    },
+    "severity": "HIGH",
+    "original_query": "Claude style AI CMS interface design with warm neutrals, serif typography, and minimalist layout",
+    "reference_styles": [
+      {
+        "name": "Claude",
+        "slug": "claude",
+        "group": "AI & LLM Platforms",
+        "summary": "Anthropic's AI assistant. Warm terracotta accent, clean editorial layout",
+        "keywords": [
+          "claude",
+          "ai",
+          "llm",
+          "platforms",
+          "anthropic",
+          "s",
+          "ai",
+          "assistant.",
+          "warm",
+          "terracotta",
+          "accent",
+          "clean",
+          "editorial",
+          "layout"
+        ]
+      },
+      {
+        "name": "Minimax",
+        "slug": "minimax",
+        "group": "AI & LLM Platforms",
+        "summary": "AI model provider. Bold dark interface with neon accents",
+        "keywords": [
+          "minimax",
+          "ai",
+          "llm",
+          "platforms",
+          "ai",
+          "model",
+          "provider.",
+          "bold",
+          "dark",
+          "interface",
+          "with",
+          "neon",
+          "accents"
+        ]
+      },
+      {
+        "name": "Starbucks",
+        "slug": "starbucks",
+        "group": "E-commerce & Retail",
+        "summary": "Coffee retail flagship. Four-tier earth-green system, warm cream canvas, proprietary SoDoSans typography",
+        "keywords": [
+          "starbucks",
+          "e-commerce",
+          "retail",
+          "coffee",
+          "retail",
+          "flagship.",
+          "four-tier",
+          "earth-green",
+          "system",
+          "warm",
+          "cream",
+          "canvas",
+          "proprietary",
+          "sodosans",
+          "typography"
+        ]
+      }
+    ],
+    "reference_summary": "Claude, Minimax, Starbucks",
+    "reference_direction": "Primary reference: Claude - Anthropic's AI assistant. Warm terracotta accent, clean editorial layout",
+    "source_pipeline": {
+      "reference_source": "awesome-design-md",
+      "structured_source": "ui-ux-pro-max-skill",
+      "synthesis": "scripts/reasoning.py"
+    }
+  },
+  "final_design_system": {
+    "project_name": "Claude-AI-CMS",
+    "category": "Home Decoration & Interior Design",
+    "pattern": {
+      "name": "App Store Style Landing",
+      "sections": "1. Hero with device mockup, 2. Screenshots carousel, 3. Features with icons, 4. Reviews/ratings, 5. Download CTAs",
+      "cta_placement": "Download buttons prominent (App Store + Play Store) throughout",
+      "color_strategy": "Dark/light matching app store feel. Star ratings in gold. Screenshots with device frames.",
+      "conversion": "Show real screenshots. Include ratings (4.5+ stars). QR code for mobile. Platform-specific CTAs."
+    },
+    "style": {
+      "name": "Minimalism & Swiss Style",
+      "type": "General",
+      "effects": "Subtle hover (200-250ms), smooth transitions, sharp shadows if any, clear type hierarchy, fast loading",
+      "keywords": "Clean, simple, spacious, functional, white space, high contrast, geometric, sans-serif, grid-based, essential",
+      "best_for": "Enterprise apps, dashboards, documentation sites, SaaS platforms, professional tools Reference fit: Anthropic's AI assistant. Warm terracotta accent, clean editorial layout",
+      "performance": "⚡ Excellent",
+      "accessibility": "✓ WCAG AAA",
+      "light_mode": "✓ Full",
+      "dark_mode": "✓ Full"
+    },
+    "colors": {
+      "primary": "#78716C",
+      "on_primary": "#FFFFFF",
+      "secondary": "#A8A29E",
+      "accent": "#D97706",
+      "background": "#FAF5F2",
+      "foreground": "#0F172A",
+      "muted": "#F6F6F6",
+      "border": "#EEEDED",
+      "destructive": "#DC2626",
+      "ring": "#78716C",
+      "notes": "Interior warm grey + gold accent",
+      "cta": "#D97706",
+      "text": "#0F172A"
+    },
+    "typography": {
+      "heading": "Archivo",
+      "body": "Space Grotesk",
+      "mood": "minimal, portfolio, designer, creative, clean, artistic",
+      "best_for": "Design portfolios, creative professionals, minimalist brands",
+      "google_fonts_url": "https://fonts.google.com/share?selection.family=Archivo:wght@300;400;500;600;700|Space+Grotesk:wght@300;400;500;600;700",
+      "css_import": "@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');"
+    },
+    "key_effects": "Subtle hover (200-250ms), smooth transitions, sharp shadows if any, clear type hierarchy, fast loading",
+    "anti_patterns": "Excessive decoration",
+    "decision_rules": {
+      "if_ux_focused": "prioritize-clarity",
+      "if_mobile": "optimize-touch-targets"
+    },
+    "severity": "HIGH",
+    "original_query": "Claude style AI CMS interface design with warm neutrals, serif typography, and minimalist layout",
+    "reference_styles": [
+      {
+        "name": "Claude",
+        "slug": "claude",
+        "group": "AI & LLM Platforms",
+        "summary": "Anthropic's AI assistant. Warm terracotta accent, clean editorial layout",
+        "keywords": [
+          "claude",
+          "ai",
+          "llm",
+          "platforms",
+          "anthropic",
+          "s",
+          "ai",
+          "assistant.",
+          "warm",
+          "terracotta",
+          "accent",
+          "clean",
+          "editorial",
+          "layout"
+        ]
+      },
+      {
+        "name": "Minimax",
+        "slug": "minimax",
+        "group": "AI & LLM Platforms",
+        "summary": "AI model provider. Bold dark interface with neon accents",
+        "keywords": [
+          "minimax",
+          "ai",
+          "llm",
+          "platforms",
+          "ai",
+          "model",
+          "provider.",
+          "bold",
+          "dark",
+          "interface",
+          "with",
+          "neon",
+          "accents"
+        ]
+      },
+      {
+        "name": "Starbucks",
+        "slug": "starbucks",
+        "group": "E-commerce & Retail",
+        "summary": "Coffee retail flagship. Four-tier earth-green system, warm cream canvas, proprietary SoDoSans typography",
+        "keywords": [
+          "starbucks",
+          "e-commerce",
+          "retail",
+          "coffee",
+          "retail",
+          "flagship.",
+          "four-tier",
+          "earth-green",
+          "system",
+          "warm",
+          "cream",
+          "canvas",
+          "proprietary",
+          "sodosans",
+          "typography"
+        ]
+      }
+    ],
+    "reference_summary": "Claude, Minimax, Starbucks",
+    "reference_direction": "Primary reference: Claude - Anthropic's AI assistant. Warm terracotta accent, clean editorial layout",
+    "source_pipeline": {
+      "reference_source": "awesome-design-md",
+      "structured_source": "ui-ux-pro-max-skill",
+      "synthesis": "scripts/reasoning.py"
+    }
+  }
+}

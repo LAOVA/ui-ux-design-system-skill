@@ -36,60 +36,138 @@
     </div>
   </div>
 
-  <main class="mx-auto max-w-7xl px-5 pb-24 pt-28 md:px-8">
+  <main class="mx-auto max-w-[1440px] px-4 pb-24 pt-28 md:px-6 xl:px-8">
     <!-- Required spec sections begin -->
-    <section class="grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.9fr)]">
-      <div class="space-y-5">
-        <div
-          class="inline-flex rounded-full border px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] theme-soft theme-muted">
-          Design Spec
-        </div>
-        <div class="space-y-4">
-          <h1 class="max-w-4xl text-5xl font-black tracking-[-0.05em] md:text-7xl">{{project_name}}</h1>
-          <p class="max-w-3xl text-lg leading-8 theme-muted">{{summary}}</p>
-        </div>
-        <div class="flex flex-wrap gap-3">
-          {{hero_tags}}
-        </div>
-      </div>
-
-      <aside class="theme-panel rounded-[28px] border p-4 shadow-xl">
-        <!-- Preview area: lightweight system preview only, not a full app mockup -->
-        <div class="theme-preview-window rounded-[24px] border p-4 md:p-5">
-          <div class="mb-4 flex gap-2">
-            <span class="h-2.5 w-2.5 rounded-full theme-dot"></span>
-            <span class="h-2.5 w-2.5 rounded-full theme-dot"></span>
-            <span class="h-2.5 w-2.5 rounded-full theme-dot"></span>
+    <section class="grid gap-6 xl:grid-cols-[260px_minmax(0,1fr)]">
+      <aside class="xl:sticky xl:top-28 xl:h-[calc(100vh-8rem)]">
+        <div class="theme-panel rounded-[28px] border p-4 md:p-5">
+          <div class="flex items-center justify-between gap-3">
+            <div>
+              <div
+                class="inline-flex rounded-full border px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] theme-soft theme-muted">
+                Design Spec
+              </div>
+              <h2 class="mt-4 text-xl font-black tracking-[-0.03em]">{{project_name}}</h2>
+            </div>
+            <div class="rounded-2xl border px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.14em] theme-soft">
+              v1
+            </div>
           </div>
-          <div class="grid gap-4 md:grid-cols-[120px_minmax(0,1fr)]">
-            <div class="theme-preview-surface rounded-[20px] border p-3">
-              <div class="theme-nav-item active rounded-xl px-3 py-2 text-sm font-semibold">Overview</div>
-              <div class="theme-nav-item mt-2 rounded-xl px-3 py-2 text-sm">Analytics</div>
-              <div class="theme-nav-item mt-2 rounded-xl px-3 py-2 text-sm">Settings</div>
-            </div>
-            <div class="theme-preview-surface rounded-[20px] border p-4">
-              <div class="grid gap-3 sm:grid-cols-2">
-                <div class="theme-preview-card rounded-2xl border p-4">
-                  <strong class="block text-3xl font-black">78%</strong>
-                  <span class="text-sm theme-muted">Adoption</span>
-                </div>
-                <div class="theme-preview-card rounded-2xl border p-4">
-                  <strong class="block text-3xl font-black">24h</strong>
-                  <span class="text-sm theme-muted">Response Time</span>
-                </div>
-              </div>
-              <div class="theme-chart mt-4 h-32 rounded-2xl border"></div>
-              <div class="mt-4 flex flex-wrap gap-3">
-                <button class="theme-button-primary rounded-2xl px-5 py-3 font-semibold">Primary</button>
-                <button class="theme-button-secondary rounded-2xl px-5 py-3 font-semibold">Secondary</button>
-              </div>
-            </div>
+
+          <nav class="mt-6 space-y-1 text-sm">
+            <a href="#overview" class="theme-nav-item flex items-center justify-between rounded-2xl border px-3 py-3">
+              <span>System Snapshot</span><span class="theme-muted text-xs">01</span>
+            </a>
+            <a href="#direction" class="theme-nav-item flex items-center justify-between rounded-2xl border px-3 py-3">
+              <span>Visual Direction</span><span class="theme-muted text-xs">02</span>
+            </a>
+            <a href="#layout" class="theme-nav-item flex items-center justify-between rounded-2xl border px-3 py-3">
+              <span>Flow and Layout</span><span class="theme-muted text-xs">03</span>
+            </a>
+            <a href="#color" class="theme-nav-item flex items-center justify-between rounded-2xl border px-3 py-3">
+              <span>Color Palette</span><span class="theme-muted text-xs">04</span>
+            </a>
+            <a href="#type" class="theme-nav-item flex items-center justify-between rounded-2xl border px-3 py-3">
+              <span>Typography</span><span class="theme-muted text-xs">05</span>
+            </a>
+            <a href="#tokens" class="theme-nav-item flex items-center justify-between rounded-2xl border px-3 py-3">
+              <span>Tokens</span><span class="theme-muted text-xs">06</span>
+            </a>
+            <a href="#components" class="theme-nav-item flex items-center justify-between rounded-2xl border px-3 py-3">
+              <span>Components</span><span class="theme-muted text-xs">07</span>
+            </a>
+            <a href="#rules" class="theme-nav-item flex items-center justify-between rounded-2xl border px-3 py-3">
+              <span>Rules and Risks</span><span class="theme-muted text-xs">08</span>
+            </a>
+          </nav>
+
+          <div class="mt-6 rounded-3xl border theme-soft p-4">
+            <p class="text-xs font-semibold uppercase tracking-[0.16em] theme-muted">Reference Direction</p>
+            <p class="mt-3 text-sm leading-7">{{reference_direction}}</p>
           </div>
         </div>
       </aside>
-    </section>
 
-    <section class="mt-12">
+      <div class="space-y-12">
+        <section class="grid gap-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)]">
+          <div class="theme-panel rounded-[32px] border p-6 md:p-8">
+            <div class="flex flex-wrap items-start justify-between gap-4">
+              <div class="max-w-4xl">
+                <p class="text-xs font-semibold uppercase tracking-[0.22em] theme-muted">System Overview</p>
+                <h1 class="mt-4 max-w-4xl text-5xl font-black tracking-[-0.05em] md:text-7xl">{{project_name}}</h1>
+                <p class="mt-5 max-w-3xl text-lg leading-8 theme-muted">{{summary}}</p>
+              </div>
+              <div class="rounded-3xl border px-4 py-3 text-right theme-soft">
+                <div class="text-xs font-semibold uppercase tracking-[0.16em] theme-muted">Artifact</div>
+                <div class="mt-2 text-lg font-black">Design System Spec</div>
+              </div>
+            </div>
+
+            <div class="mt-8 flex flex-wrap gap-3">
+              {{hero_tags}}
+            </div>
+
+            <div class="mt-8 grid gap-4 md:grid-cols-3">
+              <article class="theme-soft rounded-3xl border p-4">
+                <p class="text-xs font-semibold uppercase tracking-[0.16em] theme-muted">Pattern</p>
+                <strong class="mt-3 block text-xl font-black">{{pattern_name}}</strong>
+                <p class="mt-2 text-sm leading-6 theme-muted">{{cta_placement}}</p>
+              </article>
+              <article class="theme-soft rounded-3xl border p-4">
+                <p class="text-xs font-semibold uppercase tracking-[0.16em] theme-muted">Fonts</p>
+                <strong class="mt-3 block text-xl font-black">{{heading_font}}</strong>
+                <p class="mt-2 text-sm leading-6 theme-muted">{{body_font}}</p>
+              </article>
+              <article class="theme-soft rounded-3xl border p-4">
+                <p class="text-xs font-semibold uppercase tracking-[0.16em] theme-muted">Reference</p>
+                <strong class="mt-3 block text-xl font-black">{{reference_summary}}</strong>
+                <p class="mt-2 text-sm leading-6 theme-muted">Used as directional input, not as a substitute for the system.</p>
+              </article>
+            </div>
+          </div>
+
+          <aside class="theme-panel rounded-[32px] border p-4 shadow-xl md:p-5">
+            <!-- Preview area: lightweight system preview only, not a full app mockup -->
+            <div class="theme-preview-window rounded-[26px] border p-4 md:p-5">
+              <div class="mb-4 flex items-center justify-between gap-3">
+                <div class="flex gap-2">
+                  <span class="h-2.5 w-2.5 rounded-full theme-dot"></span>
+                  <span class="h-2.5 w-2.5 rounded-full theme-dot"></span>
+                  <span class="h-2.5 w-2.5 rounded-full theme-dot"></span>
+                </div>
+                <div class="rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] theme-soft theme-muted">
+                  Preview Surface
+                </div>
+              </div>
+              <div class="grid gap-4 md:grid-cols-[120px_minmax(0,1fr)]">
+                <div class="theme-preview-surface rounded-[20px] border p-3">
+                  <div class="theme-nav-item active rounded-xl px-3 py-2 text-sm font-semibold">Overview</div>
+                  <div class="theme-nav-item mt-2 rounded-xl px-3 py-2 text-sm">Analytics</div>
+                  <div class="theme-nav-item mt-2 rounded-xl px-3 py-2 text-sm">Settings</div>
+                </div>
+                <div class="theme-preview-surface rounded-[20px] border p-4">
+                  <div class="grid gap-3 sm:grid-cols-2">
+                    <div class="theme-preview-card rounded-2xl border p-4">
+                      <strong class="block text-3xl font-black">78%</strong>
+                      <span class="text-sm theme-muted">Adoption</span>
+                    </div>
+                    <div class="theme-preview-card rounded-2xl border p-4">
+                      <strong class="block text-3xl font-black">24h</strong>
+                      <span class="text-sm theme-muted">Response Time</span>
+                    </div>
+                  </div>
+                  <div class="theme-chart mt-4 h-32 rounded-2xl border"></div>
+                  <div class="mt-4 flex flex-wrap gap-3">
+                    <button class="theme-button-primary rounded-2xl px-5 py-3 font-semibold">Primary</button>
+                    <button class="theme-button-secondary rounded-2xl px-5 py-3 font-semibold">Secondary</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <section id="overview" class="mt-12">
       <!-- System snapshot -->
       <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div>
@@ -118,7 +196,7 @@
       </div>
     </section>
 
-    <section class="mt-12">
+    <section id="direction" class="mt-12">
       <!-- Visual direction -->
       <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div>
@@ -149,7 +227,7 @@
       </div>
     </section>
 
-    <section class="mt-12">
+    <section id="layout" class="mt-12">
       <!-- Flow and layout -->
       <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div>
@@ -176,7 +254,7 @@
       </div>
     </section>
 
-    <section class="mt-12">
+    <section id="color" class="mt-12">
       <!-- Color palette -->
       <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div>
@@ -191,9 +269,20 @@
         <h3 class="text-lg font-bold">Usage Notes</h3>
         <p class="mt-4 leading-7">{{color_notes}}</p>
       </article>
+
+      <div class="mt-4 grid gap-4 lg:grid-cols-3">
+        <article class="theme-panel rounded-3xl border p-5 lg:col-span-2">
+          <h3 class="text-lg font-bold">Semantic Application</h3>
+          <p class="mt-4 text-sm leading-7 theme-muted">Use semantic tokens first and visual expression second. Product surfaces, status states, and primary actions should map to stable token names rather than bespoke one-off hex values.</p>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Reference Note</h3>
+          <p class="mt-4 text-sm leading-7 theme-muted">{{reference_direction}}</p>
+        </article>
+      </div>
     </section>
 
-    <section class="mt-12">
+    <section id="type" class="mt-12">
       <!-- Typography -->
       <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div>
@@ -227,7 +316,7 @@
       </div>
     </section>
 
-    <section class="mt-12">
+    <section id="tokens" class="mt-12">
       <!-- Tokens -->
       <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div>
@@ -258,7 +347,7 @@
       </div>
     </section>
 
-    <section class="mt-12">
+    <section id="components" class="mt-12">
       <!-- Components: keep these as concise spec previews, not full product UI -->
       <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div>
@@ -319,7 +408,7 @@
       </div>
     </section>
 
-    <section class="mt-12">
+    <section id="rules" class="mt-12">
       <!-- Rules and risks -->
       <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div>
@@ -347,6 +436,8 @@
             {{anti_patterns}}
           </ul>
         </article>
+      </div>
+    </section>
       </div>
     </section>
     <!-- Required spec sections end -->

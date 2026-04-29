@@ -1,0 +1,20 @@
+{
+  "query": "BMW-M style forum interface",
+  "project_name": "BMW-M Forum",
+  "run_dir": "E:\\project\\skills\\ui-ux-design-system-skill\\artifacts\\2026-04-29_17-27-19",
+  "final_output_dir": "E:\\project\\skills\\ui-ux-design-system-skill\\artifacts\\2026-04-29_17-27-19",
+  "reference_summary": "BMW, ClickHouse, Cursor",
+  "structured_query": "BMW-M style forum interface BMW ClickHouse",
+  "source_pipeline": {
+    "reference_source": "awesome-design-md",
+    "structured_source": "ui-ux-pro-max-skill",
+    "synthesis": "scripts/reasoning.py"
+  },
+  "workflow_stage": "final-artifacts-authored",
+  "next_step": "Run completed. Final DESIGN.md and design-spec.html were authored in final_output_dir.",
+  "outputs": {
+    "generation-bundle.json": "E:\\project\\skills\\ui-ux-design-system-skill\\artifacts\\2026-04-29_17-27-19\\generation-bundle.json",
+    "DESIGN.md": "E:\\project\\skills\\ui-ux-design-system-skill\\artifacts\\2026-04-29_17-27-19\\DESIGN.md",
+    "design-spec.html": "E:\\project\\skills\\ui-ux-design-system-skill\\artifacts\\2026-04-29_17-27-19\\design-spec.html"
+  }
+}

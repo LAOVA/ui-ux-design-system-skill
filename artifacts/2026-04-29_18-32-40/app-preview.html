@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NVIDIA 官方技术论坛 - 预览</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-background: #000000;
+      --color-surface: #1a1a1a;
+      --color-primary: #76b900;
+      --color-foreground: #ffffff;
+      --color-foreground-muted: #999999;
+      --color-border: #333333;
+      --font-main: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--color-background);
+      color: var(--color-foreground);
+      font-family: var(--font-main);
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* 顶部导航栏 */
+    .navbar {
+      height: 64px;
+      background-color: var(--color-background);
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background-color: var(--color-primary);
+      clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+    }
+
+    .nav-links {
+      margin-left: 48px;
+      display: flex;
+      gap: 24px;
+      font-size: 14px;
+      color: var(--color-foreground-muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--color-primary);
+    }
+
+    /* 英雄区 */
+    .hero {
+      background: linear-gradient(180deg, #111111 0%, #000000 100%);
+      padding: 80px 24px;
+      text-align: center;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero p {
+      color: var(--color-foreground-muted);
+      max-width: 600px;
+      margin: 0 auto 32px;
+      font-size: 18px;
+    }
+
+    .search-bar {
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .search-bar input {
+      width: 100%;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      padding: 16px 20px;
+      color: white;
+      font-size: 16px;
+    }
+
+    .search-bar input:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 2px rgba(118, 185, 0, 0.2);
+    }
+
+    /* 主内容区 */
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 32px;
+      padding: 0 24px;
+    }
+
+    /* 帖子列表 */
+    .category-section {
+      margin-bottom: 48px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .section-header h2 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .forum-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      padding: 20px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .forum-card:hover {
+      border-color: var(--color-primary);
+      transform: translateY(-2px);
+    }
+
+    .forum-icon {
+      width: 48px;
+      height: 48px;
+      background: #222;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+    }
+
+    .forum-info {
+      flex: 1;
+    }
+
+    .forum-info h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .forum-info p {
+      font-size: 14px;
+      color: var(--color-foreground-muted);
+    }
+
+    .forum-stats {
+      display: flex;
+      gap: 24px;
+      font-size: 13px;
+      color: var(--color-foreground-muted);
+      text-align: center;
+    }
+
+    .stat-item span {
+      display: block;
+      color: white;
+      font-weight: 600;
+    }
+
+    /* 侧边栏 */
+    .sidebar-widget {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .sidebar-widget h3 {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+      color: var(--color-primary);
+    }
+
+    .post-link {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 12px;
+      color: var(--color-foreground);
+      text-decoration: none;
+    }
+
+    .post-link:hover {
+      color: var(--color-primary);
+    }
+
+    .post-meta {
+      font-size: 12px;
+      color: var(--color-foreground-muted);
+      margin-top: 4px;
+    }
+
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      background: #2a2a2a;
+      padding: 4px 10px;
+      border-radius: 2px;
+      font-size: 12px;
+      color: var(--color-foreground-muted);
+    }
+
+    .tag:hover {
+      background: var(--color-primary);
+      color: black;
+    }
+
+    /* 按钮 */
+    .btn-primary {
+      background-color: var(--color-primary);
+      color: black;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-size: 14px;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        display: none;
+      }
+      .hero h1 {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <div class="logo-icon"></div>
+      NVIDIA FORUM
+    </div>
+    <nav class="nav-links">
+      <a href="#">产品</a>
+      <a href="#">开发者</a>
+      <a href="#">支持</a>
+      <a href="#">下载</a>
+    </nav>
+    <div style="margin-left: auto;">
+      <a href="#" class="btn-primary">登录</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>加速你的创意与探索</h1>
+    <p>加入 NVIDIA 官方技术社区，与全球开发者及专家探讨深度学习、游戏开发及 GPU 加速技术。</p>
+    <div class="search-bar">
+      <input type="text" placeholder="搜索主题、产品或错误代码...">
+    </div>
+  </section>
+
+  <main class="container">
+    <div class="content">
+      <!-- 分类 1 -->
+      <div class="category-section">
+        <div class="section-header">
+          <h2>GeForce 游戏社区</h2>
+          <a href="#" class="text-sm text-[#76b900]">查看全部</a>
+        </div>
+        
+        <div class="forum-card">
+          <div class="forum-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+          </div>
+          <div class="forum-info">
+            <h3>GeForce RTX 40 系列</h3>
+            <p>讨论最新的 Ada Lovelace 架构、DLSS 3 及光线追踪性能。</p>
+          </div>
+          <div class="forum-stats">
+            <div class="stat-item"><span>12.5k</span>帖子</div>
+            <div class="stat-item"><span>850</span>今日</div>
+          </div>
+        </div>
+
+        <div class="forum-card">
+          <div class="forum-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+          </div>
+          <div class="forum-info">
+            <h3>游戏优化与驱动</h3>
+            <p>反馈 Game Ready 驱动问题，分享游戏优化设置心得。</p>
+          </div>
+          <div class="forum-stats">
+            <div class="stat-item"><span>45k</span>帖子</div>
+            <div class="stat-item"><span>2.1k</span>今日</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 分类 2 -->
+      <div class="category-section">
+        <div class="section-header">
+          <h2>开发者与 AI 社区</h2>
+          <a href="#" class="text-sm text-[#76b900]">查看全部</a>
+        </div>
+        
+        <div class="forum-card">
+          <div class="forum-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+          </div>
+          <div class="forum-info">
+            <h3>CUDA 编程</h3>
+            <p>并行计算、内存优化及底层硬件加速讨论。</p>
+          </div>
+          <div class="forum-stats">
+            <div class="stat-item"><span>8.2k</span>帖子</div>
+            <div class="stat-item"><span>120</span>今日</div>
+          </div>
+        </div>
+
+        <div class="forum-card">
+          <div class="forum-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          </div>
+          <div class="forum-info">
+            <h3>Omniverse & 3D 仿真</h3>
+            <p>协作式 3D 工作流与物理仿真引擎技术交流。</p>
+          </div>
+          <div class="forum-stats">
+            <div class="stat-item"><span>3.4k</span>帖子</div>
+            <div class="stat-item"><span>45</span>今日</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="sidebar">
+      <div class="sidebar-widget">
+        <h3>热门话题</h3>
+        <a href="#" class="post-link">
+          RTX 50 系列最新爆料汇总
+          <div class="post-meta">240 回复 · 2小时前</div>
+        </a>
+        <a href="#" class="post-link">
+          如何在 Linux 下配置 CUDA 12.4
+          <div class="post-meta">85 回复 · 5小时前</div>
+        </a>
+        <a href="#" class="post-link">
+          DLSS 3.5 光线重建技术深度解析
+          <div class="post-meta">156 回复 · 昨天</div>
+        </a>
+      </div>
+
+      <div class="sidebar-widget">
+        <h3>技术标签</h3>
+        <div class="tag-cloud">
+          <span class="tag">#RTX</span>
+          <span class="tag">#CUDA</span>
+          <span class="tag">#AI</span>
+          <span class="tag">#DeepLearning</span>
+          <span class="tag">#Gaming</span>
+          <span class="tag">#Drivers</span>
+          <span class="tag">#StableDiffusion</span>
+          <span class="tag">#Omniverse</span>
+        </div>
+      </div>
+
+      <div class="sidebar-widget">
+        <h3>社区统计</h3>
+        <div class="flex justify-between mb-2">
+          <span class="text-sm text-gray-400">注册会员</span>
+          <span class="text-sm font-bold">1,240,562</span>
+        </div>
+        <div class="flex justify-between mb-2">
+          <span class="text-sm text-gray-400">当前在线</span>
+          <span class="text-sm font-bold text-[#76b900]">12,405</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-sm text-gray-400">总帖子数</span>
+          <span class="text-sm font-bold">8,540,211</span>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <footer style="padding: 40px 24px; border-top: 1px solid var(--color-border); text-align: center; color: var(--color-foreground-muted); font-size: 12px;">
+    &copy; 2024 NVIDIA Corporation. 保留所有权利。
+  </footer>
+</body>
+</html>

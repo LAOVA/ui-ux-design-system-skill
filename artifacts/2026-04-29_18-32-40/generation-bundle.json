@@ -1,0 +1,377 @@
+{
+  "query": "NVIDIA style forum website",
+  "project_name": "NVIDIA Forum",
+  "reference_context": {
+    "query": "NVIDIA style forum website",
+    "references": [
+      {
+        "name": "NVIDIA",
+        "slug": "nvidia",
+        "group": "Media & Consumer Tech",
+        "summary": "GPU computing. Green-black energy, technical power aesthetic",
+        "local_detail": {
+          "status": "redirect-only-local-detail",
+          "path": "E:\\project\\skills\\ui-ux-design-system-skill\\awesome-design-md\\design-md\\nvidia\\README.md",
+          "redirect_url": "https://getdesign.md/nvidia/design-md",
+          "hex_colors": [],
+          "excerpt": "# NVIDIA Inspired Design System Design system details have been moved to: https://getdesign.md/nvidia/design-md"
+        },
+        "remote_detail": {
+          "status": "remote-detail-available",
+          "source": "getdesign-cli",
+          "hex_colors": [
+            "#000000",
+            "#ffffff",
+            "#76b900",
+            "#bff230",
+            "#df6500",
+            "#ef9100",
+            "#feeeb2",
+            "#e52020",
+            "#650b0b",
+            "#3f8500",
+            "#0046a4",
+            "#4d1368",
+            "#f9d4ff",
+            "#8c1c55",
+            "#a7a7a7",
+            "#898989",
+            "#757575",
+            "#5e5e5e",
+            "#1a1a1a",
+            "#3860be",
+            "#1eaedb",
+            "#007fff",
+            "#003eff",
+            "#666666"
+          ],
+          "excerpt": "# Design System Inspired by NVIDIA ## 1. Visual Theme & Atmosphere NVIDIA's website is a high-contrast, technology-forward experience that communicates raw computational power through design restraint. The page is built on a stark black (`#000000`) and white (`#ffffff`) foundation, punctuated by NVIDIA's signature green (`#76b900`) -- a color so specific it functions as a brand fingerprint. This is not the lush green of nature; it's the electric, lime-shifted green of GPU-rendered light, a color that sits between chartreuse and kelly green and immediately signals \"NVIDIA\" to anyone in technology. The custom NVIDIA-EMEA font family (with Arial and Helvetica fallbacks) creates a clean, industr",
+          "error": ""
+        }
+      },
+      {
+        "name": "ClickHouse",
+        "slug": "clickhouse",
+        "group": "Backend, Database & DevOps",
+        "summary": "Fast analytics database. Yellow-accented, technical documentation style",
+        "local_detail": {
+          "status": "redirect-only-local-detail",
+          "path": "E:\\project\\skills\\ui-ux-design-system-skill\\awesome-design-md\\design-md\\clickhouse\\README.md",
+          "redirect_url": "https://getdesign.md/clickhouse/design-md",
+          "hex_colors": [],
+          "excerpt": "# ClickHouse Inspired Design System Design system details have been moved to: https://getdesign.md/clickhouse/design-md"
+        },
+        "remote_detail": {
+          "status": null,
+          "source": "",
+          "hex_colors": [],
+          "excerpt": "",
+          "error": ""
+        }
+      },
+      {
+        "name": "Framer",
+        "slug": "framer",
+        "group": "Design & Creative Tools",
+        "summary": "Website builder. Bold black and blue, motion-first, design-forward",
+        "local_detail": {
+          "status": "redirect-only-local-detail",
+          "path": "E:\\project\\skills\\ui-ux-design-system-skill\\awesome-design-md\\design-md\\framer\\README.md",
+          "redirect_url": "https://getdesign.md/framer/design-md",
+          "hex_colors": [],
+          "excerpt": "# Framer Inspired Design System Design system details have been moved to: https://getdesign.md/framer/design-md"
+        },
+        "remote_detail": {
+          "status": null,
+          "source": "",
+          "hex_colors": [],
+          "excerpt": "",
+          "error": ""
+        }
+      }
+    ],
+    "reference_summary": "NVIDIA, ClickHouse, Framer",
+    "reference_direction": "Primary reference: NVIDIA - GPU computing. Green-black energy, technical power aesthetic",
+    "primary_reference_detail_status": "redirect-only-local-detail",
+    "primary_reference_detail_path": "E:\\project\\skills\\ui-ux-design-system-skill\\awesome-design-md\\design-md\\nvidia\\README.md",
+    "primary_reference_redirect_url": "https://getdesign.md/nvidia/design-md",
+    "primary_reference_hex_colors": [],
+    "primary_reference_remote_detail_status": "remote-detail-available",
+    "primary_reference_remote_hex_colors": [
+      "#000000",
+      "#ffffff",
+      "#76b900",
+      "#bff230",
+      "#df6500",
+      "#ef9100",
+      "#feeeb2",
+      "#e52020",
+      "#650b0b",
+      "#3f8500",
+      "#0046a4",
+      "#4d1368",
+      "#f9d4ff",
+      "#8c1c55",
+      "#a7a7a7",
+      "#898989",
+      "#757575",
+      "#5e5e5e",
+      "#1a1a1a",
+      "#3860be",
+      "#1eaedb",
+      "#007fff",
+      "#003eff",
+      "#666666"
+    ],
+    "primary_reference_design_md_excerpt": "# Design System Inspired by NVIDIA ## 1. Visual Theme & Atmosphere NVIDIA's website is a high-contrast, technology-forward experience that communicates raw computational power through design restraint. The page is built on a stark black (`#000000`) and white (`#ffffff`) foundation, punctuated by NVIDIA's signature green (`#76b900`) -- a color so specific it functions as a brand fingerprint. This is not the lush green of nature; it's the electric, lime-shifted green of GPU-rendered light, a color that sits between chartreuse and kelly green and immediately signals \"NVIDIA\" to anyone in technology. The custom NVIDIA-EMEA font family (with Arial and Helvetica fallbacks) creates a clean, industr",
+    "query_suffix": "NVIDIA ClickHouse"
+  },
+  "structured_query": "NVIDIA style forum website NVIDIA ClickHouse",
+  "structured_result": {
+    "project_name": "NVIDIA Forum",
+    "category": "AI Photo & Avatar Generator",
+    "pattern": {
+      "name": "Community/Forum Landing",
+      "sections": "1. Hero (community value prop), 2. Popular topics/categories, 3. Active members showcase, 4. Join CTA",
+      "cta_placement": "Join button prominent + After member showcase",
+      "color_strategy": "Warm, welcoming. Member photos add humanity. Topic badges in brand colors. Activity indicators green.",
+      "conversion": "Show active community (member count, posts today). Highlight benefits. Preview content. Easy onboarding."
+    },
+    "style": {
+      "name": "AI-Native UI",
+      "type": "General",
+      "effects": "Typing indicators (3-dot pulse), streaming text animations, pulse animations, context cards, smooth reveals",
+      "keywords": "Chatbot, conversational, voice, assistant, agentic, ambient, minimal chrome, streaming text, AI interactions",
+      "best_for": "AI products, chatbots, voice assistants, copilots, AI-powered tools, conversational interfaces",
+      "performance": "⚡ Excellent",
+      "accessibility": "✓ WCAG AA",
+      "light_mode": "✓ Full",
+      "dark_mode": "✓ Full"
+    },
+    "colors": {
+      "primary": "#2563EB",
+      "on_primary": "",
+      "secondary": "#3B82F6",
+      "accent": "#F97316",
+      "background": "#F8FAFC",
+      "foreground": "#1E293B",
+      "muted": "",
+      "border": "",
+      "destructive": "",
+      "ring": "",
+      "notes": "",
+      "cta": "#F97316",
+      "text": "#1E293B"
+    },
+    "typography": {
+      "heading": "Libre Bodoni",
+      "body": "Public Sans",
+      "mood": "magazine, editorial, publishing, refined, journalism, print",
+      "best_for": "Magazines, online publications, editorial content, journalism",
+      "google_fonts_url": "https://fonts.google.com/share?selection.family=Libre+Bodoni:wght@400;500;600;700|Public+Sans:wght@300;400;500;600;700",
+      "css_import": "@import url('https://fonts.googleapis.com/css2?family=Libre+Bodoni:wght@400;500;600;700&family=Public+Sans:wght@300;400;500;600;700&display=swap');"
+    },
+    "key_effects": "Typing indicators (3-dot pulse), streaming text animations, pulse animations, context cards, smooth reveals",
+    "anti_patterns": "Inconsistent styling + Poor contrast ratios",
+    "decision_rules": {
+      "if_trust_needed": "add-testimonials"
+    },
+    "severity": "HIGH"
+  },
+  "final_design_system": {
+    "project_name": "NVIDIA Forum",
+    "category": "AI Photo & Avatar Generator",
+    "pattern": {
+      "name": "Community/Forum Landing",
+      "sections": "1. Hero (community value prop), 2. Popular topics/categories, 3. Active members showcase, 4. Join CTA",
+      "cta_placement": "Join button prominent + After member showcase",
+      "color_strategy": "Warm, welcoming. Member photos add humanity. Topic badges in brand colors. Activity indicators green.",
+      "conversion": "Show active community (member count, posts today). Highlight benefits. Preview content. Easy onboarding."
+    },
+    "style": {
+      "name": "AI-Native UI",
+      "type": "General",
+      "effects": "Typing indicators (3-dot pulse), streaming text animations, pulse animations, context cards, smooth reveals",
+      "keywords": "Chatbot, conversational, voice, assistant, agentic, ambient, minimal chrome, streaming text, AI interactions",
+      "best_for": "AI products, chatbots, voice assistants, copilots, AI-powered tools, conversational interfaces Reference fit: GPU computing. Green-black energy, technical power aesthetic",
+      "performance": "⚡ Excellent",
+      "accessibility": "✓ WCAG AA",
+      "light_mode": "✓ Full",
+      "dark_mode": "✓ Full"
+    },
+    "colors": {
+      "primary": "#ffffff",
+      "on_primary": "#bff230",
+      "secondary": "#bff230",
+      "accent": "#76b900",
+      "background": "#bff230",
+      "foreground": "#ffffff",
+      "muted": "",
+      "border": "",
+      "destructive": "",
+      "ring": "",
+      "notes": "Reference-constrained palette from remote DESIGN.md heuristics",
+      "cta": "#F97316",
+      "text": "#1E293B"
+    },
+    "typography": {
+      "heading": "Libre Bodoni",
+      "body": "Public Sans",
+      "mood": "magazine, editorial, publishing, refined, journalism, print",
+      "best_for": "Magazines, online publications, editorial content, journalism",
+      "google_fonts_url": "https://fonts.google.com/share?selection.family=Libre+Bodoni:wght@400;500;600;700|Public+Sans:wght@300;400;500;600;700",
+      "css_import": "@import url('https://fonts.googleapis.com/css2?family=Libre+Bodoni:wght@400;500;600;700&family=Public+Sans:wght@300;400;500;600;700&display=swap');"
+    },
+    "key_effects": "a color so specific it functions as a brand fingerprint. This is not the lush green of nature; it's the electric, lime-shifted green of GPU-rendered light, a color that sits between chartreuse and kelly green and immediately signals \"NVIDIA\" to anyone in technology., it's European, pragmatic, and engineering-focused. Body text runs at 15-16px, comfortable for reading but not generous, maintaining the sense that screen real estate is optimized like GPU memory., but never as backgrounds or large surface areas on the main content. The green is a signal, not a surface. Combined with a deep shadow system (`rgba(0, 0, 0, 0.3) 0px 0px 5px`) and minimal border radius (1-2px), the overall effect is of precision engineering hardware rendered in pixels.",
+    "anti_patterns": "Inconsistent styling + Poor contrast ratios",
+    "decision_rules": {
+      "if_trust_needed": "add-testimonials"
+    },
+    "severity": "HIGH",
+    "original_query": "NVIDIA style forum website",
+    "reference_styles": [
+      {
+        "name": "NVIDIA",
+        "slug": "nvidia",
+        "group": "Media & Consumer Tech",
+        "summary": "GPU computing. Green-black energy, technical power aesthetic",
+        "local_detail": {
+          "status": "redirect-only-local-detail",
+          "path": "E:\\project\\skills\\ui-ux-design-system-skill\\awesome-design-md\\design-md\\nvidia\\README.md",
+          "redirect_url": "https://getdesign.md/nvidia/design-md",
+          "hex_colors": [],
+          "excerpt": "# NVIDIA Inspired Design System Design system details have been moved to: https://getdesign.md/nvidia/design-md"
+        },
+        "remote_detail": {
+          "status": "remote-detail-available",
+          "source": "getdesign-cli",
+          "hex_colors": [
+            "#000000",
+            "#ffffff",
+            "#76b900",
+            "#bff230",
+            "#df6500",
+            "#ef9100",
+            "#feeeb2",
+            "#e52020",
+            "#650b0b",
+            "#3f8500",
+            "#0046a4",
+            "#4d1368",
+            "#f9d4ff",
+            "#8c1c55",
+            "#a7a7a7",
+            "#898989",
+            "#757575",
+            "#5e5e5e",
+            "#1a1a1a",
+            "#3860be",
+            "#1eaedb",
+            "#007fff",
+            "#003eff",
+            "#666666"
+          ],
+          "excerpt": "# Design System Inspired by NVIDIA ## 1. Visual Theme & Atmosphere NVIDIA's website is a high-contrast, technology-forward experience that communicates raw computational power through design restraint. The page is built on a stark black (`#000000`) and white (`#ffffff`) foundation, punctuated by NVIDIA's signature green (`#76b900`) -- a color so specific it functions as a brand fingerprint. This is not the lush green of nature; it's the electric, lime-shifted green of GPU-rendered light, a color that sits between chartreuse and kelly green and immediately signals \"NVIDIA\" to anyone in technology. The custom NVIDIA-EMEA font family (with Arial and Helvetica fallbacks) creates a clean, industr",
+          "error": ""
+        }
+      },
+      {
+        "name": "ClickHouse",
+        "slug": "clickhouse",
+        "group": "Backend, Database & DevOps",
+        "summary": "Fast analytics database. Yellow-accented, technical documentation style",
+        "local_detail": {
+          "status": "redirect-only-local-detail",
+          "path": "E:\\project\\skills\\ui-ux-design-system-skill\\awesome-design-md\\design-md\\clickhouse\\README.md",
+          "redirect_url": "https://getdesign.md/clickhouse/design-md",
+          "hex_colors": [],
+          "excerpt": "# ClickHouse Inspired Design System Design system details have been moved to: https://getdesign.md/clickhouse/design-md"
+        },
+        "remote_detail": {
+          "status": null,
+          "source": "",
+          "hex_colors": [],
+          "excerpt": "",
+          "error": ""
+        }
+      },
+      {
+        "name": "Framer",
+        "slug": "framer",
+        "group": "Design & Creative Tools",
+        "summary": "Website builder. Bold black and blue, motion-first, design-forward",
+        "local_detail": {
+          "status": "redirect-only-local-detail",
+          "path": "E:\\project\\skills\\ui-ux-design-system-skill\\awesome-design-md\\design-md\\framer\\README.md",
+          "redirect_url": "https://getdesign.md/framer/design-md",
+          "hex_colors": [],
+          "excerpt": "# Framer Inspired Design System Design system details have been moved to: https://getdesign.md/framer/design-md"
+        },
+        "remote_detail": {
+          "status": null,
+          "source": "",
+          "hex_colors": [],
+          "excerpt": "",
+          "error": ""
+        }
+      }
+    ],
+    "reference_summary": "NVIDIA, ClickHouse, Framer",
+    "reference_direction": "Primary reference: NVIDIA - GPU computing. Green-black energy, technical power aesthetic",
+    "reference_detail_status": "redirect-only-local-detail",
+    "reference_detail_path": "E:\\project\\skills\\ui-ux-design-system-skill\\awesome-design-md\\design-md\\nvidia\\README.md",
+    "reference_detail_redirect_url": "https://getdesign.md/nvidia/design-md",
+    "reference_hex_colors": [],
+    "reference_remote_detail_status": "remote-detail-available",
+    "reference_remote_hex_colors": [
+      "#000000",
+      "#ffffff",
+      "#76b900",
+      "#bff230",
+      "#df6500",
+      "#ef9100",
+      "#feeeb2",
+      "#e52020",
+      "#650b0b",
+      "#3f8500",
+      "#0046a4",
+      "#4d1368",
+      "#f9d4ff",
+      "#8c1c55",
+      "#a7a7a7",
+      "#898989",
+      "#757575",
+      "#5e5e5e",
+      "#1a1a1a",
+      "#3860be",
+      "#1eaedb",
+      "#007fff",
+      "#003eff",
+      "#666666"
+    ],
+    "reference_design_md_excerpt": "# Design System Inspired by NVIDIA ## 1. Visual Theme & Atmosphere NVIDIA's website is a high-contrast, technology-forward experience that communicates raw computational power through design restraint. The page is built on a stark black (`#000000`) and white (`#ffffff`) foundation, punctuated by NVIDIA's signature green (`#76b900`) -- a color so specific it functions as a brand fingerprint. This is not the lush green of nature; it's the electric, lime-shifted green of GPU-rendered light, a color that sits between chartreuse and kelly green and immediately signals \"NVIDIA\" to anyone in technology. The custom NVIDIA-EMEA font family (with Arial and Helvetica fallbacks) creates a clean, industr",
+    "source_pipeline": {
+      "reference_source": "awesome-design-md",
+      "structured_source": "ui-ux-pro-max-skill",
+      "synthesis": "scripts/reasoning.py"
+    },
+    "brief_profile": {
+      "has_geek_intent": false,
+      "protect_terminal_identity": false,
+      "prefers_dark": false
+    },
+    "reference_overrides_applied": [
+      "colors.background",
+      "colors.foreground",
+      "colors.primary",
+      "colors.on_primary",
+      "colors.secondary",
+      "colors.accent",
+      "key_effects",
+      "colors.notes"
+    ]
+  },
+  "reference_assets": {
+    "primary_reference_design_md": "# Design System Inspired by NVIDIA\n\n## 1. Visual Theme & Atmosphere\n\nNVIDIA's website is a high-contrast, technology-forward experience that communicates raw computational power through design restraint. The page is built on a stark black (`#000000`) and white (`#ffffff`) foundation, punctuated by NVIDIA's signature green (`#76b900`) -- a color so specific it functions as a brand fingerprint. This is not the lush green of nature; it's the electric, lime-shifted green of GPU-rendered light, a color that sits between chartreuse and kelly green and immediately signals \"NVIDIA\" to anyone in technology.\n\nThe custom NVIDIA-EMEA font family (with Arial and Helvetica fallbacks) creates a clean, industrial typographic voice. Headings at 36px bold with tight 1.25 line-height create dense, authoritative blocks of text. The font lacks the geometric playfulness of Silicon Valley sans-serifs -- it's European, pragmatic, and engineering-focused. Body text runs at 15-16px, comfortable for reading but not generous, maintaining the sense that screen real estate is optimized like GPU memory.\n\nWhat distinguishes NVIDIA's design from other dark-background tech sites is the disciplined use of the green accent. The `#76b900` appears in borders (`2px solid #76b900`), link underlines (`underline 2px rgb(118, 185, 0)`), and CTAs -- but never as backgrounds or large surface areas on the main content. The green is a signal, not a surface. Combined with a deep shadow system (`rgba(0, 0, 0, 0.3) 0px 0px 5px`) and minimal border radius (1-2px), the overall effect is of precision engineering hardware rendered in pixels.\n\n**Key Characteristics:**\n- NVIDIA Green (`#76b900`) as pure accent -- borders, underlines, and interactive highlights only\n- Black (`#000000`) dominant background with white (`#ffffff`) text on dark sections\n- NVIDIA-EMEA custom font with Arial/Helvetica fallback -- industrial, European, clean\n- Tight line-heights (1.25 for headings) creating dense, authoritative text blocks\n- Minimal border radius (1-2px) -- sharp, engineered corners throughout\n- Green-bordered buttons (`2px solid #76b900`) as primary interactive pattern\n- Font Awesome 6 Pro/Sharp icon system at weight 900 for sharp iconography\n- Multi-framework architecture (PrimeReact, Fluent UI, Element Plus) enabling rich interactive components\n\n## 2. Color Palette & Roles\n\n### Primary Brand\n- **NVIDIA Green** (`#76b900`): The signature -- borders, link underlines, CTA outlines, active indicators. Never used as large surface fills.\n- **True Black** (`#000000`): Primary page background, text on light surfaces, dominant tone.\n- **Pure White** (`#ffffff`): Text on dark backgrounds, light section backgrounds, card surfaces.\n\n### Extended Brand Palette\n- **NVIDIA Green Light** (`#bff230`): Bright lime accent for highlights and hover states.\n- **Orange 400** (`#df6500`): Warm accent for alerts, featured badges, or energy-related contexts.\n- **Yellow 300** (`#ef9100`): Secondary warm accent, product category highlights.\n- **Yellow 050** (`#feeeb2`): Light warm surface for callout backgrounds.\n\n### Status & Semantic\n- **Red 500** (`#e52020`): Error states, destructive actions, critical alerts.\n- **Red 800** (`#650b0b`): Deep red for severe warning backgrounds.\n- **Green 500** (`#3f8500`): Success states, positive indicators (darker than brand green).\n- **Blue 700** (`#0046a4`): Informational accents, link hover alternative.\n\n### Decorative\n- **Purple 800** (`#4d1368`): Deep purple for gradient ends, premium/AI contexts.\n- **Purple 100** (`#f9d4ff`): Light purple surface tint.\n- **Fuchsia 700** (`#8c1c55`): Rich accent for special promotions or featured content.\n\n### Neutral Scale\n- **Gray 300** (`#a7a7a7`): Muted text, disabled labels.\n- **Gray 400** (`#898989`): Secondary text, metadata.\n- **Gray 500** (`#757575`): Tertiary text, placeholders, footers.\n- **Gray Border** (`#5e5e5e`): Subtle borders, divider lines.\n- **Near Black** (`#1a1a1a`): Dark surfaces, card backgrounds on black pages.\n\n### Interactive States\n- **Link Default (dark bg)** (`#ffffff`): White links on dark backgrounds.\n- **Link Default (light bg)** (`#000000`): Black links with green underline on light backgrounds.\n- **Link Hover** (`#3860be`): Blue shift on hover across all link variants.\n- **Button Hover** (`#1eaedb`): Teal highlight for button hover states.\n- **Button Active** (`#007fff`): Bright blue for active/pressed button states.\n- **Focus Ring** (`#000000 solid 2px`): Black outline for keyboard focus.\n\n### Shadows & Depth\n- **Card Shadow** (`rgba(0, 0, 0, 0.3) 0px 0px 5px 0px`): Subtle ambient shadow for elevated cards.\n\n## 3. Typography Rules\n\n### Font Family\n- **Primary**: `NVIDIA-EMEA`, with fallbacks: `Arial, Helvetica, sans-serif`\n- **Icon Font**: `Font Awesome 6 Pro` (weight 900 for solid icons, 700 for regular)\n- **Icon Sharp**: `Font Awesome 6 Sharp` (weight 300 for light icons, 400 for regular)\n\n### Hierarchy\n\n| Role | Font | Size | Weight | Line Height | Letter Spacing | Notes |\n|------|------|------|--------|-------------|----------------|-------|\n| Display Hero | NVIDIA-EMEA | 36px (2.25rem) | 700 | 1.25 (tight) | normal | Maximum impact headlines |\n| Section Heading | NVIDIA-EMEA | 24px (1.50rem) | 700 | 1.25 (tight) | normal | Section titles, card headings |\n| Sub-heading | NVIDIA-EMEA | 22px (1.38rem) | 400 | 1.75 (relaxed) | normal | Feature descriptions, subtitles |\n| Card Title | NVIDIA-EMEA | 20px (1.25rem) | 700 | 1.25 (tight) | normal | Card and module headings |\n| Body Large | NVIDIA-EMEA | 18px (1.13rem) | 700 | 1.67 (relaxed) | normal | Emphasized body, lead paragraphs |\n| Body | NVIDIA-EMEA | 16px (1.00rem) | 400 | 1.50 | normal | Standard reading text |\n| Body Bold | NVIDIA-EMEA | 16px (1.00rem) | 700 | 1.50 | normal | Strong labels, nav items |\n| Body Small | NVIDIA-EMEA | 15px (0.94rem) | 400 | 1.67 (relaxed) | normal | Secondary content, descriptions |\n| Body Small Bold | NVIDIA-EMEA | 15px (0.94rem) | 700 | 1.50 | normal | Emphasized secondary content |\n| Button Large | NVIDIA-EMEA | 18px (1.13rem) | 700 | 1.25 (tight) | normal | Primary CTA buttons |\n| Button | NVIDIA-EMEA | 16px (1.00rem) | 700 | 1.25 (tight) | normal | Standard buttons |\n| Button Compact | NVIDIA-EMEA | 14.4px (0.90rem) | 700 | 1.00 (tight) | 0.144px | Small/compact buttons |\n| Link | NVIDIA-EMEA | 14px (0.88rem) | 700 | 1.43 | normal | Navigation links |\n| Link Uppercase | NVIDIA-EMEA | 14px (0.88rem) | 700 | 1.43 | normal | `text-transform: uppercase`, nav labels |\n| Caption | NVIDIA-EMEA | 14px (0.88rem) | 600 | 1.50 | normal | Metadata, timestamps |\n| Caption Small | NVIDIA-EMEA | 12px (0.75rem) | 400 | 1.25 (tight) | normal | Fine print, legal |\n| Micro Label | NVIDIA-EMEA | 10px (0.63rem) | 700 | 1.50 | normal | `text-transform: uppercase`, tiny badges |\n| Micro | NVIDIA-EMEA | 11px (0.69rem) | 700 | 1.00 (tight) | normal | Smallest UI text |\n\n### Principles\n- **Bold as the default voice**: NVIDIA leans heavily on weight 700 for headings, buttons, links, and labels. The 400 weight is reserved for body text and descriptions -- everything else is bold, projecting confidence and authority.\n- **Tight headings, relaxed body**: Heading line-height is consistently 1.25 (tight), while body text relaxes to 1.50-1.67. This contrast creates visual density at the top of content blocks and comfortable readability in paragraphs.\n- **Uppercase for navigation**: Link labels use `text-transform: uppercase` with weight 700, creating a navigation voice that reads like hardware specification labels.\n- **No decorative tracking**: Letter-spacing is normal throughout, except for compact buttons (0.144px). The font itself carries the industrial character without manipulation.\n\n## 4. Component Stylings\n\n### Buttons\n\n**Primary (Green Border)**\n- Background: `transparent`\n- Text: `#000000`\n- Padding: 11px 13px\n- Border: `2px solid #76b900`\n- Radius: 2px\n- Font: 16px weight 700\n- Hover: background `#1eaedb`, text `#ffffff`\n- Active: background `#007fff`, text `#ffffff`, border `1px solid #003eff`, scale(1)\n- Focus: background `#1eaedb`, text `#ffffff`, outline `#000000 solid 2px`, opacity 0.9\n- Use: Primary CTA (\"Learn More\", \"Explore Solutions\")\n\n**Secondary (Green Border Thin)**\n- Background: transparent\n- Border: `1px solid #76b900`\n- Radius: 2px\n- Use: Secondary actions, alternative CTAs\n\n**Compact / Inline**\n- Font: 14.4px weight 700\n- Letter-spacing: 0.144px\n- Line-height: 1.00\n- Use: Inline CTAs, compact navigation\n\n### Cards & Containers\n- Background: `#ffffff` (light) or `#1a1a1a` (dark sections)\n- Border: none (clean edges) or `1px solid #5e5e5e`\n- Radius: 2px\n- Shadow: `rgba(0, 0, 0, 0.3) 0px 0px 5px 0px` for elevated cards\n- Hover: shadow intensification\n- Padding: 16-24px internal\n\n### Links\n- **On Dark Background**: `#ffffff`, no underline, hover shifts to `#3860be`\n- **On Light Background**: `#000000` or `#1a1a1a`, underline `2px solid #76b900`, hover shifts to `#3860be`, underline removed\n- **Green Links**: `#76b900`, hover shifts to `#3860be`\n- **Muted Links**: `#666666`, hover shifts to `#3860be`\n\n### Navigation\n- Dark black background (`#000000`)\n- Logo left-aligned, prominent NVIDIA wordmark\n- Links: NVIDIA-EMEA 14px weight 700 uppercase, `#ffffff`\n- Hover: color shift, no underline change\n- Mega-menu dropdowns for product categories\n- Sticky on scroll with backdrop\n\n### Image Treatment\n- Product/GPU renders as hero images, often full-width\n- Screenshot images with subtle shadow for depth\n- Green gradient overlays on dark hero sections\n- Circular avatar containers with 50% radius\n\n### Distinctive Components\n\n**Product Cards**\n- Clean white or dark card with minimal radius (2px)\n- Green accent border or underline on title\n- Bold heading + lighter description pattern\n- CTA with green border at bottom\n\n**Tech Spec Tables**\n- Industrial grid layouts\n- Alternating row backgrounds (subtle gray shift)\n- Bold labels, regular values\n- Green highlights for key metrics\n\n**Cookie/Consent Banner**\n- Fixed bottom positioning\n- Rounded buttons (2px radius)\n- Gray border treatments\n\n## 5. Layout Principles\n\n### Spacing System\n- Base unit: 8px\n- Scale: 1px, 2px, 3px, 4px, 5px, 6px, 7px, 8px, 9px, 10px, 11px, 12px, 13px, 15px\n- Primary padding values: 8px, 11px, 13px, 16px, 24px, 32px\n- Section spacing: 48-80px vertical padding\n\n### Grid & Container\n- Max content width: approximately 1200px (contained)\n- Full-width hero sections with contained text\n- Feature sections: 2-3 column grids for product cards\n- Single-column for article/blog content\n- Sidebar layouts for documentation\n\n### Whitespace Philosophy\n- **Purposeful density**: NVIDIA uses tighter spacing than typical SaaS sites, reflecting the density of technical content. White space exists to separate concepts, not to create luxury emptiness.\n- **Section rhythm**: Dark sections alternate with white sections, using background color (not just spacing) to separate content blocks.\n- **Card density**: Product cards sit close together with 16-20px gaps, creating a catalog feel rather than a gallery feel.\n\n### Border Radius Scale\n- Micro (1px): Inline spans, tiny elements\n- Standard (2px): Buttons, cards, containers, inputs -- the default for nearly everything\n- Circle (50%): Avatar images, circular tab indicators\n\n## 6. Depth & Elevation\n\n| Level | Treatment | Use |\n|-------|-----------|-----|\n| Flat (Level 0) | No shadow | Page backgrounds, inline text |\n| Subtle (Level 1) | `rgba(0,0,0,0.3) 0px 0px 5px 0px` | Standard cards, modals |\n| Border (Level 1b) | `1px solid #5e5e5e` | Content dividers, section borders |\n| Green accent (Level 2) | `2px solid #76b900` | Active elements, CTAs, selected items |\n| Focus (Accessibility) | `2px solid #000000` outline | Keyboard focus ring |\n\n**Shadow Philosophy**: NVIDIA's depth system is minimal and utilitarian. There is essentially one shadow value -- a 5px ambient blur at 30% opacity -- used sparingly for cards and modals. The primary depth signal is not shadow but _color contrast_: black backgrounds next to white sections, green borders on black surfaces. This creates hardware-like visual layering where depth comes from material difference, not simulated light.\n\n### Decorative Depth\n- Green gradient washes behind hero content\n- Dark-to-darker gradients (black to near-black) for section transitions\n- No glassmorphism or blur effects -- clarity over atmosphere\n\n## 7. Responsive Behavior\n\n### Breakpoints\n| Name | Width | Key Changes |\n|------|-------|-------------|\n| Mobile Small | <375px | Compact single column, reduced padding |\n| Mobile | 375-425px | Standard mobile layout |\n| Mobile Large | 425-600px | Wider mobile, some 2-col hints |\n| Tablet Small | 600-768px | 2-column grids begin |\n| Tablet | 768-1024px | Full card grids, expanded nav |\n| Desktop | 1024-1350px | Standard desktop layout |\n| Large Desktop | >1350px | Maximum content width, generous margins |\n\n### Touch Targets\n- Buttons use 11px 13px padding for comfortable tap targets\n- Navigation links at 14px uppercase with adequate spacing\n- Green-bordered buttons provide high-contrast touch targets on dark backgrounds\n- Mobile: hamburger menu collapse with full-screen overlay\n\n### Collapsing Strategy\n- Hero: 36px heading scales down proportionally\n- Navigation: full horizontal nav collapses to hamburger menu at ~1024px\n- Product cards: 3-column to 2-column to single column stacked\n- Footer: multi-column grid collapses to single stacked column\n- Section spacing: 64-80px reduces to 32-48px on mobile\n- Images: maintain aspect ratio, scale to container width\n\n### Image Behavior\n- GPU/product renders maintain high resolution at all sizes\n- Hero images scale proportionally with viewport\n- Card images use consistent aspect ratios\n- Full-bleed dark sections maintain edge-to-edge treatment\n\n## 8. Responsive Behavior (Extended)\n\n### Typography Scaling\n- Display 36px scales to ~24px on mobile\n- Section headings 24px scale to ~20px on mobile\n- Body text maintains 15-16px across all breakpoints\n- Button text maintains 16px for consistent tap targets\n\n### Dark/Light Section Strategy\n- Dark sections (black bg, white text) alternate with light sections (white bg, black text)\n- The green accent remains consistent across both surface types\n- On dark: links are white, underlines are green\n- On light: links are black, underlines are green\n- This alternation creates natural scroll rhythm and content grouping\n\n## 9. Agent Prompt Guide\n\n### Quick Color Reference\n- Primary accent: NVIDIA Green (`#76b900`)\n- Background dark: True Black (`#000000`)\n- Background light: Pure White (`#ffffff`)\n- Heading text (dark bg): White (`#ffffff`)\n- Heading text (light bg): Black (`#000000`)\n- Body text (light bg): Black (`#000000`) or Near Black (`#1a1a1a`)\n- Body text (dark bg): White (`#ffffff`) or Gray 300 (`#a7a7a7`)\n- Link hover: Blue (`#3860be`)\n- Border accent: `2px solid #76b900`\n- Button hover: Teal (`#1eaedb`)\n\n### Example Component Prompts\n- \"Create a hero section on black background. Headline at 36px NVIDIA-EMEA weight 700, line-height 1.25, color #ffffff. Subtitle at 18px weight 400, line-height 1.67, color #a7a7a7. CTA button with transparent background, 2px solid #76b900 border, 2px radius, 11px 13px padding, text #ffffff. Hover: background #1eaedb, text white.\"\n- \"Design a product card: white background, 2px border-radius, box-shadow rgba(0,0,0,0.3) 0px 0px 5px. Title at 20px NVIDIA-EMEA weight 700, line-height 1.25, color #000000. Body at 15px weight 400, line-height 1.67, color #757575. Green underline accent on title: border-bottom 2px solid #76b900.\"\n- \"Build a navigation bar: #000000 background, sticky top. NVIDIA logo left-aligned. Links at 14px NVIDIA-EMEA weight 700 uppercase, color #ffffff. Hover: color #3860be. Green-bordered CTA button right-aligned.\"\n- \"Create a dark feature section: #000000 background. Section label at 14px weight 700 uppercase, color #76b900. Heading at 24px weight 700, color #ffffff. Description at 16px weight 400, color #a7a7a7. Three product cards in a row with 20px gap.\"\n- \"Design a footer: #000000 background. Multi-column layout with link groups. Links at 14px weight 400, color #a7a7a7. Hover: color #76b900. Bottom bar with legal text at 12px, color #757575.\"\n\n### Iteration Guide\n1. Always use `#76b900` as accent, never as a background fill -- it's a signal color for borders, underlines, and highlights\n2. Buttons are transparent with green borders by default -- filled backgrounds appear only on hover/active states\n3. Weight 700 is the dominant voice for all interactive and heading elements; 400 is only for body paragraphs\n4. Border radius is 2px for everything -- this sharp, minimal rounding is core to the industrial aesthetic\n5. Dark sections use white text; light sections use black text -- green accent works identically on both\n6. Link hover is always `#3860be` (blue) regardless of the link's default color\n7. Line-height 1.25 for headings, 1.50-1.67 for body text -- maintain this contrast for visual hierarchy\n8. Navigation uses uppercase 14px bold -- this hardware-label typography is part of the brand voice\n"
+  }
+}

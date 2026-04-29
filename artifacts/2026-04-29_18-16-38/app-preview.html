@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple 风格论坛 - 交流中心</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'SF Pro Display';
+            src: url('https://sf.cdn.apple.com/font/sf-pro-display/v1/sf-pro-display-semibold.woff2') format('woff2');
+            font-weight: 600;
+        }
+        @font-face {
+            font-family: 'SF Pro Text';
+            src: url('https://sf.cdn.apple.com/font/sf-pro-text/v1/sf-pro-text-regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+
+        :root {
+            --apple-blue: #0066cc;
+            --apple-blue-hover: #0071e3;
+            --apple-ink: #1d1d1f;
+            --apple-bg: #ffffff;
+            --apple-bg-secondary: #f5f5f7;
+            --apple-border: #d2d2d7;
+            --apple-text-muted: #6e6e73;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--apple-bg);
+            color: var(--apple-ink);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .sf-display {
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+            letter-spacing: -0.022em;
+        }
+
+        .glass-nav {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .apple-card {
+            background: var(--apple-bg);
+            border-radius: 20px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.25, 1), box-shadow 0.3s ease;
+        }
+
+        .apple-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .squircle {
+            border-radius: 24px;
+        }
+
+        .btn-primary {
+            background-color: var(--apple-blue);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 980px;
+            font-weight: 400;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--apple-blue-hover);
+        }
+
+        .search-input {
+            background-color: rgba(0, 0, 0, 0.05);
+            border: none;
+            border-radius: 12px;
+            padding: 12px 20px 12px 45px;
+            width: 100%;
+            font-size: 17px;
+            transition: background-color 0.2s;
+        }
+
+        .search-input:focus {
+            background-color: white;
+            outline: 2px solid var(--apple-blue);
+            box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
+        }
+
+        .tag {
+            background-color: var(--apple-bg-secondary);
+            color: var(--apple-ink);
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body class="bg-[#f5f5f7]">
+
+    <!-- 全局导航 -->
+    <nav class="glass-nav sticky top-0 z-50 h-12 flex items-center justify-between px-6 max-w-screen-xl mx-auto w-full">
+        <div class="flex items-center space-x-8">
+            <a href="#" class="text-xl opacity-90"><i class="fab fa-apple"></i></a>
+            <div class="hidden md:flex space-x-6 text-xs font-normal opacity-80">
+                <a href="#" class="hover:opacity-100">商店</a>
+                <a href="#" class="hover:opacity-100">Mac</a>
+                <a href="#" class="hover:opacity-100">iPad</a>
+                <a href="#" class="hover:opacity-100">iPhone</a>
+                <a href="#" class="hover:opacity-100">技术支持</a>
+                <a href="#" class="hover:opacity-100">社区</a>
+            </div>
+        </div>
+        <div class="flex items-center space-x-4 text-xs opacity-80">
+            <a href="#"><i class="fas fa-search"></i></a>
+            <a href="#"><i class="fas fa-shopping-bag"></i></a>
+        </div>
+    </nav>
+
+    <!-- 英雄板块 -->
+    <section class="bg-white py-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="sf-display text-5xl md:text-6xl font-semibold mb-6">交流社区</h1>
+            <p class="text-xl md:text-2xl text-[#6e6e73] mb-10">寻找答案，分享知识，与全球 Apple 用户交流。</p>
+            
+            <div class="relative max-w-2xl mx-auto">
+                <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                <input type="text" class="search-input" placeholder="搜索主题、产品或问题">
+            </div>
+        </div>
+    </section>
+
+    <!-- 分类网格 (Bento Grid) -->
+    <section class="max-w-6xl mx-auto py-16 px-6">
+        <h2 class="sf-display text-3xl font-semibold mb-8">按产品浏览</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- iPhone -->
+            <div class="apple-card p-8 flex flex-col items-center text-center">
+                <i class="fas fa-mobile-alt text-5xl mb-6 text-blue-500"></i>
+                <h3 class="text-xl font-semibold mb-2">iPhone</h3>
+                <p class="text-sm text-[#6e6e73]">iOS、设置、硬件等问题交流</p>
+            </div>
+            <!-- Mac -->
+            <div class="apple-card p-8 flex flex-col items-center text-center">
+                <i class="fas fa-laptop text-5xl mb-6 text-purple-500"></i>
+                <h3 class="text-xl font-semibold mb-2">Mac</h3>
+                <p class="text-sm text-[#6e6e73]">macOS、MacBook、iMac 讨论</p>
+            </div>
+            <!-- iPad -->
+            <div class="apple-card p-8 flex flex-col items-center text-center">
+                <i class="fas fa-tablet-alt text-5xl mb-6 text-pink-500"></i>
+                <h3 class="text-xl font-semibold mb-2">iPad</h3>
+                <p class="text-sm text-[#6e6e73]">iPadOS、Apple Pencil 使用心得</p>
+            </div>
+            <!-- Services -->
+            <div class="apple-card p-8 md:col-span-2 flex items-center space-x-8">
+                <div class="bg-gradient-to-br from-orange-400 to-red-500 p-6 rounded-2xl">
+                    <i class="fas fa-cloud text-4xl text-white"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">服务与软件</h3>
+                    <p class="text-sm text-[#6e6e73]">iCloud, Apple Music, App Store 及更多软件支持。</p>
+                </div>
+            </div>
+            <!-- Accessories -->
+            <div class="apple-card p-8 flex flex-col justify-center">
+                <h3 class="text-xl font-semibold mb-2">配件</h3>
+                <p class="text-sm text-[#6e6e73]">AirPods, Apple Watch, 及其他官方配件讨论。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 热门讨论 -->
+    <section class="max-w-6xl mx-auto py-16 px-6 border-t border-gray-200">
+        <div class="flex justify-between items-end mb-10">
+            <div>
+                <h2 class="sf-display text-3xl font-semibold">热门讨论</h2>
+                <p class="text-[#6e6e73] mt-2">看看大家都在关注什么</p>
+            </div>
+            <a href="#" class="text-[#0066cc] hover:underline">查看全部 <i class="fas fa-chevron-right text-xs"></i></a>
+        </div>
+
+        <div class="space-y-4">
+            <!-- 讨论项 1 -->
+            <div class="bg-white p-6 rounded-2xl flex items-start justify-between hover:bg-gray-50 transition-colors cursor-pointer border border-transparent hover:border-gray-200">
+                <div class="flex space-x-4">
+                    <img src="https://ui-avatars.com/api/?name=User+A&background=random" class="w-10 h-10 rounded-full" alt="avatar">
+                    <div>
+                        <h4 class="font-medium text-lg mb-1">如何解决 iPhone 15 Pro 的发热问题？</h4>
+                        <div class="flex items-center space-x-3 text-xs text-[#6e6e73]">
+                            <span class="tag">iPhone</span>
+                            <span>由 <strong>TechGuru</strong> 发布于 2 小时前</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-6 text-[#6e6e73]">
+                    <div class="text-center">
+                        <span class="block font-semibold text-black">128</span>
+                        <span class="text-[10px] uppercase">回复</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="block font-semibold text-black">1.2k</span>
+                        <span class="text-[10px] uppercase">浏览</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 讨论项 2 -->
+            <div class="bg-white p-6 rounded-2xl flex items-start justify-between hover:bg-gray-50 transition-colors cursor-pointer border border-transparent hover:border-gray-200">
+                <div class="flex space-x-4">
+                    <img src="https://ui-avatars.com/api/?name=User+B&background=random" class="w-10 h-10 rounded-full" alt="avatar">
+                    <div>
+                        <h4 class="font-medium text-lg mb-1">macOS Sonoma 的新功能体验分享</h4>
+                        <div class="flex items-center space-x-3 text-xs text-[#6e6e73]">
+                            <span class="tag">Mac</span>
+                            <span>由 <strong>AppleLover</strong> 发布于 5 小时前</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-6 text-[#6e6e73]">
+                    <div class="text-center">
+                        <span class="block font-semibold text-black">85</span>
+                        <span class="text-[10px] uppercase">回复</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="block font-semibold text-black">940</span>
+                        <span class="text-[10px] uppercase">浏览</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 讨论项 3 -->
+            <div class="bg-white p-6 rounded-2xl flex items-start justify-between hover:bg-gray-50 transition-colors cursor-pointer border border-transparent hover:border-gray-200">
+                <div class="flex space-x-4">
+                    <img src="https://ui-avatars.com/api/?name=User+C&background=random" class="w-10 h-10 rounded-full" alt="avatar">
+                    <div>
+                        <h4 class="font-medium text-lg mb-1">iCloud 空间不足，有什么好的清理建议？</h4>
+                        <div class="flex items-center space-x-3 text-xs text-[#6e6e73]">
+                            <span class="tag">服务</span>
+                            <span>由 <strong>CloudMaster</strong> 发布于 8 小时前</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-6 text-[#6e6e73]">
+                    <div class="text-center">
+                        <span class="block font-semibold text-black">42</span>
+                        <span class="text-[10px] uppercase">回复</span>
+                    </div>
+                    <div class="text-center">
+                        <span class="block font-semibold text-black">620</span>
+                        <span class="text-[10px] uppercase">浏览</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部召唤 -->
+    <section class="bg-[#1d1d1f] text-white py-20 px-6 text-center">
+        <h2 class="sf-display text-4xl font-semibold mb-6">没找到你想要的答案？</h2>
+        <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">发起一个新的讨论主题，让社区的专家和用户来协助你。</p>
+        <button class="btn-primary text-lg px-10 py-3">发起讨论</button>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-[#f5f5f7] py-12 px-6">
+        <div class="max-w-6xl mx-auto text-[#6e6e73] text-xs">
+            <div class="border-b border-gray-300 pb-4 mb-4">
+                更多选购方式：查找你附近的 <a href="#" class="text-[#0066cc] underline">Apple Store</a> 或 <a href="#" class="text-[#0066cc] underline">其他零售商</a>，或致电 400-666-8800。
+            </div>
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                <p>Copyright © 2024 Apple Inc. 保留所有权利。</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:underline">隐私政策</a>
+                    <span class="text-gray-400">|</span>
+                    <a href="#" class="hover:underline">使用条款</a>
+                    <span class="text-gray-400">|</span>
+                    <a href="#" class="hover:underline">销售政策</a>
+                    <span class="text-gray-400">|</span>
+                    <a href="#" class="hover:underline">法律信息</a>
+                    <span class="text-gray-400">|</span>
+                    <a href="#" class="hover:underline">网站地图</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

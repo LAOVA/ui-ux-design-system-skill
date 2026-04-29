@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--
+  CANONICAL DESIGN-SPEC TEMPLATE
+  TEMPLATE_SIGNATURE: uiux-design-system/design-spec/v1
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>极客苹果风个人主页 设计规范</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap');
+
+    :root {
+      --color-bg: #000000;
+      --color-text: #F5F5F7;
+      --color-primary: #007AFF;
+      --color-accent: #00D2FF;
+      --color-border: #27272A;
+      --color-glass: rgba(28, 28, 30, 0.7);
+    }
+
+    [data-page-theme="dark"] {
+      --color-bg: #000000;
+      --color-text: #F5F5F7;
+      --color-primary: #007AFF;
+      --color-accent: #00D2FF;
+      --color-border: #27272A;
+      --color-glass: rgba(28, 28, 30, 0.7);
+    }
+
+    [data-page-theme="light"] {
+      --color-bg: #F5F5F7;
+      --color-text: #1D1D1F;
+      --color-primary: #007AFF;
+      --color-accent: #007AFF;
+      --color-border: #D1D1D6;
+      --color-glass: rgba(255, 255, 255, 0.7);
+    }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .geek-grid {
+      background-image: linear-gradient(var(--color-border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .glass-panel {
+      background: var(--color-glass);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--color-border);
+    }
+
+    .mono-text {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .theme-panel {
+      @apply glass-panel;
+    }
+
+    .theme-muted {
+      opacity: 0.6;
+    }
+
+    .theme-dot {
+      background-color: var(--color-border);
+    }
+
+    .theme-preview-window {
+      background: var(--color-bg);
+      border-color: var(--color-border);
+    }
+
+    .theme-preview-surface {
+      background: var(--color-glass);
+      border-color: var(--color-border);
+    }
+
+    .theme-preview-card {
+      background: var(--color-bg);
+      border-color: var(--color-border);
+    }
+
+    .theme-button-primary {
+      background: var(--color-primary);
+      color: white;
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .theme-button-primary:hover {
+      transform: scale(1.05);
+    }
+
+    .theme-button-secondary {
+      @apply glass-panel;
+      transition: background 0.2s ease;
+    }
+
+    .theme-input {
+      @apply glass-panel;
+    }
+
+    .theme-nav-item.active {
+      background: var(--color-primary);
+      color: white;
+    }
+
+    .theme-tag {
+      @apply glass-panel;
+      color: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+
+    .theme-status-positive {
+      background: rgba(52, 199, 89, 0.2);
+      color: #34C759;
+    }
+
+    /* Custom Terminal Styling */
+    .terminal-header {
+      background: #333;
+      height: 24px;
+      border-radius: 8px 8px 0 0;
+      display: flex;
+      align-items: center;
+      padding-left: 10px;
+      gap: 6px;
+    }
+
+    .terminal-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+
+<body data-page-theme="dark" class="min-h-screen antialiased geek-grid">
+  <div
+    class="page-theme-floating fixed left-1/2 top-4 z-50 flex -translate-x-1/2 items-center gap-3 rounded-full border px-3 py-2 shadow-2xl backdrop-blur-xl glass-panel">
+    <div class="page-theme-switch inline-flex items-center gap-1 rounded-full border p-1">
+      <button class="page-theme-button rounded-full px-3 py-2 text-sm font-semibold" type="button"
+        data-page-theme="light">Light</button>
+      <button class="page-theme-button active rounded-full px-3 py-2 text-sm font-semibold" type="button"
+        data-page-theme="dark">Dark</button>
+    </div>
+  </div>
+
+  <main class="mx-auto max-w-7xl px-5 pb-24 pt-28 md:px-8">
+    <section class="grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.9fr)]">
+      <div class="space-y-5">
+        <div
+          class="inline-flex rounded-full border px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] theme-tag mono-text">
+          DESIGN SPEC v1.0
+        </div>
+        <div class="space-y-4">
+          <h1 class="max-w-4xl text-5xl font-extrabold tracking-tight md:text-7xl">极客苹果风</h1>
+          <p class="max-w-3xl text-lg leading-8 theme-muted">融合 Apple 的至简美学与 Geek 的硬核技术细节。专为开发者、架构师和极客设计的个人主页视觉系统。</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <span class="rounded-full border px-3 py-1 text-sm glass-panel">#Glassmorphism</span>
+          <span class="rounded-full border px-3 py-1 text-sm glass-panel">#BentoGrid</span>
+          <span class="rounded-full border px-3 py-1 text-sm glass-panel">#OLED_Black</span>
+          <span class="rounded-full border px-3 py-1 text-sm glass-panel">#Mono_Details</span>
+        </div>
+      </div>
+
+      <aside class="theme-panel rounded-[28px] border p-4 shadow-xl">
+        <div class="theme-preview-window rounded-[24px] border p-4 md:p-5">
+          <div class="terminal-header mb-4">
+            <div class="terminal-dot bg-[#FF5F56]"></div>
+            <div class="terminal-dot bg-[#FFBD2E]"></div>
+            <div class="terminal-dot bg-[#27C93F]"></div>
+            <span class="mono-text text-[10px] theme-muted ml-2">zsh — 80x24</span>
+          </div>
+          <div class="grid gap-4">
+            <div class="theme-preview-surface rounded-[20px] border p-4">
+              <h3 class="text-xl font-bold mb-2">Hello, I'm a Geek.</h3>
+              <p class="mono-text text-sm theme-muted">$ whoami</p>
+              <p class="mono-text text-sm mb-4">> Full-stack Architect & Apple Enthusiast</p>
+
+              <div class="grid gap-3 sm:grid-cols-2">
+                <div class="theme-preview-card rounded-2xl border p-4">
+                  <strong class="block text-2xl font-bold text-[#00D2FF]">1.2k</strong>
+                  <span class="text-xs theme-muted mono-text">GITHUB_COMMITS</span>
+                </div>
+                <div class="theme-preview-card rounded-2xl border p-4">
+                  <strong class="block text-2xl font-bold text-[#00D2FF]">99.9%</strong>
+                  <span class="text-xs theme-muted mono-text">UPTIME_INDEX</span>
+                </div>
+              </div>
+              <div class="mt-4 flex flex-wrap gap-3">
+                <button class="theme-button-primary rounded-full px-5 py-2 text-sm font-semibold">Contact Me</button>
+                <button class="theme-button-secondary rounded-full px-5 py-2 text-sm font-semibold">View
+                  Projects</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-3xl font-bold tracking-tight mb-6">核心规范 (System Snapshot)</h2>
+      <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <article class="theme-panel rounded-3xl border p-5">
+          <span class="block text-xs uppercase tracking-[0.16em] theme-muted">类别</span>
+          <strong class="mt-3 block text-2xl font-bold">个人主页</strong>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <span class="block text-xs uppercase tracking-[0.16em] theme-muted">风格</span>
+          <strong class="mt-3 block text-2xl font-bold">极客苹果风</strong>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <span class="block text-xs uppercase tracking-[0.16em] theme-muted">布局</span>
+          <strong class="mt-3 block text-2xl font-bold">Bento Grid</strong>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <span class="block text-xs uppercase tracking-[0.16em] theme-muted">字体</span>
+          <strong class="mt-3 block text-xl font-bold">Inter / JB Mono</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-3xl font-bold tracking-tight mb-6">色彩与材质 (Colors & Materials)</h2>
+      <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <div class="space-y-4">
+          <div class="h-24 w-full rounded-2xl border bg-black flex items-end p-4">
+            <span class="mono-text text-white text-xs">#000000 (OLED Black)</span>
+          </div>
+          <div class="h-24 w-full rounded-2xl border bg-[#F5F5F7] flex items-end p-4">
+            <span class="mono-text text-black text-xs">#F5F5F7 (Apple Grey)</span>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <div class="h-24 w-full rounded-2xl border bg-[#007AFF] flex items-end p-4">
+            <span class="mono-text text-white text-xs">#007AFF (Primary Blue)</span>
+          </div>
+          <div class="h-24 w-full rounded-2xl border bg-[#00D2FF] flex items-end p-4">
+            <span class="mono-text text-black text-xs">#00D2FF (Geek Cyan)</span>
+          </div>
+        </div>
+        <article class="theme-panel rounded-3xl border p-5 flex flex-col justify-center">
+          <h3 class="text-lg font-bold mb-2">材质说明</h3>
+          <p class="text-sm theme-muted leading-relaxed">使用 70% 透明度的深色背景配合 20px 的高斯模糊，模拟苹果的材料质感。边框使用 1px 的 ZINC-800
+            保持极客的硬朗线条。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-3xl font-bold tracking-tight mb-6">字体系统 (Typography)</h2>
+      <div class="grid gap-4 lg:grid-cols-2">
+        <article class="theme-panel rounded-3xl border p-6">
+          <h3 class="text-sm font-semibold uppercase tracking-widest theme-muted mb-4">Heading - Inter</h3>
+          <p class="text-5xl font-extrabold tracking-tighter mb-4">Precision and Clarity.</p>
+          <p class="theme-muted">紧凑的字间距和极大的字重，传达出苹果式的力量感。</p>
+        </article>
+        <article class="theme-panel rounded-3xl border p-6">
+          <h3 class="text-sm font-semibold uppercase tracking-widest theme-muted mb-4">Mono - JetBrains Mono</h3>
+          <p class="mono-text text-2xl mb-4">const geek = new AppleStyle();</p>
+          <p class="theme-muted">等宽字体用于所有技术数据、标签和代码块，强化极客身份。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <h2 class="text-3xl font-bold tracking-tight mb-6">组件规范 (Components)</h2>
+      <div class="grid gap-4 lg:grid-cols-3">
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold mb-4">按钮 (Buttons)</h3>
+          <div class="flex flex-col gap-3">
+            <button class="theme-button-primary rounded-full px-6 py-3 font-bold w-fit">Primary Action</button>
+            <button class="theme-button-secondary rounded-full px-6 py-3 font-bold w-fit">Secondary Action</button>
+          </div>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold mb-4">卡片 (Bento Card)</h3>
+          <div class="theme-preview-card rounded-[28px] border p-5">
+            <div class="w-8 h-8 rounded-lg bg-[#007AFF] mb-4"></div>
+            <strong class="block text-xl font-bold">精致圆角</strong>
+            <p class="text-sm theme-muted mt-2">28px 的圆角是苹果美学的核心比例。</p>
+          </div>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold mb-4">输入框 (Input)</h3>
+          <input class="theme-input w-full rounded-2xl border px-4 py-3 mono-text text-sm"
+            placeholder="ssh root@geek.local">
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const buttons = document.querySelectorAll('.page-theme-button');
+      const root = document.body;
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const nextTheme = button.getAttribute('data-page-theme') || 'light';
+          root.setAttribute('data-page-theme', nextTheme);
+          buttons.forEach((item) => {
+            const isActive = item === button;
+            item.classList.toggle('active', isActive);
+            item.setAttribute('aria-pressed', String(isActive));
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+
+</html>

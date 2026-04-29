@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--
+  CANONICAL DESIGN-SPEC TEMPLATE
+  TEMPLATE_SIGNATURE: uiux-design-system/design-spec/v1
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NVIDIA Personal Home 设计规范</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --nvidia-green: #76B900;
+      --nvidia-green-glow: rgba(118, 185, 0, 0.2);
+    }
+
+    [data-page-theme="light"] {
+      --bg: #FAFAFA;
+      --fg: #09090B;
+      --surface: #FFFFFF;
+      --surface-muted: #F4F4F5;
+      --border: #E4E4E7;
+      --muted-text: #71717A;
+      --accent: var(--nvidia-green);
+      --accent-contrast: #FFFFFF;
+    }
+
+    [data-page-theme="dark"] {
+      --bg: #000000;
+      --fg: #FFFFFF;
+      --surface: #1A1A1A;
+      --surface-muted: #27272A;
+      --border: #3F3F46;
+      --muted-text: #A1A1AA;
+      --accent: var(--nvidia-green);
+      --accent-contrast: #000000;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--fg);
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .theme-panel {
+      background-color: var(--surface);
+      border-color: var(--border);
+    }
+
+    .theme-muted {
+      color: var(--muted-text);
+    }
+
+    .theme-soft {
+      background-color: var(--surface-muted);
+    }
+
+    .theme-preview-window {
+      background-color: var(--bg);
+      border-color: var(--border);
+    }
+
+    .theme-dot {
+      background-color: var(--border);
+    }
+
+    .theme-preview-surface {
+      background-color: var(--surface);
+      border-color: var(--border);
+    }
+
+    .theme-preview-card {
+      background-color: var(--surface-muted);
+      border-color: var(--border);
+    }
+
+    .theme-nav-item {
+      color: var(--muted-text);
+    }
+
+    .theme-nav-item.active {
+      color: var(--fg);
+      background-color: var(--surface-muted);
+    }
+
+    .theme-button-primary {
+      background-color: var(--accent);
+      color: var(--accent-contrast);
+    }
+
+    .theme-button-secondary {
+      background-color: var(--surface-muted);
+      border: 1px solid var(--border);
+      color: var(--fg);
+    }
+
+    .theme-chart {
+      background: linear-gradient(180deg, var(--nvidia-green-glow) 0%, transparent 100%);
+      border-color: var(--border);
+    }
+
+    .theme-tag {
+      background-color: var(--nvidia-green-glow);
+      color: var(--nvidia-green);
+    }
+
+    .theme-input {
+      background-color: var(--bg);
+      border-color: var(--border);
+      color: var(--fg);
+    }
+
+    .theme-table {
+      border-color: var(--border);
+    }
+
+    .theme-status-positive {
+      background-color: rgba(118, 185, 0, 0.1);
+      color: var(--nvidia-green);
+    }
+
+    .page-theme-floating {
+      background-color: rgba(var(--surface), 0.8);
+      border-color: var(--border);
+    }
+
+    .page-theme-switch {
+      border-color: var(--border);
+    }
+
+    .page-theme-button.active {
+      background-color: var(--fg);
+      color: var(--bg);
+    }
+
+    /* NVIDIA 特有的发光效果 */
+    .glow-green {
+      box-shadow: 0 0 20px var(--nvidia-green-glow);
+    }
+  </style>
+</head>
+
+<body data-page-theme="dark" class="min-h-screen antialiased">
+  <div
+    class="page-theme-floating fixed left-1/2 top-4 z-50 flex -translate-x-1/2 items-center gap-3 rounded-full border px-3 py-2 shadow-2xl backdrop-blur-xl">
+    <div class="page-theme-switch inline-flex items-center gap-1 rounded-full border p-1">
+      <button class="page-theme-button rounded-full px-3 py-2 text-sm font-semibold" type="button"
+        data-page-theme="light" aria-pressed="false">明亮</button>
+      <button class="page-theme-button active rounded-full px-3 py-2 text-sm font-semibold" type="button"
+        data-page-theme="dark" aria-pressed="true">暗黑</button>
+    </div>
+  </div>
+
+  <main class="mx-auto max-w-7xl px-5 pb-24 pt-28 md:px-8">
+    <section class="grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.9fr)]">
+      <div class="space-y-5">
+        <div
+          class="inline-flex rounded-full border px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] theme-soft theme-muted">
+          设计规范
+        </div>
+        <div class="space-y-4">
+          <h1 class="max-w-4xl text-5xl font-black tracking-[-0.05em] md:text-7xl">NVIDIA Personal Home</h1>
+          <p class="max-w-3xl text-lg leading-8 theme-muted">受 NVIDIA 技术力量美学启发的个人主页设计系统。采用 Bento Grid 展示，深色背景与标志性的 NVIDIA 绿色发光点缀，传达高性能与专业感。</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <span class="rounded-full border px-3 py-1 text-sm theme-soft">#HighPerformance</span>
+          <span class="rounded-full border px-3 py-1 text-sm theme-soft">#TechnicalAesthetic</span>
+          <span class="rounded-full border px-3 py-1 text-sm theme-soft">#BentoGrid</span>
+        </div>
+      </div>
+
+      <aside class="theme-panel rounded-[28px] border p-4 shadow-xl">
+        <div class="theme-preview-window rounded-[24px] border p-4 md:p-5">
+          <div class="mb-4 flex gap-2">
+            <span class="h-2.5 w-2.5 rounded-full theme-dot"></span>
+            <span class="h-2.5 w-2.5 rounded-full theme-dot"></span>
+            <span class="h-2.5 w-2.5 rounded-full theme-dot"></span>
+          </div>
+          <div class="grid gap-4 md:grid-cols-[120px_minmax(0,1fr)]">
+            <div class="theme-preview-surface rounded-[20px] border p-3">
+              <div class="theme-nav-item active rounded-xl px-3 py-2 text-sm font-semibold">概览</div>
+              <div class="theme-nav-item mt-2 rounded-xl px-3 py-2 text-sm">项目</div>
+              <div class="theme-nav-item mt-2 rounded-xl px-3 py-2 text-sm">技术栈</div>
+            </div>
+            <div class="theme-preview-surface rounded-[20px] border p-4">
+              <div class="grid gap-3 sm:grid-cols-2">
+                <div class="theme-preview-card rounded-2xl border p-4 glow-green">
+                  <strong class="block text-3xl font-black text-[#76B900]">99%</strong>
+                  <span class="text-sm theme-muted">代码质量</span>
+                </div>
+                <div class="theme-preview-card rounded-2xl border p-4">
+                  <strong class="block text-3xl font-black">20+</strong>
+                  <span class="text-sm theme-muted">成功项目</span>
+                </div>
+              </div>
+              <div class="theme-chart mt-4 h-32 rounded-2xl border"></div>
+              <div class="mt-4 flex flex-wrap gap-3">
+                <button class="theme-button-primary rounded-2xl px-5 py-3 font-semibold">联系我</button>
+                <button class="theme-button-secondary rounded-2xl px-5 py-3 font-semibold">查看简历</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="mt-12">
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">系统快照</h2>
+          <p class="mt-2 max-w-3xl theme-muted">快速了解设计方向的核心要素。</p>
+        </div>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <article class="theme-panel rounded-3xl border p-5">
+          <span class="block text-xs uppercase tracking-[0.16em] theme-muted">类别</span>
+          <strong class="mt-3 block text-2xl font-black">个人/作品集</strong>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <span class="block text-xs uppercase tracking-[0.16em] theme-muted">风格</span>
+          <strong class="mt-3 block text-2xl font-black">技术力量美学</strong>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <span class="block text-xs uppercase tracking-[0.16em] theme-muted">模式</span>
+          <strong class="mt-3 block text-2xl font-black">Bento Grid 展示</strong>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <span class="block text-xs uppercase tracking-[0.16em] theme-muted">字体</span>
+          <strong class="mt-3 block text-2xl font-black">Inter / Inter</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">视觉方向</h2>
+          <p class="mt-2 max-w-3xl theme-muted">这些特质应在所有页面和组件中保持一致。</p>
+        </div>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-3">
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">关键词</h3>
+          <div class="mt-4 flex flex-wrap gap-3">
+            <span class="rounded-full px-3 py-1 text-xs theme-soft">技术感</span>
+            <span class="rounded-full px-3 py-1 text-xs theme-soft">高性能</span>
+            <span class="rounded-full px-3 py-1 text-xs theme-soft">精确</span>
+            <span class="rounded-full px-3 py-1 text-xs theme-soft">发光点缀</span>
+            <span class="rounded-full px-3 py-1 text-xs theme-soft">硬核</span>
+          </div>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">最适用于</h3>
+          <p class="mt-4 leading-7">开发者主页、技术博客、AI 平台展示、硬件发烧友作品集。</p>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">性能与可访问性</h3>
+          <ul class="mt-4 space-y-3 text-sm leading-7">
+            <li><strong>性能:</strong> ⚡ 极高，强调快速响应感。</li>
+            <li><strong>可访问性:</strong> ✓ WCAG AA，确保高对比度。</li>
+            <li><strong>效果:</strong> 细微的网格背景、绿色呼吸灯、高精度边框。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">流程与布局</h2>
+          <p class="mt-2 max-w-3xl theme-muted">使用推荐的信息层级作为默认页面结构。</p>
+        </div>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-2">
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">模块顺序</h3>
+          <div class="mt-4 space-y-3">
+            <div class="flex items-center gap-3">
+              <span class="flex h-6 w-6 items-center justify-center rounded-full bg-[#76B900] text-xs font-bold text-black">1</span>
+              <span>Hero (核心口号与 3D 渲染)</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="flex h-6 w-6 items-center justify-center rounded-full bg-[#76B900] text-xs font-bold text-black">2</span>
+              <span>Bento Showcase (多维度个人信息网格)</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="flex h-6 w-6 items-center justify-center rounded-full bg-[#76B900] text-xs font-bold text-black">3</span>
+              <span>Tech Specs (类似 GPU 参数的技术栈表格)</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="flex h-6 w-6 items-center justify-center rounded-full bg-[#76B900] text-xs font-bold text-black">4</span>
+              <span>Project Log (滚动式项目记录)</span>
+            </div>
+          </div>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">转化策略</h3>
+          <ul class="mt-4 space-y-3 text-sm leading-7">
+            <li><strong>位置:</strong> 固定导航栏右侧或页面底部悬浮按钮。</li>
+            <li><strong>转化重心:</strong> 强调 "立即合作" 或 "查看 GitHub"。</li>
+            <li><strong>色彩策略:</strong> 仅在 CTA 上使用全亮 NVIDIA 绿色。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">调色板</h2>
+          <p class="mt-2 max-w-3xl theme-muted">在代码和 UI 中应一致使用这些语义化变量。</p>
+        </div>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div class="space-y-3">
+          <div class="h-24 w-full rounded-2xl bg-[#76B900] border shadow-lg"></div>
+          <div>
+            <span class="block text-sm font-bold">NVIDIA Green</span>
+            <span class="text-xs theme-muted">#76B900 (Primary)</span>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="h-24 w-full rounded-2xl bg-[#000000] border border-[#3F3F46] shadow-lg"></div>
+          <div>
+            <span class="block text-sm font-bold">Deep Black</span>
+            <span class="text-xs theme-muted">#000000 (Background)</span>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="h-24 w-full rounded-2xl bg-[#1A1A1A] border shadow-lg"></div>
+          <div>
+            <span class="block text-sm font-bold">Surface Low</span>
+            <span class="text-xs theme-muted">#1A1A1A (Card)</span>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="h-24 w-full rounded-2xl bg-[#A1A1AA] border shadow-lg"></div>
+          <div>
+            <span class="block text-sm font-bold">Muted Slate</span>
+            <span class="text-xs theme-muted">#A1A1AA (Text)</span>
+          </div>
+        </div>
+      </div>
+      <article class="theme-panel mt-4 rounded-3xl border p-5">
+        <h3 class="text-lg font-bold">使用说明</h3>
+        <p class="mt-4 leading-7">核心原则是“黑底绿字”。绿色主要用于交互反馈、数据强调和装饰性发光。避免大面积使用绿色，以免破坏专业感。</p>
+      </article>
+    </section>
+
+    <section class="mt-12">
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">字体</h2>
+          <p class="mt-2 max-w-3xl theme-muted">使用字体建立结构，辅以动画和颜色。</p>
+        </div>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-3">
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">标题系统</h3>
+          <p class="mt-4 text-sm font-semibold uppercase tracking-[0.16em] theme-muted">Inter</p>
+          <p class="mt-4 text-4xl font-black tracking-[-0.04em]">ACCELERATING THE FUTURE</p>
+          <p class="mt-3 leading-7 theme-muted">标题应采用全大写或极粗字体，传达果断与力量。</p>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">正文系统</h3>
+          <p class="mt-4 text-sm font-semibold uppercase tracking-[0.16em] theme-muted">Inter</p>
+          <p class="mt-4 leading-8">正文应清晰、有度，在高密度的信息展示中保持可读性。支持长时间阅读和技术细节查阅。</p>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">字体说明</h3>
+          <ul class="mt-4 space-y-3 text-sm leading-7">
+            <li><strong>氛围:</strong> 工业感、精确、现代。</li>
+            <li><strong>最适用于:</strong> 强调技术细节、性能数据。</li>
+            <li><strong>Google Fonts:</strong> <a href="https://fonts.google.com/specimen/Inter" target="_blank" rel="noreferrer">Inter Reference</a></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">规则与风险</h2>
+          <p class="mt-2 max-w-3xl theme-muted">在实施和评审期间请牢记这些规则，以确保设计质量不发生偏移。</p>
+        </div>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-3">
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">可访问性</h3>
+          <ul class="mt-4 space-y-3 text-sm leading-7">
+            <li>确保绿色文字在纯黑背景上的对比度。</li>
+            <li>交互元素必须有明显的焦点状态（绿色边框）。</li>
+            <li>保持 16px 以上的正文大小。</li>
+          </ul>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">响应式</h3>
+          <ul class="mt-4 space-y-3 text-sm leading-7">
+            <li>Bento Grid 在移动端应塌陷为单列。</li>
+            <li>在大屏上利用宽间距保持高级感。</li>
+            <li>发光效果在移动端应适当减弱以节省性能。</li>
+          </ul>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">避免</h3>
+          <ul class="mt-4 space-y-3 text-sm leading-7">
+            <li>避免使用圆角过大的组件（建议 12px-20px）。</li>
+            <li>避免使用任何柔和的过渡色。</li>
+            <li>避免布局过于松散，保持紧凑的工业感。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const buttons = document.querySelectorAll('.page-theme-button');
+      const root = document.body;
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const nextTheme = button.getAttribute('data-page-theme') || 'light';
+          root.setAttribute('data-page-theme', nextTheme);
+          buttons.forEach((item) => {
+            const isActive = item === button;
+            item.classList.toggle('active', isActive);
+            item.setAttribute('aria-pressed', String(isActive));
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+
+</html>

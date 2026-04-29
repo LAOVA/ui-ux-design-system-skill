@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  CANONICAL DESIGN-SPEC TEMPLATE
+  TEMPLATE_SIGNATURE: uiux-design-system/design-spec/v1
+  This file defines the required structure for design-spec.html.
+  It is a design-system specification page, not an application mockup.
+  Do not replace this with a dashboard, landing page, editor, CMS, or prototype screen.
+  If a realistic product UI is also needed, generate a separate artifact such as app-preview.html.
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apple Forum Design Spec</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+
+    :root {
+      color-scheme: light;
+      --page-bg: #ffffff;
+      --page-fg: #1d1d1f;
+      --surface-border: #e0e0e0;
+      --primary: #0066cc;
+      --secondary: #92400E;
+      --accent: #D97706;
+      --panel-bg: #FFFFFF;
+      --panel-bg-soft: #FFFFFF;
+      --panel-fg: #111829;
+      --panel-muted: #3E4959;
+      --preview-bg: #FFFFFF;
+      --shadow-card: 0 10px 30px rgba(15, 23, 42, 0.10);
+      --shadow-popover: 0 18px 48px rgba(15, 23, 42, 0.18);
+      --font-heading: 'SF Pro Display', ui-sans-serif, system-ui, sans-serif;
+      --font-body: 'Public Sans', ui-sans-serif, system-ui, sans-serif;
+      --interactive-primary: #0066cc;
+      --interactive-on-primary: #ffffff;
+      --interactive-primary-shadow: color-mix(in srgb, #0066cc 22%, transparent);
+      --interactive-secondary-fg: #0066cc;
+      --toggle-shell-bg: color-mix(in srgb, #FFFFFF 90%, white 10%);
+      --toggle-shell-border: color-mix(in srgb, #e0e0e0 82%, white 18%);
+      --toggle-button-fg: #3E4959;
+      --toggle-active-bg: color-mix(in srgb, #FFFFFF 92%, white 8%);
+      --toggle-active-fg: #111829;
+      --toggle-active-border: #e0e0e0;
+      --toggle-active-shadow: 0 6px 18px rgba(15, 23, 42, 0.10);
+    }
+    body[data-page-theme="dark"] {
+      color-scheme: dark;
+      --page-bg: #020617;
+      --page-fg: #F8FAFC;
+      --surface-border: #243244;
+      --panel-bg: #131C2E;
+      --panel-bg-soft: #1A2740;
+      --panel-fg: #F8FAFC;
+      --panel-muted: #94A3B8;
+      --preview-bg: #0B1220;
+      --preview-surface: #162033;
+      --preview-surface-strong: #10192A;
+      --preview-border: #243244;
+      --preview-fg: #F8FAFC;
+      --preview-muted: #94A3B8;
+      --shadow-card: 0 12px 36px rgba(2, 6, 23, 0.42);
+      --shadow-popover: 0 20px 54px rgba(2, 6, 23, 0.48);
+      --interactive-primary: #D97706;
+      --interactive-on-primary: #04110C;
+      --interactive-primary-shadow: color-mix(in srgb, #D97706 32%, transparent);
+      --interactive-secondary-fg: #D7FBE7;
+      --toggle-shell-bg: color-mix(in srgb, #1A2740 88%, #020617 12%);
+      --toggle-shell-border: #243244;
+      --toggle-button-fg: #94A3B8;
+      --toggle-active-bg: color-mix(in srgb, #131C2E 82%, white 18%);
+      --toggle-active-fg: #F8FAFC;
+      --toggle-active-border: #31415A;
+      --toggle-active-shadow: 0 8px 22px rgba(2, 6, 23, 0.34);
+    }
+    body[data-page-theme="light"] {
+      color-scheme: light;
+      --page-bg: #F8FAFC;
+      --page-fg: #0F172A;
+      --surface-border: #CBD5E1;
+      --panel-bg: #FFFFFF;
+      --panel-bg-soft: #F1F5F9;
+      --panel-fg: #0F172A;
+      --panel-muted: #475569;
+      --preview-bg: #FFFFFF;
+      --preview-surface: #F8FAFC;
+      --preview-surface-strong: #FFFFFF;
+      --preview-border: #CBD5E1;
+      --preview-fg: #0F172A;
+      --preview-muted: #475569;
+      --toggle-shell-bg: color-mix(in srgb, #F1F5F9 82%, white 18%);
+      --toggle-shell-border: #D7DEE8;
+      --toggle-button-fg: #6B7280;
+      --toggle-active-bg: #FFFFFF;
+      --toggle-active-fg: #1F2937;
+      --toggle-active-border: #D7DEE8;
+      --toggle-active-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      background: var(--page-bg);
+      color: var(--page-fg);
+      transition: background 180ms ease, color 180ms ease;
+    }
+    h1, h2, h3, h4, strong { font-family: var(--font-heading); }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    a {
+      color: var(--primary);
+      text-underline-offset: 0.16em;
+    }
+    .page-theme-floating {
+      background: color-mix(in srgb, var(--panel-bg) 86%, transparent);
+      border-color: color-mix(in srgb, var(--surface-border) 78%, white 22%);
+      box-shadow: var(--shadow-popover);
+      backdrop-filter: blur(14px);
+    }
+    .page-theme-switch {
+      background: var(--toggle-shell-bg);
+      border-color: var(--toggle-shell-border);
+    }
+    .page-theme-button {
+      background: transparent;
+      color: var(--toggle-button-fg);
+      border: 1px solid transparent;
+      transition: background 160ms ease, color 160ms ease, transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+    }
+    .page-theme-button:hover,
+    .theme-button-primary:hover,
+    .theme-button-secondary:hover {
+      transform: translateY(-1px);
+    }
+    .page-theme-button.active {
+      background: var(--toggle-active-bg);
+      color: var(--toggle-active-fg);
+      border-color: var(--toggle-active-border);
+      box-shadow: var(--toggle-active-shadow);
+    }
+    .theme-panel {
+      background: var(--panel-bg);
+      border-color: var(--surface-border);
+      color: var(--panel-fg);
+      box-shadow: var(--shadow-card);
+    }
+    .theme-soft {
+      background: var(--panel-bg-soft);
+      border-color: color-mix(in srgb, var(--surface-border) 76%, white 24%);
+      color: var(--panel-fg);
+    }
+    .theme-muted { color: var(--panel-muted); }
+    .theme-chip {
+      background: color-mix(in srgb, var(--panel-bg-soft) 92%, white 8%);
+      border-color: var(--surface-border);
+      color: var(--panel-fg);
+      box-shadow: var(--shadow-card);
+    }
+    .theme-tag {
+      background: color-mix(in srgb, var(--accent) 15%, white);
+      color: var(--accent);
+      border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+    }
+    .theme-button-primary {
+      background: var(--interactive-primary);
+      color: var(--interactive-on-primary);
+      box-shadow: 0 10px 24px var(--interactive-primary-shadow);
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+    .theme-button-secondary {
+      background: transparent;
+      color: var(--interactive-secondary-fg);
+      border: 1px solid color-mix(in srgb, var(--interactive-primary) 25%, var(--surface-border));
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+    .swatch-chip { border: 1px solid rgba(15, 23, 42, 0.08); }
+    .flow-step {
+      border: 1px solid color-mix(in srgb, var(--surface-border) 70%, white 30%);
+      background: var(--panel-bg-soft);
+    }
+    .flow-index {
+      background: color-mix(in srgb, var(--primary) 14%, white);
+      color: var(--primary);
+    }
+    .token-bar { background: linear-gradient(90deg, var(--primary), var(--accent)); }
+    .radius-box {
+      border: 1px solid var(--surface-border);
+      background: var(--panel-bg-soft);
+    }
+    .shadow-box {
+      background: var(--panel-bg-soft);
+      border: 1px solid color-mix(in srgb, var(--surface-border) 70%, white 30%);
+    }
+    .theme-input,
+    .theme-preview-surface,
+    .theme-preview-card,
+    .theme-table,
+    .theme-nav-item {
+      background: var(--preview-surface, var(--panel-bg-soft));
+      border-color: var(--preview-border, var(--surface-border));
+      color: var(--preview-fg, var(--panel-fg));
+    }
+    .theme-input::placeholder { color: var(--preview-muted, var(--panel-muted)); }
+    .theme-nav-item.active {
+      background: var(--interactive-primary);
+      color: var(--interactive-on-primary);
+      border-color: var(--interactive-primary);
+    }
+    .theme-status-positive {
+      background: color-mix(in srgb, var(--accent) 18%, white);
+      color: var(--accent);
+    }
+    .theme-status-neutral {
+      background: color-mix(in srgb, var(--secondary) 18%, white);
+      color: var(--secondary);
+    }
+    .theme-preview-window,
+    .theme-preview-surface,
+    .theme-preview-card,
+    .theme-input,
+    .theme-nav-item,
+    .theme-table {
+      --preview-surface: var(--panel-bg-soft);
+      --preview-surface-strong: var(--preview-bg);
+      --preview-border: color-mix(in srgb, var(--surface-border) 65%, white 35%);
+      --preview-fg: var(--panel-fg);
+      --preview-muted: var(--panel-muted);
+    }
+    .theme-preview-window {
+      background: var(--preview-surface-strong);
+      border-color: var(--preview-border);
+      transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
+    }
+    .theme-dot { background: color-mix(in srgb, var(--panel-muted) 45%, transparent); }
+    .theme-chart {
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--accent) 16%, transparent), transparent),
+        linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255,255,255,0.14) 1px, transparent 1px);
+      background-size: auto, 18px 18px, 18px 18px;
+      background-color: var(--preview-surface-strong);
+      border-color: color-mix(in srgb, var(--preview-border) 70%, white 30%);
+      position: relative;
+      overflow: hidden;
+    }
+    .theme-chart::after {
+      content: "";
+      position: absolute;
+      inset: auto 10px 18px 10px;
+      height: 3px;
+      border-radius: 999px;
+      background:
+        linear-gradient(90deg, var(--accent) 0%, var(--accent) 30%, transparent 30%),
+        linear-gradient(90deg, transparent 10%, var(--primary) 10%, var(--primary) 68%, transparent 68%);
+      opacity: 0.85;
+      transform: skewX(-18deg);
+    }
+    @media (max-width: 640px) {
+      .page-theme-floating {
+        width: calc(100% - 24px);
+        justify-content: space-between;
+      }
+    }
+  </style>
+</head>
+
+<body data-page-theme="light" class="min-h-screen antialiased">
+  <!--
+    Preserve the role of this document:
+    - keep the spec-page structure
+    - fill it with project-specific design-system content
+    - do not reinterpret it as a freeform product screen
+  -->
+  <div
+    class="page-theme-floating fixed left-1/2 top-4 z-50 flex -translate-x-1/2 items-center gap-3 rounded-full border px-3 py-2 shadow-2xl backdrop-blur-xl">
+    <div class="page-theme-switch inline-flex items-center gap-1 rounded-full border p-1">
+      <button class="page-theme-button active rounded-full px-3 py-2 text-sm font-semibold" type="button"
+        data-page-theme="light" aria-pressed="true">Light</button>
+      <button class="page-theme-button rounded-full px-3 py-2 text-sm font-semibold" type="button"
+        data-page-theme="dark" aria-pressed="false">Dark</button>
+    </div>
+  </div>
+
+  <main class="mx-auto max-w-7xl px-5 pb-24 pt-28 md:px-8">
+    <!-- Required spec sections begin -->
+    <section class="grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.9fr)]">
+      <div class="space-y-5">
+        <div
+          class="inline-flex rounded-full border px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] theme-soft theme-muted">
+          Design Spec
+        </div>
+        <div class="space-y-4">
+          <h1 class="max-w-4xl text-5xl font-black tracking-[-0.05em] md:text-7xl">Apple Forum</h1>
+          <p class="max-w-3xl text-lg leading-8 theme-muted">Dark Mode (OLED) direction for Sleep Tracker with minimal glow (text-shadow: 0 0 10px), dark-to-light transitions, low white emission, high readability, visible focus.</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+                    <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">Sleep Tracker</span>
+          <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">Dark Mode (OLED)</span>
+          <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">Apple</span>
+          <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">SF Pro Display</span>
+          <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">Public Sans</span>
+        </div>
+      </div>
+
+      <aside class="theme-panel rounded-[28px] border p-4 shadow-xl">
+        <!-- Preview area: lightweight system preview only, not a full app mockup -->
+        <div class="theme-preview-window rounded-[24px] border p-4 md:p-5">
+          <div class="mb-4 flex gap-2">
+            <span class="h-2.5 w-2.5 rounded-full theme-dot"></span>
+            <span class="h-2.5 w-2.5 rounded-full theme-dot"></span>
+            <span class="h-2.5 w-2.5 rounded-full theme-dot"></span>
+          </div>
+          <div class="grid gap-4 md:grid-cols-[120px_minmax(0,1fr)]">
+            <div class="theme-preview-surface rounded-[20px] border p-3">
+              <div class="theme-nav-item active rounded-xl px-3 py-2 text-sm font-semibold">Overview</div>
+              <div class="theme-nav-item mt-2 rounded-xl px-3 py-2 text-sm">Analytics</div>
+              <div class="theme-nav-item mt-2 rounded-xl px-3 py-2 text-sm">Settings</div>
+            </div>
+            <div class="theme-preview-surface rounded-[20px] border p-4">
+              <div class="grid gap-3 sm:grid-cols-2">
+                <div class="theme-preview-card rounded-2xl border p-4">
+                  <strong class="block text-3xl font-black">78%</strong>
+                  <span class="text-sm theme-muted">Adoption</span>
+                </div>
+                <div class="theme-preview-card rounded-2xl border p-4">
+                  <strong class="block text-3xl font-black">24h</strong>
+                  <span class="text-sm theme-muted">Response Time</span>
+                </div>
+              </div>
+              <div class="theme-chart mt-4 h-32 rounded-2xl border"></div>
+              <div class="mt-4 flex flex-wrap gap-3">
+                <button class="theme-button-primary rounded-2xl px-5 py-3 font-semibold">Primary</button>
+                <button class="theme-button-secondary rounded-2xl px-5 py-3 font-semibold">Secondary</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="mt-12">
+      <!-- System snapshot -->
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">System Snapshot</h2>
+          <p class="mt-2 max-w-3xl theme-muted">Use this section to understand the design direction at a glance before
+            reading detailed rules.</p>
+        </div>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <article class="theme-panel rounded-3xl border p-5">
+          <span class="block text-xs uppercase tracking-[0.16em] theme-muted">Category</span>
+          <strong class="mt-3 block text-2xl font-black">Sleep Tracker</strong>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <span class="block text-xs uppercase tracking-[0.16em] theme-muted">Style</span>
+          <strong class="mt-3 block text-2xl font-black">Dark Mode (OLED)</strong>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <span class="block text-xs uppercase tracking-[0.16em] theme-muted">Pattern</span>
+          <strong class="mt-3 block text-2xl font-black">Bento Grid Showcase</strong>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <span class="block text-xs uppercase tracking-[0.16em] theme-muted">Typography</span>
+          <strong class="mt-3 block text-2xl font-black">SF Pro Display / Public Sans</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <!-- Visual direction -->
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">Visual Direction</h2>
+          <p class="mt-2 max-w-3xl theme-muted">These traits should stay stable across landing pages, dashboards, and
+            product surfaces.</p>
+        </div>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-3">
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Keywords</h3>
+          <div class="mt-4 flex flex-wrap gap-3">
+                      <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">Dark theme</span>
+          <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">low light</span>
+          <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">high contrast</span>
+          <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">deep black</span>
+          <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">midnight blue</span>
+          <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">eye-friendly</span>
+          <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">OLED</span>
+          <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">night mode</span>
+          <span class="theme-chip inline-flex items-center rounded-full border px-4 py-2 text-sm font-medium">power efficient</span>
+          </div>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Best For</h3>
+          <p class="mt-4 leading-7">Primary reference: Apple - Consumer electronics. Premium white space, SF Pro, cinematic imagery</p>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Performance and Accessibility</h3>
+          <ul class="mt-4 space-y-3 text-sm leading-7">
+            <li><strong>Performance:</strong> ⚡ Excellent</li>
+            <li><strong>Accessibility:</strong> ✓ WCAG AAA</li>
+            <li><strong>Effects:</strong> Minimal glow (text-shadow: 0 0 10px), dark-to-light transitions, low white emission, high readability, visible focus</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <!-- Flow and layout -->
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">Flow and Layout</h2>
+          <p class="mt-2 max-w-3xl theme-muted">Use the recommended information hierarchy as the default page structure.
+          </p>
+        </div>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-2">
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Section Order</h3>
+          <div class="mt-4 space-y-3">
+                      <div class="flow-step flex items-start gap-3 rounded-2xl border px-3 py-3">
+            <span class="flow-index inline-flex h-10 w-10 items-center justify-center rounded-xl text-sm font-black">01</span>
+            <div class="pt-2"><strong class="text-base font-bold">1. Hero</strong></div>
+          </div>
+          <div class="flow-step flex items-start gap-3 rounded-2xl border px-3 py-3">
+            <span class="flow-index inline-flex h-10 w-10 items-center justify-center rounded-xl text-sm font-black">02</span>
+            <div class="pt-2"><strong class="text-base font-bold">2. Bento Grid (Key Features)</strong></div>
+          </div>
+          <div class="flow-step flex items-start gap-3 rounded-2xl border px-3 py-3">
+            <span class="flow-index inline-flex h-10 w-10 items-center justify-center rounded-xl text-sm font-black">03</span>
+            <div class="pt-2"><strong class="text-base font-bold">3. Detail Cards</strong></div>
+          </div>
+          <div class="flow-step flex items-start gap-3 rounded-2xl border px-3 py-3">
+            <span class="flow-index inline-flex h-10 w-10 items-center justify-center rounded-xl text-sm font-black">04</span>
+            <div class="pt-2"><strong class="text-base font-bold">4. Tech Specs</strong></div>
+          </div>
+          <div class="flow-step flex items-start gap-3 rounded-2xl border px-3 py-3">
+            <span class="flow-index inline-flex h-10 w-10 items-center justify-center rounded-xl text-sm font-black">05</span>
+            <div class="pt-2"><strong class="text-base font-bold">5. CTA</strong></div>
+          </div>
+          </div>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">CTA Strategy</h3>
+          <ul class="mt-4 space-y-3 text-sm leading-7">
+            <li><strong>Placement:</strong> Floating Action Button or Bottom of Grid</li>
+            <li><strong>Conversion Focus:</strong> Scannable value props. High information density without clutter. Mobile stack.</li>
+            <li><strong>Color Strategy:</strong> Card backgrounds: #F5F5F7 or Glass. Icons: Vibrant brand colors. Text: Dark.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <!-- Color palette -->
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">Color Palette</h2>
+          <p class="mt-2 max-w-3xl theme-muted">Semantic tokens should be used consistently in code and UI reviews.</p>
+        </div>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                <article class="theme-panel rounded-3xl border p-5">
+          <div class="swatch-chip mb-3 aspect-[16/10] rounded-2xl border" style="background: #0066cc;"></div>
+          <strong class="block text-2xl font-black">Primary</strong>
+          <span class="theme-muted mt-2 block text-sm"><code>primary</code> - #0066cc</span>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <div class="swatch-chip mb-3 aspect-[16/10] rounded-2xl border" style="background: #92400E;"></div>
+          <strong class="block text-2xl font-black">Secondary</strong>
+          <span class="theme-muted mt-2 block text-sm"><code>secondary</code> - #92400E</span>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <div class="swatch-chip mb-3 aspect-[16/10] rounded-2xl border" style="background: #D97706;"></div>
+          <strong class="block text-2xl font-black">Accent</strong>
+          <span class="theme-muted mt-2 block text-sm"><code>accent</code> - #D97706</span>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <div class="swatch-chip mb-3 aspect-[16/10] rounded-2xl border" style="background: #ffffff;"></div>
+          <strong class="block text-2xl font-black">Background</strong>
+          <span class="theme-muted mt-2 block text-sm"><code>background</code> - #ffffff</span>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <div class="swatch-chip mb-3 aspect-[16/10] rounded-2xl border" style="background: #1d1d1f;"></div>
+          <strong class="block text-2xl font-black">Foreground</strong>
+          <span class="theme-muted mt-2 block text-sm"><code>foreground</code> - #1d1d1f</span>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <div class="swatch-chip mb-3 aspect-[16/10] rounded-2xl border" style="background: #F6F6F6;"></div>
+          <strong class="block text-2xl font-black">Muted</strong>
+          <span class="theme-muted mt-2 block text-sm"><code>muted</code> - #F6F6F6</span>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <div class="swatch-chip mb-3 aspect-[16/10] rounded-2xl border" style="background: #e0e0e0;"></div>
+          <strong class="block text-2xl font-black">Border</strong>
+          <span class="theme-muted mt-2 block text-sm"><code>border</code> - #e0e0e0</span>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <div class="swatch-chip mb-3 aspect-[16/10] rounded-2xl border" style="background: #DC2626;"></div>
+          <strong class="block text-2xl font-black">Destructive</strong>
+          <span class="theme-muted mt-2 block text-sm"><code>destructive</code> - #DC2626</span>
+        </article>
+      </div>
+      <article class="theme-panel mt-4 rounded-3xl border p-5">
+        <h3 class="text-lg font-bold">Usage Notes</h3>
+        <p class="mt-4 leading-7">Reference-constrained palette from Apple DESIGN.md</p>
+      </article>
+    </section>
+
+    <section class="mt-12">
+      <!-- Typography -->
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">Typography</h2>
+          <p class="mt-2 max-w-3xl theme-muted">Use typography to create structure first, then motion and color as
+            support.</p>
+        </div>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-3">
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Heading System</h3>
+          <p class="mt-4 text-sm font-semibold uppercase tracking-[0.16em] theme-muted">SF Pro Display</p>
+          <p class="mt-4 text-4xl font-black tracking-[-0.04em]">Build with clarity and momentum</p>
+          <p class="mt-3 leading-7 theme-muted">A deliberate hierarchy makes dense products easier to trust.</p>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Body System</h3>
+          <p class="mt-4 text-sm font-semibold uppercase tracking-[0.16em] theme-muted">Public Sans</p>
+          <p class="mt-4 leading-8">Use body copy that is readable, measured, and calm enough to support product
+            comprehension across long sessions and cross-functional review.</p>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Typography Notes</h3>
+          <ul class="mt-4 space-y-3 text-sm leading-7">
+            <li><strong>Mood:</strong> A photography-first interface that turns marketing into a museum gallery. Edge-to-edge product tiles alternate light and dark canvases, framed by SF Pro Display headlines with negative letter-spacing and a single Action Blue (#0066cc) interactive color. UI chrome recedes so the product can speak — no decorative gradients, no shadows on chrome, only the one signature drop-shadow under product imagery resting on a surface.</li>
+            <li><strong>Best For:</strong> Magazines, online publications, editorial content, journalism</li>
+            <li><strong>Google Fonts:</strong> <a href="https://fonts.google.com/share?selection.family=Libre+Bodoni:wght@400;500;600;700|Public+Sans:wght@300;400;500;600;700" target="_blank" rel="noreferrer">Open
+                reference</a></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <!-- Tokens -->
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">Tokens</h2>
+          <p class="mt-2 max-w-3xl theme-muted">These foundational values should become design tokens in the
+            implementation layer.</p>
+        </div>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-3">
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Spacing Scale</h3>
+          <div class="mt-4 space-y-3">
+                      <div class="grid grid-cols-[88px_1fr_60px] items-center gap-3 max-sm:grid-cols-1">
+            <code class="theme-muted">space-1</code>
+            <div class="token-bar h-3 rounded-full" style="width: 18px;"></div>
+            <span class="text-sm">4px</span>
+          </div>
+          <div class="grid grid-cols-[88px_1fr_60px] items-center gap-3 max-sm:grid-cols-1">
+            <code class="theme-muted">space-2</code>
+            <div class="token-bar h-3 rounded-full" style="width: 32px;"></div>
+            <span class="text-sm">8px</span>
+          </div>
+          <div class="grid grid-cols-[88px_1fr_60px] items-center gap-3 max-sm:grid-cols-1">
+            <code class="theme-muted">space-3</code>
+            <div class="token-bar h-3 rounded-full" style="width: 54px;"></div>
+            <span class="text-sm">16px</span>
+          </div>
+          <div class="grid grid-cols-[88px_1fr_60px] items-center gap-3 max-sm:grid-cols-1">
+            <code class="theme-muted">space-4</code>
+            <div class="token-bar h-3 rounded-full" style="width: 78px;"></div>
+            <span class="text-sm">24px</span>
+          </div>
+          <div class="grid grid-cols-[88px_1fr_60px] items-center gap-3 max-sm:grid-cols-1">
+            <code class="theme-muted">space-5</code>
+            <div class="token-bar h-3 rounded-full" style="width: 120px;"></div>
+            <span class="text-sm">40px</span>
+          </div>
+          </div>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Radius Scale</h3>
+          <div class="mt-4 space-y-3">
+                      <div class="grid grid-cols-[88px_1fr_72px] items-center gap-3 max-sm:grid-cols-1">
+            <code class="theme-muted">radius-sm</code>
+            <div class="radius-box h-11 rounded-2xl" style="border-radius: 8px;"></div>
+            <span class="text-sm">8px</span>
+          </div>
+          <div class="grid grid-cols-[88px_1fr_72px] items-center gap-3 max-sm:grid-cols-1">
+            <code class="theme-muted">radius-md</code>
+            <div class="radius-box h-11 rounded-2xl" style="border-radius: 12px;"></div>
+            <span class="text-sm">12px</span>
+          </div>
+          <div class="grid grid-cols-[88px_1fr_72px] items-center gap-3 max-sm:grid-cols-1">
+            <code class="theme-muted">radius-lg</code>
+            <div class="radius-box h-11 rounded-2xl" style="border-radius: 16px;"></div>
+            <span class="text-sm">16px</span>
+          </div>
+          </div>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Elevation</h3>
+          <div class="mt-4 space-y-3">
+                      <div class="grid grid-cols-[88px_1fr_72px] items-center gap-3 max-sm:grid-cols-1">
+            <code class="theme-muted">shadow-card</code>
+            <div class="shadow-box h-[52px] rounded-2xl" style="box-shadow: 0 10px 30px rgba(15, 23, 42, 0.10);"></div>
+            <span class="text-sm">Preview</span>
+          </div>
+          <div class="grid grid-cols-[88px_1fr_72px] items-center gap-3 max-sm:grid-cols-1">
+            <code class="theme-muted">shadow-popover</code>
+            <div class="shadow-box h-[52px] rounded-2xl" style="box-shadow: 0 18px 48px rgba(15, 23, 42, 0.18);"></div>
+            <span class="text-sm">Preview</span>
+          </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <!-- Components: keep these as concise spec previews, not full product UI -->
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">Component Gallery</h2>
+          <p class="mt-2 max-w-3xl theme-muted">Preview component behavior at a glance, then use the notes below to keep
+            implementation aligned.</p>
+        </div>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-2 2xl:grid-cols-4">
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Buttons</h3>
+          <div class="mt-4 flex flex-wrap gap-3">
+            <button class="theme-button-primary rounded-2xl px-5 py-3 font-semibold">Primary Action</button>
+            <button class="theme-button-secondary rounded-2xl px-5 py-3 font-semibold">Secondary Action</button>
+          </div>
+          <p class="mt-4 text-sm leading-7">Primary buttons should use #0066cc and stay visually calm but obvious.</p>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Card</h3>
+          <div class="theme-soft mt-4 rounded-3xl border p-5">
+            <span
+              class="theme-tag inline-flex rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em]">Insight</span>
+            <strong class="mt-4 block text-xl font-black">Use low-noise surfaces</strong>
+            <p class="mt-3 text-sm leading-7">Keep supporting surfaces subtle so hierarchy comes from structure, not
+              decoration.</p>
+          </div>
+          <p class="mt-4 text-sm leading-7">Use soft boundaries, moderate radius, and structure-led hierarchy over decorative noise.</p>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Input</h3>
+          <label class="mt-4 block text-sm font-medium theme-muted">Email</label>
+          <input class="theme-input mt-2 w-full rounded-2xl border px-4 py-3" placeholder="team@example.com">
+          <p class="mt-4 text-sm leading-7">Inputs should remain highly legible, with clear labels and visible focus treatment.</p>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Navigation + Table</h3>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="theme-nav-item active rounded-full px-3 py-2 text-sm font-semibold">Overview</span>
+            <span class="theme-nav-item rounded-full px-3 py-2 text-sm">Usage</span>
+            <span class="theme-nav-item rounded-full px-3 py-2 text-sm">Billing</span>
+          </div>
+          <div class="theme-table mt-4 overflow-hidden rounded-2xl border">
+            <div
+              class="grid grid-cols-[1.3fr_1fr_0.8fr] gap-3 border-b px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] theme-muted">
+              <span>Team</span><span>Status</span><span>Plan</span>
+            </div>
+            <div class="grid grid-cols-[1.3fr_1fr_0.8fr] gap-3 px-4 py-3 text-sm">
+              <span>Platform</span><span
+                class="theme-status-positive inline-flex w-fit rounded-full px-2 py-1 text-xs font-semibold">Healthy</span><span>Scale</span>
+            </div>
+            <div class="grid grid-cols-[1.3fr_1fr_0.8fr] gap-3 border-t px-4 py-3 text-sm">
+              <span>Growth</span><span
+                class="theme-status-neutral inline-flex w-fit rounded-full px-2 py-1 text-xs font-semibold">Review</span><span>Pro</span>
+            </div>
+          </div>
+          <p class="mt-4 text-sm leading-7">Keep primary navigation stable, make active state obvious, and ensure dense data views stay easy to scan.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <!-- Rules and risks -->
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">Rules and Risks</h2>
+          <p class="mt-2 max-w-3xl theme-muted">Keep these close during implementation and review so quality does not
+            drift late in delivery.</p>
+        </div>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-3">
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Accessibility</h3>
+          <ul class="mt-4 space-y-3 text-sm leading-7">
+                        <li>Contrast ratio 4.5:1 or better for body text.</li>
+            <li>Visible focus states on all interactive elements.</li>
+            <li>Minimum touch target around 44 by 44 pixels.</li>
+          </ul>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Responsive</h3>
+          <ul class="mt-4 space-y-3 text-sm leading-7">
+                        <li>Use mobile-first layouts and avoid horizontal scrolling.</li>
+            <li>Adapt density and gutters at tablet and desktop widths.</li>
+            <li>Preserve readable line length and safe tap spacing.</li>
+          </ul>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Avoid</h3>
+          <ul class="mt-4 space-y-3 text-sm leading-7">
+                        <li>Pure white backgrounds</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+    <!-- Required spec sections end -->
+  </main>
+
+  <script>
+    (() => {
+      const buttons = document.querySelectorAll('.page-theme-button');
+      const root = document.body;
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const nextTheme = button.getAttribute('data-page-theme') || 'light';
+          root.setAttribute('data-page-theme', nextTheme);
+          buttons.forEach((item) => {
+            const isActive = item === button;
+            item.classList.toggle('active', isActive);
+            item.setAttribute('aria-pressed', String(isActive));
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+
+</html>

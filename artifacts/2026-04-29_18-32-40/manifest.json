@@ -1,0 +1,21 @@
+{
+  "query": "NVIDIA style forum website",
+  "project_name": "NVIDIA Forum",
+  "run_dir": "E:\\project\\skills\\ui-ux-design-system-skill\\artifacts\\2026-04-29_18-32-40",
+  "final_output_dir": "E:\\project\\skills\\ui-ux-design-system-skill\\artifacts\\2026-04-29_18-32-40",
+  "reference_summary": "NVIDIA, ClickHouse, Framer",
+  "structured_query": "NVIDIA style forum website NVIDIA ClickHouse",
+  "source_pipeline": {
+    "reference_source": "awesome-design-md",
+    "structured_source": "ui-ux-pro-max-skill",
+    "synthesis": "scripts/reasoning.py"
+  },
+  "workflow_stage": "final-artifacts-authored",
+  "next_step": "Run completed. Final DESIGN.md, design-spec.html, and app-preview.html were authored in final_output_dir.",
+  "outputs": {
+    "generation-bundle.json": "E:\\project\\skills\\ui-ux-design-system-skill\\artifacts\\2026-04-29_18-32-40\\generation-bundle.json",
+    "DESIGN.md": "E:\\project\\skills\\ui-ux-design-system-skill\\artifacts\\2026-04-29_18-32-40\\DESIGN.md",
+    "design-spec.html": "E:\\project\\skills\\ui-ux-design-system-skill\\artifacts\\2026-04-29_18-32-40\\design-spec.html",
+    "app-preview.html": "E:\\project\\skills\\ui-ux-design-system-skill\\artifacts\\2026-04-29_18-32-40\\app-preview.html"
+  }
+}

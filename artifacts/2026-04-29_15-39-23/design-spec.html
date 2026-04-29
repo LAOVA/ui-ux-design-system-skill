@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  CANONICAL DESIGN-SPEC TEMPLATE
+  TEMPLATE_SIGNATURE: uiux-design-system/design-spec/v1
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMW-M Forum Design Spec</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --m-black: #000000;
+      --m-light-blue: #009ADA;
+      --m-dark-blue: #003299;
+      --m-red: #C3122F;
+      --carbon-grey: #111111;
+      --pure-white: #FFFFFF;
+      --engine-silver: #888888;
+    }
+
+    [data-page-theme="light"] {
+      --bg: #FFFFFF;
+      --fg: #000000;
+      --panel: #F5F5F5;
+      --border: #E5E5E5;
+      --muted: #666666;
+    }
+
+    [data-page-theme="dark"] {
+      --bg: #000000;
+      --fg: #FFFFFF;
+      --panel: #111111;
+      --border: #222222;
+      --muted: #888888;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: 'Space Mono', monospace;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    h1, h2, h3, .font-heading {
+      font-family: 'Syncopate', sans-serif;
+      text-transform: uppercase;
+    }
+
+    .theme-panel {
+      background-color: var(--panel);
+      border-color: var(--border);
+    }
+
+    .theme-muted {
+      color: var(--muted);
+    }
+
+    .theme-button-primary {
+      background: linear-gradient(90deg, var(--m-light-blue) 0%, var(--m-dark-blue) 50%, var(--m-red) 100%);
+      color: white;
+      clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+      transition: transform 0.2s;
+    }
+
+    .theme-button-primary:hover {
+      transform: skewX(-5deg) scale(1.05);
+    }
+
+    .theme-button-secondary {
+      background: transparent;
+      border: 2px solid var(--fg);
+      color: var(--fg);
+      clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    }
+
+    .theme-preview-window {
+      background: var(--bg);
+      border-color: var(--border);
+    }
+
+    .theme-preview-surface {
+      background: var(--panel);
+      border-color: var(--border);
+    }
+
+    .theme-preview-card {
+      background: var(--bg);
+      border-color: var(--border);
+    }
+
+    .theme-nav-item.active {
+      border-left: 4px solid var(--m-red);
+      background: rgba(195, 18, 47, 0.1);
+    }
+
+    .m-stripe {
+      height: 4px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--m-light-blue) 33%, var(--m-dark-blue) 33% 66%, var(--m-red) 66%);
+    }
+
+    .page-theme-button.active {
+      background: var(--m-dark-blue);
+      color: white;
+    }
+  </style>
+</head>
+
+<body data-page-theme="dark" class="min-h-screen antialiased">
+  <div
+    class="page-theme-floating fixed left-1/2 top-4 z-50 flex -translate-x-1/2 items-center gap-3 rounded-full border px-3 py-2 shadow-2xl backdrop-blur-xl bg-white/10 border-white/20">
+    <div class="page-theme-switch inline-flex items-center gap-1 rounded-full border p-1 border-white/10">
+      <button class="page-theme-button rounded-full px-3 py-2 text-sm font-semibold" type="button"
+        data-page-theme="light" aria-pressed="false">Light</button>
+      <button class="page-theme-button active rounded-full px-3 py-2 text-sm font-semibold" type="button"
+        data-page-theme="dark" aria-pressed="true">Dark</button>
+    </div>
+  </div>
+
+  <main class="mx-auto max-w-7xl px-5 pb-24 pt-28 md:px-8">
+    <section class="grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.9fr)]">
+      <div class="space-y-5">
+        <div
+          class="inline-flex rounded-full border border-red-600/50 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-red-500">
+          M Performance Design Spec
+        </div>
+        <div class="space-y-4">
+          <h1 class="max-w-4xl text-5xl font-black tracking-[-0.05em] md:text-7xl">BMW-M FORUM</h1>
+          <p class="max-w-3xl text-lg leading-8 theme-muted">将 BMW-M 的极致性能与德国工程美学注入社区交流体验。专为 M 系列车主与爱好者打造的高端论坛设计系统。</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <span class="rounded-full border border-blue-400/30 bg-blue-400/10 px-3 py-1 text-xs text-blue-400">#Performance</span>
+          <span class="rounded-full border border-red-400/30 bg-red-400/10 px-3 py-1 text-xs text-red-400">#Precision</span>
+          <span class="rounded-full border border-gray-400/30 bg-gray-400/10 px-3 py-1 text-xs text-gray-400">#Engineering</span>
+        </div>
+      </div>
+
+      <aside class="theme-panel rounded-[28px] border p-4 shadow-xl">
+        <div class="theme-preview-window rounded-[24px] border p-4 md:p-5">
+          <div class="mb-4 flex gap-2">
+            <span class="h-2.5 w-2.5 rounded-full" style="background: var(--m-light-blue)"></span>
+            <span class="h-2.5 w-2.5 rounded-full" style="background: var(--m-dark-blue)"></span>
+            <span class="h-2.5 w-2.5 rounded-full" style="background: var(--m-red)"></span>
+          </div>
+          <div class="grid gap-4 md:grid-cols-[120px_minmax(0,1fr)]">
+            <div class="theme-preview-surface rounded-[20px] border p-3">
+              <div class="theme-nav-item active rounded-r-xl px-3 py-2 text-sm font-semibold">Feed</div>
+              <div class="theme-nav-item mt-2 rounded-r-xl px-3 py-2 text-sm theme-muted">Garage</div>
+              <div class="theme-nav-item mt-2 rounded-r-xl px-3 py-2 text-sm theme-muted">Events</div>
+            </div>
+            <div class="theme-preview-surface rounded-[20px] border p-4">
+              <div class="grid gap-3 sm:grid-cols-2">
+                <div class="theme-preview-card rounded-2xl border p-4">
+                  <strong class="block text-3xl font-black font-heading" style="color: var(--m-red)">M3</strong>
+                  <span class="text-xs theme-muted">Trending Topic</span>
+                </div>
+                <div class="theme-preview-card rounded-2xl border p-4">
+                  <strong class="block text-3xl font-black font-heading">342</strong>
+                  <span class="text-xs theme-muted">Online</span>
+                </div>
+              </div>
+              <div class="mt-4 flex flex-wrap gap-3">
+                <button class="theme-button-primary px-5 py-2 text-sm font-bold">POST NEW</button>
+                <button class="theme-button-secondary px-5 py-2 text-sm font-bold">EXPLORE</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="mt-12">
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">System Snapshot</h2>
+        </div>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <article class="theme-panel rounded-3xl border p-5">
+          <span class="block text-xs uppercase tracking-[0.16em] theme-muted">Category</span>
+          <strong class="mt-3 block text-2xl font-black">Automotive/Community</strong>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <span class="block text-xs uppercase tracking-[0.16em] theme-muted">Style</span>
+          <strong class="mt-3 block text-2xl font-black">M Performance</strong>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <span class="block text-xs uppercase tracking-[0.16em] theme-muted">Pattern</span>
+          <strong class="mt-3 block text-2xl font-black">Technical Grid</strong>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <span class="block text-xs uppercase tracking-[0.16em] theme-muted">Typography</span>
+          <strong class="mt-3 block text-2xl font-black">Syncopate / Space Mono</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">Color Palette</h2>
+        </div>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+        <div class="space-y-3">
+          <div class="h-24 w-full rounded-2xl shadow-inner border" style="background: var(--m-black)"></div>
+          <div class="px-1">
+            <strong class="block text-sm">M Black</strong>
+            <code class="text-xs theme-muted">#000000</code>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="h-24 w-full rounded-2xl shadow-inner border" style="background: var(--m-light-blue)"></div>
+          <div class="px-1">
+            <strong class="block text-sm">M Light Blue</strong>
+            <code class="text-xs theme-muted">#009ADA</code>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="h-24 w-full rounded-2xl shadow-inner border" style="background: var(--m-dark-blue)"></div>
+          <div class="px-1">
+            <strong class="block text-sm">M Dark Blue</strong>
+            <code class="text-xs theme-muted">#003299</code>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="h-24 w-full rounded-2xl shadow-inner border" style="background: var(--m-red)"></div>
+          <div class="px-1">
+            <strong class="block text-sm">M Red</strong>
+            <code class="text-xs theme-muted">#C3122F</code>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="h-24 w-full rounded-2xl shadow-inner border" style="background: var(--carbon-grey)"></div>
+          <div class="px-1">
+            <strong class="block text-sm">Carbon Grey</strong>
+            <code class="text-xs theme-muted">#111111</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">Typography</h2>
+        </div>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-2">
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Heading: Syncopate</h3>
+          <p class="mt-4 text-4xl font-black tracking-tighter font-heading">THE MOST POWERFUL LETTER IN THE WORLD.</p>
+          <p class="mt-3 leading-7 theme-muted">用于标题、型号名称与关键数据。展现宽广的视野与力量感。</p>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Body: Space Mono</h3>
+          <p class="mt-4 leading-8 text-lg">Precision is not just a word, it is a way of life for every M driver. Technology meets soul.</p>
+          <p class="mt-3 leading-7 theme-muted">用于正文、技术规格与代码片段。体现精确与工业美学。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="mt-12">
+      <div class="mb-5 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-0.03em]">Components</h2>
+        </div>
+      </div>
+      <div class="grid gap-4 lg:grid-cols-2">
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">Buttons</h3>
+          <div class="mt-6 flex flex-wrap gap-6">
+            <button class="theme-button-primary px-8 py-4 text-lg font-bold">LAUNCH DRIVE</button>
+            <button class="theme-button-secondary px-8 py-4 text-lg font-bold">SPECIFICATIONS</button>
+          </div>
+          <p class="mt-6 text-sm theme-muted">采用斜切边缘 (Clip-path) 模拟动感，Primary 使用 M 三色渐变。</p>
+        </article>
+        <article class="theme-panel rounded-3xl border p-5">
+          <h3 class="text-lg font-bold">M Stripe Element</h3>
+          <div class="mt-6 space-y-4">
+            <div class="m-stripe"></div>
+            <p class="text-sm theme-muted">经典的 M 三色条纹作为装饰线，用于卡片顶部或导航激活状态。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const buttons = document.querySelectorAll('.page-theme-button');
+      const root = document.body;
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const nextTheme = button.getAttribute('data-page-theme') || 'light';
+          root.setAttribute('data-page-theme', nextTheme);
+          buttons.forEach((item) => {
+            const isActive = item === button;
+            item.classList.toggle('active', isActive);
+            item.setAttribute('aria-pressed', String(isActive));
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+
+</html>

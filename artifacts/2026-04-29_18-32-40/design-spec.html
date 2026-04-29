@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<!--
+  CANONICAL DESIGN-SPEC TEMPLATE
+  TEMPLATE_SIGNATURE: uiux-design-system/design-spec/v1
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NVIDIA Forum 设计规范 (Design Spec)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --page-bg: #000000;
+      --page-fg: #ffffff;
+      --surface-border: #333333;
+      --primary: #76b900;
+      --secondary: #1a1a1a;
+      --accent: #76b900;
+      --panel-bg: #1a1a1a;
+      --panel-bg-soft: #222222;
+      --panel-fg: #ffffff;
+      --panel-muted: #999999;
+      --preview-bg: #0a0a0a;
+      --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.5);
+      --shadow-popover: 0 10px 40px rgba(0, 0, 0, 0.8);
+      --font-heading: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      --interactive-primary: #76b900;
+      --interactive-on-primary: #000000;
+      --interactive-primary-shadow: rgba(118, 185, 0, 0.3);
+      --interactive-secondary-fg: #ffffff;
+      --toggle-shell-bg: #222222;
+      --toggle-shell-border: #333333;
+      --toggle-button-fg: #999999;
+      --toggle-active-bg: #333333;
+      --toggle-active-fg: #ffffff;
+      --toggle-active-border: #76b900;
+      --toggle-active-shadow: 0 0 10px rgba(118, 185, 0, 0.2);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      background: var(--page-bg);
+      color: var(--page-fg);
+      transition: background 180ms ease, color 180ms ease;
+    }
+    h1, h2, h3, h4, strong { font-family: var(--font-heading); }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+    }
+    
+    .theme-panel {
+      background: var(--panel-bg);
+      border: 1px solid var(--surface-border);
+      color: var(--panel-fg);
+      box-shadow: var(--shadow-card);
+    }
+    .theme-soft {
+      background: var(--panel-bg-soft);
+      border: 1px solid var(--surface-border);
+    }
+    .theme-muted { color: var(--panel-muted); }
+    .theme-button-primary {
+      background: var(--interactive-primary);
+      color: var(--interactive-on-primary);
+      box-shadow: 0 4px 12px var(--interactive-primary-shadow);
+    }
+    .theme-button-secondary {
+      background: transparent;
+      color: var(--interactive-secondary-fg);
+      border: 1px solid var(--surface-border);
+    }
+    .token-bar { background: var(--primary); }
+    .radius-box {
+      border: 1px solid var(--surface-border);
+      background: var(--panel-bg-soft);
+    }
+    .theme-preview-window {
+      background: var(--preview-bg);
+      border: 1px solid var(--surface-border);
+    }
+    .theme-nav-item.active {
+      background: var(--interactive-primary);
+      color: var(--interactive-on-primary);
+    }
+    .theme-preview-card {
+      background: var(--panel-bg);
+      border: 1px solid var(--surface-border);
+    }
+  </style>
+</head>
+
+<body data-page-theme="dark" class="min-h-screen antialiased">
+  <main class="mx-auto max-w-[1440px] px-4 pb-24 pt-12 md:px-6 xl:px-8">
+    <section class="grid gap-6 xl:grid-cols-[280px_minmax(0,1fr)]">
+      <aside class="xl:sticky xl:top-12 xl:h-[calc(100vh-6rem)]">
+        <div class="theme-panel rounded-lg border p-5">
+          <div class="flex items-center justify-between gap-3">
+            <div>
+              <div class="inline-flex rounded-sm border px-2 py-1 text-[10px] font-bold uppercase tracking-widest theme-soft theme-muted">
+                Design Spec
+              </div>
+              <h2 class="mt-4 text-xl font-bold tracking-tight">NVIDIA Forum</h2>
+            </div>
+          </div>
+
+          <nav class="mt-6 space-y-1 text-sm">
+            <a href="#overview" class="flex items-center justify-between rounded px-3 py-3 hover:bg-[#333]">
+              <span>系统快照</span><span class="theme-muted text-xs">01</span>
+            </a>
+            <a href="#direction" class="flex items-center justify-between rounded px-3 py-3 hover:bg-[#333]">
+              <span>视觉方向</span><span class="theme-muted text-xs">02</span>
+            </a>
+            <a href="#color" class="flex items-center justify-between rounded px-3 py-3 hover:bg-[#333]">
+              <span>色彩调色板</span><span class="theme-muted text-xs">03</span>
+            </a>
+            <a href="#type" class="flex items-center justify-between rounded px-3 py-3 hover:bg-[#333]">
+              <span>字体规范</span><span class="theme-muted text-xs">04</span>
+            </a>
+            <a href="#components" class="flex items-center justify-between rounded px-3 py-3 hover:bg-[#333]">
+              <span>组件库</span><span class="theme-muted text-xs">05</span>
+            </a>
+          </nav>
+
+          <div class="mt-6 rounded-md border theme-soft p-4">
+            <p class="text-[10px] font-bold uppercase tracking-wider theme-muted">参考方向</p>
+            <p class="mt-2 text-sm leading-relaxed">NVIDIA 官方工业设计语言：深色、精密、高性能感。</p>
+          </div>
+        </div>
+      </aside>
+
+      <div class="space-y-12">
+        <!-- Overview -->
+        <section id="overview" class="theme-panel rounded-xl border p-8">
+          <div class="max-w-4xl">
+            <p class="text-xs font-bold uppercase tracking-widest theme-muted">系统概览</p>
+            <h1 class="mt-4 text-5xl font-bold tracking-tight">NVIDIA Forum</h1>
+            <p class="mt-5 text-lg leading-relaxed theme-muted">专为技术专家和开发者打造的交流平台。设计灵感源自 NVIDIA 硬件控制面板，强调速度、准确性与沉浸感。</p>
+          </div>
+          
+          <div class="mt-8 grid gap-4 md:grid-cols-3">
+            <article class="theme-soft rounded-lg p-4">
+              <p class="text-[10px] font-bold uppercase theme-muted">模式</p>
+              <strong class="mt-2 block text-lg font-bold">论坛与社区</strong>
+            </article>
+            <article class="theme-soft rounded-lg p-4">
+              <p class="text-[10px] font-bold uppercase theme-muted">字体</p>
+              <strong class="mt-2 block text-lg font-bold">Inter / Sans-serif</strong>
+            </article>
+            <article class="theme-soft rounded-lg p-4">
+              <p class="text-[10px] font-bold uppercase theme-muted">核心色彩</p>
+              <strong class="mt-2 block text-lg font-bold">NVIDIA Green (#76b900)</strong>
+            </article>
+          </div>
+        </section>
+
+        <!-- Color Palette -->
+        <section id="color" class="mt-12">
+          <h2 class="text-3xl font-bold mb-6">色彩调色板</h2>
+          <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <article class="theme-panel rounded-lg p-5">
+              <div class="mb-3 h-24 rounded border" style="background: #000000;"></div>
+              <strong class="block text-xl font-bold">Background</strong>
+              <span class="theme-muted text-sm">#000000 - 主背景</span>
+            </article>
+            <article class="theme-panel rounded-lg p-5">
+              <div class="mb-3 h-24 rounded border" style="background: #1a1a1a;"></div>
+              <strong class="block text-xl font-bold">Surface</strong>
+              <span class="theme-muted text-sm">#1a1a1a - 容器与卡片</span>
+            </article>
+            <article class="theme-panel rounded-lg p-5">
+              <div class="mb-3 h-24 rounded border" style="background: #76b900;"></div>
+              <strong class="block text-xl font-bold">Primary</strong>
+              <span class="theme-muted text-sm">#76b900 - 品牌色</span>
+            </article>
+            <article class="theme-panel rounded-lg p-5">
+              <div class="mb-3 h-24 rounded border" style="background: #333333;"></div>
+              <strong class="block text-xl font-bold">Border</strong>
+              <span class="theme-muted text-sm">#333333 - 分割线</span>
+            </article>
+          </div>
+        </section>
+
+        <!-- Components -->
+        <section id="components" class="mt-12">
+          <h2 class="text-3xl font-bold mb-6">组件库预览</h2>
+          <div class="grid gap-6 lg:grid-cols-2">
+            <article class="theme-panel rounded-lg p-6">
+              <h3 class="text-lg font-bold mb-4">按钮 (Buttons)</h3>
+              <div class="flex gap-4">
+                <button class="theme-button-primary rounded px-6 py-2 font-bold">主要操作</button>
+                <button class="theme-button-secondary rounded px-6 py-2 font-bold">次要操作</button>
+              </div>
+            </article>
+            <article class="theme-panel rounded-lg p-6">
+              <h3 class="text-lg font-bold mb-4">输入框 (Input)</h3>
+              <input class="w-full bg-[#111] border border-[#333] rounded px-4 py-2 text-white" placeholder="搜索主题...">
+            </article>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

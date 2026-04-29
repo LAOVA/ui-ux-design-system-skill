@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMW-M CMS Dashboard Preview</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600;700;900&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --m-blue: #1c69d4;
+      --m-light-blue: #0066b1;
+      --m-red: #e22718;
+      --bg-deep: #1a2129;
+      --bg-surface: #262e38;
+      --text-main: #ffffff;
+      --text-muted: #bbbbbb;
+      --border-line: #3c3c3c;
+    }
+
+    body {
+      font-family: 'Public Sans', sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-main);
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .m-sidebar {
+      background-color: var(--bg-surface);
+      border-right: 1px solid var(--border-line);
+      width: 260px;
+      height: 100vh;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+
+    .m-nav-item {
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-muted);
+      transition: all 0.2s;
+      border-left: 4px solid transparent;
+    }
+
+    .m-nav-item:hover,
+    .m-nav-item.active {
+      color: var(--text-main);
+      background: rgba(28, 105, 212, 0.1);
+    }
+
+    .m-nav-item.active {
+      border-left-color: var(--m-blue);
+      background: linear-gradient(90deg, rgba(28, 105, 212, 0.15) 0%, transparent 100%);
+    }
+
+    .m-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-line);
+      border-radius: 12px;
+      padding: 24px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .m-card:hover {
+      border-color: var(--m-blue);
+    }
+
+    .m-btn-primary {
+      background-color: var(--m-blue);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .m-btn-primary:hover {
+      background-color: var(--m-light-blue);
+    }
+
+    .m-accent-line {
+      height: 4px;
+      background: linear-gradient(90deg, var(--m-light-blue) 0%, var(--m-blue) 50%, var(--m-red) 100%);
+    }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+      gap: 20px;
+    }
+
+    .status-pill {
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .status-online {
+      background: rgba(34, 197, 94, 0.2);
+      color: #22c55e;
+    }
+
+    .status-busy {
+      background: rgba(226, 39, 24, 0.2);
+      color: #e22718;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-deep);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-line);
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--m-blue);
+    }
+  </style>
+</head>
+
+<body class="flex">
+
+  <!-- Sidebar -->
+  <aside class="m-sidebar">
+    <div class="p-8 flex flex-col gap-2">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-[#1c69d4] rounded-lg flex items-center justify-center font-black text-xl italic">M
+        </div>
+        <span class="text-xl font-black tracking-tighter italic">CMS POWER</span>
+      </div>
+      <div class="m-accent-line w-full mt-4"></div>
+    </div>
+
+    <nav class="flex-1 flex flex-col mt-4">
+      <a href="#" class="m-nav-item active">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+        </svg>
+        控制面板
+      </a>
+      <a href="#" class="m-nav-item">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+        </svg>
+        内容管理
+      </a>
+      <a href="#" class="m-nav-item">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+        性能数据
+      </a>
+      <a href="#" class="m-nav-item">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        用户中心
+      </a>
+      <div class="mt-auto p-6">
+        <div class="m-card p-4 flex items-center gap-3 bg-[#1c69d4]/10 border-[#1c69d4]/30">
+          <div class="w-10 h-10 rounded-full bg-gray-500 overflow-hidden">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="avatar">
+          </div>
+          <div class="flex-1 overflow-hidden">
+            <div class="text-sm font-bold truncate">Admin User</div>
+            <div class="text-xs text-muted truncate">M-Performance Mode</div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 h-screen overflow-y-auto p-10">
+    <!-- Header -->
+    <header class="flex justify-between items-center mb-10">
+      <div>
+        <h1 class="text-3xl font-black italic tracking-tight">DASHBOARD / <span class="text-[#1c69d4]">OVERVIEW</span>
+        </h1>
+        <p class="text-muted mt-1">欢迎回来，当前系统运行处于最佳性能状态。</p>
+      </div>
+      <div class="flex gap-4">
+        <div class="relative">
+          <input type="text" placeholder="搜索资源..."
+            class="bg-surface border border-line rounded-lg px-4 py-2 pl-10 w-64 focus:border-m-blue outline-none transition-all"
+            style="background-color: var(--bg-surface);">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 absolute left-3 top-2.5 text-muted" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+        <button class="m-btn-primary flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+          发布内容
+        </button>
+      </div>
+    </header>
+
+    <!-- Bento Grid Dashboard -->
+    <div class="bento-grid">
+      <!-- Stats 1 -->
+      <div class="m-card flex flex-col justify-between">
+        <div class="text-muted text-sm font-bold uppercase tracking-wider">实时访问量</div>
+        <div class="mt-4 flex items-baseline gap-2">
+          <span class="text-4xl font-black italic">1,284</span>
+          <span class="text-green-500 text-sm font-bold">+12%</span>
+        </div>
+        <div class="mt-4 h-1 w-full bg-line rounded-full overflow-hidden">
+          <div class="h-full bg-m-blue" style="width: 75%; background-color: var(--m-blue);"></div>
+        </div>
+      </div>
+
+      <!-- Stats 2 -->
+      <div class="m-card flex flex-col justify-between">
+        <div class="text-muted text-sm font-bold uppercase tracking-wider">平均响应时间</div>
+        <div class="mt-4 flex items-baseline gap-2">
+          <span class="text-4xl font-black italic">42<span class="text-lg">ms</span></span>
+          <span class="text-m-blue text-sm font-bold">EXCELLENT</span>
+        </div>
+        <div class="mt-4 h-1 w-full bg-line rounded-full overflow-hidden">
+          <div class="h-full bg-m-red" style="width: 20%; background-color: var(--m-red);"></div>
+        </div>
+      </div>
+
+      <!-- Main Chart Area (Spans 2 columns) -->
+      <div class="m-card col-span-2 row-span-1 flex flex-col">
+        <div class="flex justify-between items-center mb-6">
+          <div class="text-muted text-sm font-bold uppercase tracking-wider">性能监控 (M-Power Output)</div>
+          <div class="flex gap-2">
+            <span class="status-pill status-online">ENGINE ACTIVE</span>
+          </div>
+        </div>
+        <div class="flex-1 flex items-end gap-2 h-32">
+          <div class="flex-1 bg-m-blue/20 border-t-2 border-m-blue h-[60%] rounded-t"></div>
+          <div class="flex-1 bg-m-blue/20 border-t-2 border-m-blue h-[40%] rounded-t"></div>
+          <div class="flex-1 bg-m-blue/20 border-t-2 border-m-blue h-[80%] rounded-t"></div>
+          <div class="flex-1 bg-m-blue/20 border-t-2 border-m-blue h-[55%] rounded-t"></div>
+          <div class="flex-1 bg-m-red/20 border-t-2 border-m-red h-[95%] rounded-t"></div>
+          <div class="flex-1 bg-m-blue/20 border-t-2 border-m-blue h-[70%] rounded-t"></div>
+          <div class="flex-1 bg-m-blue/20 border-t-2 border-m-blue h-[85%] rounded-t"></div>
+        </div>
+      </div>
+
+      <!-- Content List (Spans 3 columns) -->
+      <div class="m-card col-span-3">
+        <h3 class="text-xl font-bold mb-6 italic tracking-tight">近期发布内容 / RECENT CONTENT</h3>
+        <table class="w-full text-left">
+          <thead>
+            <tr class="border-b border-line text-muted text-xs uppercase tracking-widest">
+              <th class="pb-4 font-normal">标题</th>
+              <th class="pb-4 font-normal">作者</th>
+              <th class="pb-4 font-normal">状态</th>
+              <th class="pb-4 font-normal">操作</th>
+            </tr>
+          </thead>
+          <tbody class="text-sm">
+            <tr class="border-b border-line/50">
+              <td class="py-4 font-bold">2024 BMW M4 Competition Review</td>
+              <td class="py-4 text-muted">M-Expert-01</td>
+              <td class="py-4"><span class="status-pill status-online">已发布</span></td>
+              <td class="py-4"><button class="text-m-blue hover:underline">编辑</button></td>
+            </tr>
+            <tr class="border-b border-line/50">
+              <td class="py-4 font-bold">Precision Engineering in Modern Turbochargers</td>
+              <td class="py-4 text-muted">Admin</td>
+              <td class="py-4"><span class="status-pill status-busy">审核中</span></td>
+              <td class="py-4"><button class="text-m-blue hover:underline">查看</button></td>
+            </tr>
+            <tr>
+              <td class="py-4 font-bold">The History of M-Power: From M1 to XM</td>
+              <td class="py-4 text-muted">Historian</td>
+              <td class="py-4"><span class="status-pill status-online">已发布</span></td>
+              <td class="py-4"><button class="text-m-blue hover:underline">编辑</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Secondary Card -->
+      <div
+        class="m-card flex flex-col justify-center items-center text-center bg-gradient-to-br from-[#1c69d4]/20 to-transparent">
+        <div class="w-16 h-16 rounded-full border-4 border-m-red flex items-center justify-center mb-4">
+          <span class="text-m-red font-black text-2xl italic">!</span>
+        </div>
+        <h4 class="font-bold">系统维护通知</h4>
+        <p class="text-xs text-muted mt-2">凌晨 02:00 将进行 M-Performance 核心引擎升级，届时可能会有短暂波动。</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Simple interactivity
+    document.querySelectorAll('.m-nav-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.querySelectorAll('.m-nav-item').forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+      });
+    });
+  </script>
+</body>
+
+</html>

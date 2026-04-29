@@ -1,0 +1,312 @@
+{
+  "query": "BMW-M high-performance automotive forum interface",
+  "project_name": "BMW-M Forum",
+  "reference_context": {
+    "query": "BMW-M high-performance automotive forum interface",
+    "references": [
+      {
+        "name": "BMW",
+        "slug": "bmw",
+        "group": "Automotive",
+        "summary": "Luxury automotive. Dark premium surfaces, precise German engineering aesthetic",
+        "keywords": [
+          "bmw",
+          "automotive",
+          "luxury",
+          "automotive.",
+          "dark",
+          "premium",
+          "surfaces",
+          "precise",
+          "german",
+          "engineering",
+          "aesthetic"
+        ]
+      },
+      {
+        "name": "Cursor",
+        "slug": "cursor",
+        "group": "Developer Tools & IDEs",
+        "summary": "AI-first code editor. Sleek dark interface, gradient accents",
+        "keywords": [
+          "cursor",
+          "developer",
+          "tools",
+          "ides",
+          "ai-first",
+          "code",
+          "editor.",
+          "sleek",
+          "dark",
+          "interface",
+          "gradient",
+          "accents"
+        ]
+      },
+      {
+        "name": "Ferrari",
+        "slug": "ferrari",
+        "group": "Automotive",
+        "summary": "Luxury automotive. Chiaroscuro black-white editorial, Ferrari Red with extreme sparseness",
+        "keywords": [
+          "ferrari",
+          "automotive",
+          "luxury",
+          "automotive.",
+          "chiaroscuro",
+          "black-white",
+          "editorial",
+          "ferrari",
+          "red",
+          "with",
+          "extreme",
+          "sparseness"
+        ]
+      }
+    ],
+    "reference_summary": "BMW, Cursor, Ferrari",
+    "reference_direction": "Primary reference: BMW - Luxury automotive. Dark premium surfaces, precise German engineering aesthetic",
+    "query_suffix": "BMW Cursor"
+  },
+  "structured_query": "BMW-M high-performance automotive forum interface BMW Cursor",
+  "structured_result": {
+    "project_name": "BMW-M Forum",
+    "category": "Automotive/Car Dealership",
+    "pattern": {
+      "name": "Community/Forum Landing",
+      "sections": "1. Hero (community value prop), 2. Popular topics/categories, 3. Active members showcase, 4. Join CTA",
+      "cta_placement": "Join button prominent + After member showcase",
+      "color_strategy": "Warm, welcoming. Member photos add humanity. Topic badges in brand colors. Activity indicators green.",
+      "conversion": "Show active community (member count, posts today). Highlight benefits. Preview content. Easy onboarding."
+    },
+    "style": {
+      "name": "Motion-Driven",
+      "type": "General",
+      "effects": "Scroll anim (Intersection Observer), hover (300-400ms), entrance, parallax (3-5 layers), page transitions",
+      "keywords": "Animation-heavy, microinteractions, smooth transitions, scroll effects, parallax, entrance anim, page transitions",
+      "best_for": "Portfolio sites, storytelling platforms, interactive experiences, entertainment apps, creative, SaaS Reference fit: Luxury automotive. Dark premium surfaces, precise German engineering aesthetic",
+      "performance": "⚠ Good",
+      "accessibility": "⚠ Prefers-reduced-motion",
+      "light_mode": "✓ Full",
+      "dark_mode": "✓ Full"
+    },
+    "colors": {
+      "primary": "#0F172A",
+      "on_primary": "#FFFFFF",
+      "secondary": "#334155",
+      "accent": "#0369A1",
+      "background": "#F8FAFC",
+      "foreground": "#020617",
+      "muted": "#E8ECF1",
+      "border": "#E2E8F0",
+      "destructive": "#DC2626",
+      "ring": "#0F172A",
+      "notes": "High contrast navy + blue",
+      "cta": "#0369A1",
+      "text": "#020617"
+    },
+    "typography": {
+      "heading": "Syncopate",
+      "body": "Space Mono",
+      "mood": "kinetic, motion, futuristic, speed, wide, tech",
+      "best_for": "Music festivals, automotive, high-energy brands",
+      "google_fonts_url": "https://fonts.google.com/share?selection.family=Space+Mono:wght@400;700|Syncopate:wght@400;700",
+      "css_import": "@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syncopate:wght@400;700&display=swap');"
+    },
+    "key_effects": "Scroll anim (Intersection Observer), hover (300-400ms), entrance, parallax (3-5 layers), page transitions",
+    "anti_patterns": "Static product pages + Poor UX",
+    "decision_rules": {
+      "must_have": "financing-calculator"
+    },
+    "severity": "HIGH",
+    "original_query": "BMW-M high-performance automotive forum interface",
+    "reference_styles": [
+      {
+        "name": "BMW",
+        "slug": "bmw",
+        "group": "Automotive",
+        "summary": "Luxury automotive. Dark premium surfaces, precise German engineering aesthetic",
+        "keywords": [
+          "bmw",
+          "automotive",
+          "luxury",
+          "automotive.",
+          "dark",
+          "premium",
+          "surfaces",
+          "precise",
+          "german",
+          "engineering",
+          "aesthetic"
+        ]
+      },
+      {
+        "name": "Cursor",
+        "slug": "cursor",
+        "group": "Developer Tools & IDEs",
+        "summary": "AI-first code editor. Sleek dark interface, gradient accents",
+        "keywords": [
+          "cursor",
+          "developer",
+          "tools",
+          "ides",
+          "ai-first",
+          "code",
+          "editor.",
+          "sleek",
+          "dark",
+          "interface",
+          "gradient",
+          "accents"
+        ]
+      },
+      {
+        "name": "Ferrari",
+        "slug": "ferrari",
+        "group": "Automotive",
+        "summary": "Luxury automotive. Chiaroscuro black-white editorial, Ferrari Red with extreme sparseness",
+        "keywords": [
+          "ferrari",
+          "automotive",
+          "luxury",
+          "automotive.",
+          "chiaroscuro",
+          "black-white",
+          "editorial",
+          "ferrari",
+          "red",
+          "with",
+          "extreme",
+          "sparseness"
+        ]
+      }
+    ],
+    "reference_summary": "BMW, Cursor, Ferrari",
+    "reference_direction": "Primary reference: BMW - Luxury automotive. Dark premium surfaces, precise German engineering aesthetic",
+    "source_pipeline": {
+      "reference_source": "awesome-design-md",
+      "structured_source": "ui-ux-pro-max-skill",
+      "synthesis": "scripts/reasoning.py"
+    }
+  },
+  "final_design_system": {
+    "project_name": "BMW-M Forum",
+    "category": "Automotive/Car Dealership",
+    "pattern": {
+      "name": "Community/Forum Landing",
+      "sections": "1. Hero (community value prop), 2. Popular topics/categories, 3. Active members showcase, 4. Join CTA",
+      "cta_placement": "Join button prominent + After member showcase",
+      "color_strategy": "Warm, welcoming. Member photos add humanity. Topic badges in brand colors. Activity indicators green.",
+      "conversion": "Show active community (member count, posts today). Highlight benefits. Preview content. Easy onboarding."
+    },
+    "style": {
+      "name": "Motion-Driven",
+      "type": "General",
+      "effects": "Scroll anim (Intersection Observer), hover (300-400ms), entrance, parallax (3-5 layers), page transitions",
+      "keywords": "Animation-heavy, microinteractions, smooth transitions, scroll effects, parallax, entrance anim, page transitions",
+      "best_for": "Portfolio sites, storytelling platforms, interactive experiences, entertainment apps, creative, SaaS Reference fit: Luxury automotive. Dark premium surfaces, precise German engineering aesthetic",
+      "performance": "⚠ Good",
+      "accessibility": "⚠ Prefers-reduced-motion",
+      "light_mode": "✓ Full",
+      "dark_mode": "✓ Full"
+    },
+    "colors": {
+      "primary": "#0F172A",
+      "on_primary": "#FFFFFF",
+      "secondary": "#334155",
+      "accent": "#0369A1",
+      "background": "#F8FAFC",
+      "foreground": "#020617",
+      "muted": "#E8ECF1",
+      "border": "#E2E8F0",
+      "destructive": "#DC2626",
+      "ring": "#0F172A",
+      "notes": "High contrast navy + blue",
+      "cta": "#0369A1",
+      "text": "#020617"
+    },
+    "typography": {
+      "heading": "Syncopate",
+      "body": "Space Mono",
+      "mood": "kinetic, motion, futuristic, speed, wide, tech",
+      "best_for": "Music festivals, automotive, high-energy brands",
+      "google_fonts_url": "https://fonts.google.com/share?selection.family=Space+Mono:wght@400;700|Syncopate:wght@400;700",
+      "css_import": "@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syncopate:wght@400;700&display=swap');"
+    },
+    "key_effects": "Scroll anim (Intersection Observer), hover (300-400ms), entrance, parallax (3-5 layers), page transitions",
+    "anti_patterns": "Static product pages + Poor UX",
+    "decision_rules": {
+      "must_have": "financing-calculator"
+    },
+    "severity": "HIGH",
+    "original_query": "BMW-M high-performance automotive forum interface",
+    "reference_styles": [
+      {
+        "name": "BMW",
+        "slug": "bmw",
+        "group": "Automotive",
+        "summary": "Luxury automotive. Dark premium surfaces, precise German engineering aesthetic",
+        "keywords": [
+          "bmw",
+          "automotive",
+          "luxury",
+          "automotive.",
+          "dark",
+          "premium",
+          "surfaces",
+          "precise",
+          "german",
+          "engineering",
+          "aesthetic"
+        ]
+      },
+      {
+        "name": "Cursor",
+        "slug": "cursor",
+        "group": "Developer Tools & IDEs",
+        "summary": "AI-first code editor. Sleek dark interface, gradient accents",
+        "keywords": [
+          "cursor",
+          "developer",
+          "tools",
+          "ides",
+          "ai-first",
+          "code",
+          "editor.",
+          "sleek",
+          "dark",
+          "interface",
+          "gradient",
+          "accents"
+        ]
+      },
+      {
+        "name": "Ferrari",
+        "slug": "ferrari",
+        "group": "Automotive",
+        "summary": "Luxury automotive. Chiaroscuro black-white editorial, Ferrari Red with extreme sparseness",
+        "keywords": [
+          "ferrari",
+          "automotive",
+          "luxury",
+          "automotive.",
+          "chiaroscuro",
+          "black-white",
+          "editorial",
+          "ferrari",
+          "red",
+          "with",
+          "extreme",
+          "sparseness"
+        ]
+      }
+    ],
+    "reference_summary": "BMW, Cursor, Ferrari",
+    "reference_direction": "Primary reference: BMW - Luxury automotive. Dark premium surfaces, precise German engineering aesthetic",
+    "source_pipeline": {
+      "reference_source": "awesome-design-md",
+      "structured_source": "ui-ux-pro-max-skill",
+      "synthesis": "scripts/reasoning.py"
+    }
+  }
+}
