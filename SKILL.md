@@ -52,6 +52,23 @@ Inspect `./awesome-design-md/design-md/*/README.md` when the user references a b
 - layout density
 - interaction style
 
+If the local reference only contains an entry link such as `https://getdesign.md/<brand>/design-md`, treat that link as a source pointer, not as sufficient reference material. Resolve the full brand `DESIGN.md` before synthesizing or generating artifacts. Prefer the project/user-approved local getdesign workflow, for example:
+
+```powershell
+cmd /c npx getdesign@latest add <brand>
+```
+
+Read the resulting full file, usually `./<brand>/DESIGN.md` in the command working directory, and use that complete source rather than inferring from the brand name or URL alone. Extract tokens, typography, spacing, radius, components, do/don't rules, responsive behavior, and known gaps from the full file.
+
+When producing `generation-bundle.json`, embed each resolved full brand source under `reference_context.references[]` with at least:
+
+- `name`
+- `source_url`
+- `source_path`
+- `full_design_md`
+
+For multi-brand fusion, embed every full reference separately and make the synthesis state the intended weight or role of each brand, such as primary surface language, secondary structural system, accent behavior, or 50/50 split. Do not collapse full references into only a short summary.
+
 ### Structured rules
 
 Prefer the existing local search tooling when you need product, style, color, typography, landing, UX, or stack guidance:
@@ -91,6 +108,9 @@ If the search output is noisy or insufficient, read the relevant CSV-backed doma
 ## Guardrails
 
 - Preserve the difference between inspiration and prescription. References inform the direction; they do not replace product-specific reasoning.
+- Do not generate brand-reference artifacts from entry links alone. If an `awesome-design-md` entry points to getdesign.md, first resolve and read the complete brand `DESIGN.md`.
+- `generation-bundle.json` must preserve the complete brand source text in `reference_context.references[].full_design_md` for every referenced brand, including each brand in a fusion direction.
+- For fusion directions, explicitly document each brand's role and weighting in the bundle synthesis before authoring `app-preview.html`.
 - Prefer semantic tokens over raw hex values when describing systems.
 - Always surface accessibility, responsiveness, and interaction constraints for implementation-facing outputs.
 - For HTML outputs, prefer deterministic template rendering over ad hoc generated markup.
